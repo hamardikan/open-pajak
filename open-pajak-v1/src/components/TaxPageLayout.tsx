@@ -40,9 +40,9 @@ export function TaxPageLayout({
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card className="p-0">{form}</Card>
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           {summary}
-          <Card>{result}</Card>
+          <Card className="flex-1">{result}</Card>
         </div>
       </div>
 

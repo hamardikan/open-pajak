@@ -35,7 +35,7 @@ function renderValue(row: TaxBreakdownRow) {
 
 export function TaxResultTable({ breakdown }: TaxResultTableProps) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto lg:max-h-[620px]">
       <Table className="text-sm">
         <TableHeader>
           <TableRow>

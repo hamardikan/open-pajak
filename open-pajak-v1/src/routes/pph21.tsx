@@ -152,17 +152,22 @@ function Pph21Page() {
           title="Data Penghasilan"
           description="Masukkan nilai bruto dan parameter masa pajak."
           actions={
-            <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-end">
+            <>
               <Button
                 variant="outline"
+                size="sm"
                 onClick={() => setForm(createEmptyForm())}
               >
                 Kosongkan Form
               </Button>
-              <Button variant="ghost" onClick={() => setForm(createSampleForm())}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setForm(createSampleForm())}
+              >
                 Gunakan Contoh
               </Button>
-            </div>
+            </>
           }
         >
           <FormField label="Jenis subjek" htmlFor="subjectType">

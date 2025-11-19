@@ -108,31 +108,49 @@ function calculatePegawaiTetap(
     if (months < 12) {
       const bonusTax = input.bonusAnnual * terRate
       const total = terPaid + bonusTax
-      const rows: Array<TaxBreakdownRow> = [
-        { label: 'Penghasilan Masa TER', variant: 'section' },
-        { label: 'Bruto per masa', value: input.brutoMonthly },
-        { label: 'Tarif TER', value: terRate, valueType: 'percent' },
-        {
-          label: 'PPh 21 TER per masa',
-          value: masaTax,
-          note: `${months} masa`,
-        },
-        {
-          label: `Akumulasi TER (${months} masa)`,
-          value: terPaid,
-          variant: 'subtotal',
-        },
-      ]
-      if (input.bonusAnnual > 0) {
-        rows.push({
-          label: 'PPh 21 atas bonus (TER)',
-          value: bonusTax,
+    const takeHomeAnnual = brutoTahun - total
+    const takeHomePerMasa = takeHomeAnnual / Math.max(1, months)
+
+    const rows: Array<TaxBreakdownRow> = [
+      { label: 'Penghasilan Masa TER', variant: 'section' },
+      { label: 'Bruto per masa', value: input.brutoMonthly },
+      { label: 'Tarif TER', value: terRate, valueType: 'percent' },
+      {
+        label: 'PPh 21 TER per masa',
+        value: masaTax,
+        note: `${months} masa`,
+      },
+      {
+        label: `Akumulasi TER (${months} masa)`,
+        value: terPaid,
+        variant: 'subtotal',
+      },
+      { label: 'Pengurang Penghasilan', variant: 'section' },
+      {
+        label: 'Biaya jabatan (5% maks 6 jt)',
+        value: biayaJabatan,
+      },
+      { label: 'Iuran pensiun (setahun)', value: iuranTahun },
+      { label: 'Zakat/sumbangan', value: input.zakatOrDonation },
+      { label: 'Netto setahun', value: nettoSetahun, variant: 'subtotal' },
+    ]
+    if (input.bonusAnnual > 0) {
+      rows.push({
+        label: 'PPh 21 atas bonus (TER)',
+        value: bonusTax,
         })
       }
       rows.push({
         label: 'Total PPh 21 (TER)',
         value: total,
         variant: 'total',
+      })
+      rows.push({ label: 'Take-home pay', variant: 'section' })
+      rows.push({ label: 'Take-home setahun', value: takeHomeAnnual })
+      rows.push({
+        label: 'Take-home per masa',
+        value: takeHomePerMasa,
+        note: `${months} masa`,
       })
 
       return {
@@ -146,6 +164,9 @@ function calculatePegawaiTetap(
     const overpaid = difference < 0 ? Math.abs(difference) : 0
     const totalTax = terPaid + adjustment
 
+    const takeHomeAnnual = brutoTahun - totalTax
+    const takeHomePerMasa = takeHomeAnnual / Math.max(1, months)
+
     const breakdown: Array<TaxBreakdownRow> = [
       { label: 'Penghasilan (Jan–Nov)', variant: 'section' },
       { label: 'Bruto setahun', value: brutoTahun },
@@ -157,6 +178,12 @@ function calculatePegawaiTetap(
         variant: 'subtotal',
       },
       { label: 'Perhitungan Pasal 17', variant: 'section' },
+      {
+        label: 'Biaya jabatan (5% maks 6 jt)',
+        value: biayaJabatan,
+      },
+      { label: 'Iuran pensiun (setahun)', value: iuranTahun },
+      { label: 'Zakat/sumbangan', value: input.zakatOrDonation },
       { label: 'Netto setahun', value: nettoSetahun },
       { label: 'PTKP', value: ptkp },
       { label: 'PKP dibulatkan', value: pkpRounded },
@@ -183,6 +210,13 @@ function calculatePegawaiTetap(
       value: totalTax,
       variant: 'total',
     })
+    breakdown.push({ label: 'Take-home pay', variant: 'section' })
+    breakdown.push({ label: 'Take-home setahun', value: takeHomeAnnual })
+    breakdown.push({
+      label: 'Take-home per masa',
+      value: takeHomePerMasa,
+      note: `${months} masa`,
+    })
 
     return {
       totalTax,
@@ -191,13 +225,15 @@ function calculatePegawaiTetap(
   }
 
   const totalTax = (pajakSetahun / 12) * months
+  const takeHomeAnnual = brutoTahun - totalTax
+  const takeHomePerMasa = takeHomeAnnual / Math.max(1, months)
 
   const breakdown: Array<TaxBreakdownRow> = [
     { label: 'Penghasilan', variant: 'section' },
     { label: 'Bruto setahun', value: brutoTahun },
     { label: 'Pengurang Penghasilan', variant: 'section' },
-    { label: 'Biaya jabatan', value: biayaJabatan },
-    { label: 'Iuran pensiun', value: iuranTahun },
+    { label: 'Biaya jabatan (5% maks 6 jt)', value: biayaJabatan },
+    { label: 'Iuran pensiun (setahun)', value: iuranTahun },
     { label: 'Zakat/sumbangan', value: input.zakatOrDonation },
     {
       label: 'Penghasilan neto setahun',
@@ -209,6 +245,13 @@ function calculatePegawaiTetap(
     { label: 'PKP dibulatkan', value: pkpRounded },
     { label: 'PPh 21 setahun', value: pajakSetahun },
     { label: `PPh 21 ${months} masa`, value: totalTax, variant: 'total' },
+    { label: 'Take-home pay', variant: 'section' },
+    { label: 'Take-home setahun', value: takeHomeAnnual },
+    {
+      label: 'Take-home per masa',
+      value: takeHomePerMasa,
+      note: `${months} masa`,
+    },
   ]
 
   return {

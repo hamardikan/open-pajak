@@ -1,5 +1,5 @@
 import { formatCurrency } from '../lib/format'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Card, CardTitle } from './ui/card'
 
 interface TaxSummaryCardProps {
   total: number
@@ -13,18 +13,20 @@ export function TaxSummaryCard({
   meta,
 }: TaxSummaryCardProps) {
   return (
-    <Card className="border-2 border-[#f9c74f]/60 bg-gradient-to-br from-[#fffaf2] to-[#fff4d8]">
-      <CardHeader>
-        <CardTitle className="text-[#5a4100]">{label}</CardTitle>
-        {meta && (
-          <p className="text-sm font-medium text-[#5a4100]/80">{meta}</p>
-        )}
-      </CardHeader>
-      <CardContent>
-        <p className="text-4xl font-bold text-[#0f1e3d]">
+    <Card className="border border-[#f9c74f]/60 bg-gradient-to-br from-[#fffaf2] to-[#fff4d8] px-6 py-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <p className="text-3xl font-bold text-[#0f1e3d]">
           {formatCurrency(total)}
         </p>
-      </CardContent>
+        <div className="space-y-1 text-right sm:text-left">
+          <CardTitle className="text-sm font-semibold text-[#5a4100] uppercase tracking-wide">
+            {label}
+          </CardTitle>
+          {meta && (
+            <p className="text-xs font-medium text-[#5a4100]/80">{meta}</p>
+          )}
+        </div>
+      </div>
     </Card>
   )
 }
