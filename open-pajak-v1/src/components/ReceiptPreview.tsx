@@ -122,61 +122,74 @@ export function ReceiptPreview({
           {t('receipts.modal.breakdownTitle')}
         </p>
         <div className="mt-3 rounded-xl border border-[#0f1e3d]/5">
-          <table className="w-full border-collapse text-sm">
-            <thead className="bg-[#fff7e6] text-xs uppercase tracking-[0.2em] text-[#5f4400]">
-              <tr>
-                <th className="px-3 py-2 text-left">{t('table.component')}</th>
-                <th className="px-3 py-2 text-left">{t('table.value')}</th>
-                <th className="px-3 py-2 text-left">{t('table.note')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {breakdown.map((row, index) => {
-                if (row.variant === 'group') {
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-sm">
+              <thead className="bg-[#fff7e6] text-xs uppercase tracking-[0.2em] text-[#5f4400]">
+                <tr>
+                  <th className="px-3 py-2 text-left">
+                    {t('table.component')}
+                  </th>
+                  <th className="px-3 py-2 text-left">{t('table.value')}</th>
+                  <th className="px-3 py-2 text-left">{t('table.note')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {breakdown.map((row, index) => {
+                  if (row.variant === 'group') {
+                    return (
+                      <tr
+                        key={`group-${row.label}-${index}`}
+                        className="bg-[#fff9eb] text-xs uppercase tracking-[0.2em] text-[#806000]"
+                      >
+                        <td className="px-3 py-2" colSpan={3}>
+                          {row.label}
+                        </td>
+                      </tr>
+                    )
+                  }
+                  if (row.variant === 'section') {
+                    return (
+                      <tr
+                        key={`section-${row.label}-${index}`}
+                        className="bg-[#f4f6fb] font-semibold text-[#0f1e3d]"
+                      >
+                        <td className="px-3 py-2" colSpan={3}>
+                          {row.label}
+                        </td>
+                      </tr>
+                    )
+                  }
+                  if (row.variant === 'spacer') {
+                    return (
+                      <tr key={`spacer-${index}`}>
+                        <td colSpan={3} className="py-2" />
+                      </tr>
+                    )
+                  }
+                  const value =
+                    row.valueType === 'percent'
+                      ? typeof row.value === 'number'
+                        ? formatPercent(row.value)
+                        : (row.value ?? '')
+                      : typeof row.value === 'number'
+                        ? formatCurrency(row.value)
+                        : (row.value ?? '')
                   return (
-                    <tr key={`group-${row.label}-${index}`} className="bg-[#fff9eb] text-xs uppercase tracking-[0.2em] text-[#806000]">
-                      <td className="px-3 py-2" colSpan={3}>
-                        {row.label}
+                    <tr
+                      key={`${row.label}-${index}`}
+                      className="border-t border-[#eef1f7] text-[#0f1e3d]"
+                    >
+                      <td className="px-3 py-2 font-medium">{row.label}</td>
+                      <td className="px-3 py-2 tabular-nums">{value}</td>
+                      <td className="px-3 py-2 text-xs text-[#0f1e3d]/70">
+                        {row.note ?? '—'}
                       </td>
                     </tr>
                   )
-                }
-                if (row.variant === 'section') {
-                  return (
-                    <tr key={`section-${row.label}-${index}`} className="bg-[#f4f6fb] font-semibold text-[#0f1e3d]">
-                      <td className="px-3 py-2" colSpan={3}>
-                        {row.label}
-                      </td>
-                    </tr>
-                  )
-                }
-                if (row.variant === 'spacer') {
-                  return (
-                    <tr key={`spacer-${index}`}>
-                      <td colSpan={3} className="py-2" />
-                    </tr>
-                  )
-                }
-                const value =
-                  row.valueType === 'percent'
-                    ? typeof row.value === 'number'
-                      ? formatPercent(row.value)
-                      : row.value ?? ''
-                    : typeof row.value === 'number'
-                      ? formatCurrency(row.value)
-                      : row.value ?? ''
-                return (
-                  <tr key={`${row.label}-${index}`} className="border-t border-[#eef1f7] text-[#0f1e3d]">
-                    <td className="px-3 py-2 font-medium">{row.label}</td>
-                    <td className="px-3 py-2 tabular-nums">{value}</td>
-                    <td className="px-3 py-2 text-xs text-[#0f1e3d]/70">
-                      {row.note ?? '—'}
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -186,7 +199,10 @@ export function ReceiptPreview({
         </p>
         <div className="mt-3 grid gap-3 md:grid-cols-2">
           {Object.entries(formSnapshot).map(([key, value]) => (
-            <div key={key} className="rounded-xl border border-[#f0f2f7] bg-[#f9fafc] px-3 py-2">
+            <div
+              key={key}
+              className="rounded-xl border border-[#f0f2f7] bg-[#f9fafc] px-3 py-2"
+            >
               <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#6a748f]">
                 {t(`receipts.fields.${key}`, { defaultValue: key })}
               </p>

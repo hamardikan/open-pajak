@@ -148,7 +148,7 @@ export function ReceiptModal({
                 )}
               </div>
             </div>
-            <div className="md:col-span-1">
+            <div className="md:col-span-1 min-w-0">
               <ReceiptPreview {...data} title={title || data.title} />
             </div>
           </div>
@@ -156,7 +156,7 @@ export function ReceiptModal({
       </div>
       {open && (
         <Button
-          className="fixed bottom-6 right-6 z-[60] shadow-lg shadow-black/15"
+          className="fixed bottom-6 right-6 z-60 shadow-lg shadow-black/15"
           variant="accent"
           size="icon"
           onClick={() => {
