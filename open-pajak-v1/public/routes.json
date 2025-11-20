@@ -1,0 +1,7 @@
+[
+  {
+    "pattern": "/*",
+    "custom_domain": true,
+    "path": "/index.html"
+  }
+]
