@@ -209,49 +209,18 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="space-y-4">
           {renderNav('light')}
           <div className="relative">
-            <button
-              type="button"
-              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+            <select
               aria-label="Change language"
-              className="flex w-full items-center justify-between rounded-lg border border-[#0f1e3d]/20 bg-white px-3 py-2 text-sm text-[#0f1e3d] outline-none transition-all hover:bg-[#0f1e3d]/5"
+              value={i18n.language}
+              onChange={(event) => handleLocaleChange(event.target.value)}
+              className="w-full rounded-lg border border-[#0f1e3d]/20 bg-white px-3 py-2 text-sm text-[#0f1e3d] outline-none transition-all hover:bg-[#0f1e3d]/5"
             >
-              <span className="flex items-center gap-2">
-                <span>{currentLocale.emoji}</span>
-                <span>{currentLocale.label}</span>
-              </span>
-              <ChevronDown
-                className={cn(
-                  'size-4 text-[#0f1e3d] transition-transform',
-                  langDropdownOpen && 'rotate-180',
-                )}
-              />
-            </button>
-            {langDropdownOpen && (
-              <div className="absolute inset-x-0 top-full z-50 mt-2 rounded-lg border border-[#0f1e3d]/10 bg-white shadow-lg">
-                {availableLocales.map((locale) => {
-                  const isSelected = locale.code === i18n.language
-                  return (
-                    <button
-                      key={locale.code}
-                      type="button"
-                      onClick={() => handleLocaleChange(locale.code)}
-                      className={cn(
-                        'flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-sm text-[#0f1e3d] transition-colors first:rounded-t-lg last:rounded-b-lg',
-                        isSelected
-                          ? 'bg-[#f9c74f]/20 font-medium text-[#0f1e3d]'
-                          : 'hover:bg-[#0f1e3d]/5',
-                      )}
-                    >
-                      <span className="flex items-center gap-2">
-                        <span>{locale.emoji}</span>
-                        <span>{locale.label}</span>
-                      </span>
-                      {isSelected && <Check className="size-4 text-[#f9c74f]" />}
-                    </button>
-                  )
-                })}
-              </div>
-            )}
+              {availableLocales.map((locale) => (
+                <option key={locale.code} value={locale.code}>
+                  {`${locale.emoji} ${locale.label}`}
+                </option>
+              ))}
+            </select>
           </div>
           <Button asChild className="w-full" variant="outline">
             <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
