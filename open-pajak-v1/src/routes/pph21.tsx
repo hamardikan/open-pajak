@@ -351,7 +351,7 @@ function Pph21Page() {
         value: option.value,
         label: t(option.labelKey),
       })),
-    [t],
+    [t, i18n.language],
   )
 
   const normalizedForm = useMemo(
@@ -374,8 +374,14 @@ function Pph21Page() {
     isDailyWorker,
   } = normalizedForm
 
-  const result = useMemo(() => calculatePph21(normalizedForm), [normalizedForm])
-  const metrics = useMemo(() => extractMetrics(result.breakdown), [result.breakdown])
+  const result = useMemo(
+    () => calculatePph21(normalizedForm),
+    [normalizedForm, i18n.language],
+  )
+  const metrics = useMemo(
+    () => extractMetrics(result.breakdown),
+    [result.breakdown, i18n.language],
+  )
   const { takeHomeAnnual, takeHomePerPeriod, terPerPeriod, decemberAdjustment } = metrics
   const summaryPayload = useMemo(
     () => ({
@@ -417,6 +423,7 @@ function Pph21Page() {
       zakatOrDonation,
       foreignTaxRate,
       isDailyWorker,
+      i18n.language,
     ],
   )
   const defaultTitle = t('receipts.defaultTitle', {
@@ -439,6 +446,7 @@ function Pph21Page() {
       summaryPayload,
       result.breakdown,
       formSnapshot,
+      i18n.language,
     ],
   )
   const draftPreviewData: ReceiptPreviewData = useMemo(
