@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { TaxPageLayout } from '../components/TaxPageLayout'
 import { TaxFormSection } from '../components/TaxFormSection'
 import { TaxSummaryCard } from '../components/TaxSummaryCard'
@@ -45,6 +46,7 @@ export const Route = createFileRoute('/ppn')({
 })
 
 function PpnPage() {
+  const { t } = useTranslation()
   const [form, setForm] = useState<PpnFormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -68,24 +70,24 @@ function PpnPage() {
 
   return (
     <TaxPageLayout
-      title="Kalkulator PPN"
-      description="Hitung DPP dan PPN untuk transaksi termasuk maupun belum termasuk PPN. Cocok untuk memeriksa faktur pajak dan e-invoice."
+      title={t('ppnCalc.title')}
+      description={t('ppnCalc.description')}
       form={
         <TaxFormSection
-          title="Data transaksi"
+          title={t('ppnCalc.form.title')}
           actions={
             <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-end">
               <Button variant="outline" onClick={() => setForm(emptyForm())}>
-                Kosongkan Form
+                {t('app.buttons.clearForm')}
               </Button>
               <Button variant="ghost" onClick={() => setForm(sampleForm())}>
-                Gunakan Contoh
+                {t('app.buttons.useSample')}
               </Button>
             </div>
           }
         >
           <div className="grid gap-4 md:grid-cols-2">
-            <FormField label="Tahun pajak" htmlFor="taxYear">
+            <FormField label={t('ppnCalc.form.taxYear')} htmlFor="taxYear">
               <Select
                 id="taxYear"
                 value={form.taxYear}
@@ -100,9 +102,9 @@ function PpnPage() {
               </Select>
             </FormField>
             <FormField
-              label="Harga jual"
+              label={t('ppnCalc.form.basePrice')}
               htmlFor="basePrice"
-              description="Isi harga termasuk PPN jika mode di bawah diaktifkan."
+              description={t('ppnCalc.form.basePriceDesc')}
             >
               <NumberInput
                 id="basePrice"
@@ -115,7 +117,7 @@ function PpnPage() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <FormField label="Diskon (-)" htmlFor="discount">
+            <FormField label={t('ppnCalc.form.discount')} htmlFor="discount">
               <NumberInput
                 id="discount"
                 value={form.discount}
@@ -124,7 +126,7 @@ function PpnPage() {
                 }
               />
             </FormField>
-            <FormField label="Biaya lain (+)" htmlFor="otherCosts">
+            <FormField label={t('ppnCalc.form.otherCosts')} htmlFor="otherCosts">
               <NumberInput
                 id="otherCosts"
                 value={form.otherCosts}
@@ -137,9 +139,9 @@ function PpnPage() {
 
           <div className="grid gap-4 md:grid-cols-2">
             <FormField
-              label="Tarif khusus (opsional)"
+              label={t('ppnCalc.form.customRate')}
               htmlFor="customRate"
-              description="Dalam persen."
+              description={t('ppnCalc.form.customRateDesc')}
             >
               <Input
                 id="customRate"
@@ -157,10 +159,10 @@ function PpnPage() {
           <div className="flex items-center justify-between rounded-2xl border border-[#0f1e3d]/15 bg-[#0f1e3d]/5 px-4 py-3">
             <div>
               <p className="text-sm font-semibold text-[#0f1e3d]">
-                Harga sudah termasuk PPN?
+                {t('ppnCalc.form.toggleTitle')}
               </p>
               <p className="text-xs text-[#0f1e3d]/70">
-                Aktifkan untuk memecah nilai menjadi DPP + PPN.
+                {t('ppnCalc.form.toggleHint')}
               </p>
             </div>
             <Button
@@ -172,7 +174,7 @@ function PpnPage() {
                 }))
               }
             >
-              {form.includePpn ? 'Ya, termasuk' : 'Belum termasuk'}
+              {form.includePpn ? t('ppnCalc.form.toggleTrue') : t('ppnCalc.form.toggleFalse')}
             </Button>
           </div>
         </TaxFormSection>
@@ -180,29 +182,25 @@ function PpnPage() {
       summary={
         <TaxSummaryCard
           total={result.totalTax}
-          label="PPN terutang"
-          meta={form.includePpn ? 'Harga sudah termasuk PPN' : 'Harga belum termasuk PPN'}
+          label={t('ppnCalc.summary.label')}
+          meta={
+            form.includePpn
+              ? t('ppnCalc.summary.metaInclusive')
+              : t('ppnCalc.summary.metaExclusive')
+          }
         />
       }
       result={<TaxResultTable breakdown={result.breakdown} />}
       explanation={
         <FormulaExplanationCard
-          title="Formula DPP"
-          steps={[
-            'Jika harga belum termasuk PPN: DPP = Harga jual - diskon + biaya lain.',
-            'Jika harga sudah termasuk PPN: DPP = Harga / (1 + tarif).',
-            'PPN = DPP × tarif; total tagihan = DPP + PPN.',
-          ]}
+          title={t('ppnCalc.explanationTitle')}
+          steps={t('ppnCalc.explanation', { returnObjects: true }) as string[]}
         />
       }
       info={
         <InfoAlert
-          title="Praktik baik"
-          items={[
-            'Pastikan diskon sudah dikurangi dari DPP.',
-            'Gunakan tarif khusus bila mendapat fasilitas PMK terkait.',
-            'Simpan nomor faktur pajak untuk audit trail.',
-          ]}
+          title={t('ppnCalc.info.title')}
+          items={t('ppnCalc.info.items', { returnObjects: true }) as string[]}
         />
       }
     />

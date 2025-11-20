@@ -1,5 +1,6 @@
-import { formatCurrency } from '../lib/format'
+import { formatCurrency, formatPercent } from '../lib/format'
 import { cn } from '../lib/cn'
+import { useTranslation } from 'react-i18next'
 import {
   Table,
   TableBody,
@@ -9,12 +10,6 @@ import {
   TableRow,
 } from './ui/table'
 import type { TaxBreakdownRow } from '../lib/tax/types'
-
-const percentFormatter = new Intl.NumberFormat('id-ID', {
-  style: 'percent',
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-})
 
 interface TaxResultTableProps {
   breakdown: Array<TaxBreakdownRow>
@@ -28,20 +23,21 @@ function renderValue(row: TaxBreakdownRow) {
     return row.value
   }
   if (row.valueType === 'percent') {
-    return percentFormatter.format(row.value)
+    return formatPercent(row.value)
   }
   return formatCurrency(row.value)
 }
 
 export function TaxResultTable({ breakdown }: TaxResultTableProps) {
+  const { t } = useTranslation()
   return (
     <div className="overflow-x-auto lg:max-h-[620px]">
       <Table className="text-sm">
         <TableHeader className="sticky top-0 z-10 bg-white shadow-sm">
           <TableRow>
-            <TableHead>Komponen</TableHead>
-            <TableHead>Nilai (Rp)</TableHead>
-            <TableHead>Keterangan</TableHead>
+            <TableHead>{t('table.component')}</TableHead>
+            <TableHead>{t('table.value')}</TableHead>
+            <TableHead>{t('table.note')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

@@ -7,6 +7,7 @@ import {
 } from './utils'
 import { PASAL17_LAYERS } from './constants'
 import type { TaxBreakdownRow, TaxResult } from './types'
+import i18n from '../../i18n/config'
 
 export type PPh21SubjectType =
   | 'pegawai_tetap'
@@ -169,26 +170,26 @@ function calculatePegawaiTetap(
     const takeHomePerMasa = takeHomeAnnual / Math.max(1, months)
 
     const pasal17Rows = buildPasal17TierRows(pkpRounded)
-  const breakdown = buildWaterfallTerRows({
-    months,
-    salaryAnnual: input.brutoMonthly * months,
-    allowanceAnnual: input.bonusAnnual,
-    brutoTahun,
+    const breakdown = buildWaterfallTerRows({
+      months,
+      salaryAnnual: input.brutoMonthly * months,
+      allowanceAnnual: input.bonusAnnual,
+      brutoTahun,
       biayaJabatan,
       iuranTahun,
       zakat: input.zakatOrDonation,
       nettoSetahun,
       ptkp,
       pkpRounded,
-    pasal17Rows,
-    pajakSetahun,
-    terRate,
-    masaTax,
-    terPaid,
-    terMonths,
-    adjustment,
-    overpaid,
-    takeHomeAnnual,
+      pasal17Rows,
+      pajakSetahun,
+      terRate,
+      masaTax,
+      terPaid,
+      terMonths,
+      adjustment,
+      overpaid,
+      takeHomeAnnual,
       takeHomePerMasa,
     })
 
@@ -426,73 +427,75 @@ function buildWaterfallTerRows({
   takeHomeAnnual: number
   takeHomePerMasa: number
 }): TaxBreakdownRow[] {
+  const t = (key: string, fallback: string, options?: Record<string, unknown>) =>
+    i18n.t(key, { defaultValue: fallback, ...options })
   const rows: TaxBreakdownRow[] = []
   const totalPengurang = biayaJabatan + iuranTahun + zakat
 
-  rows.push({ label: 'A. Penghasilan Bruto (Gross)', variant: 'group' })
+  rows.push({ label: t('pph21Waterfall.groups.gross', 'A. Penghasilan Bruto (Gross)'), variant: 'group' })
   rows.push({
-    label: 'Gaji pokok (setahun)',
+    label: t('pph21Waterfall.rows.salaryAnnual', 'Gaji pokok (setahun)'),
     value: salaryAnnual,
-    note: `Estimasi ${months} masa`,
+    note: t('pph21Waterfall.notes.salaryAnnual', 'Estimasi {{months}} masa', { months }),
   })
   rows.push({
-    label: 'Tunjangan/bonus (setahun)',
+    label: t('pph21Waterfall.rows.allowanceAnnual', 'Tunjangan/bonus (setahun)'),
     value: allowanceAnnual,
-    note: 'Tunjangan tetap / bonus / THR',
+    note: t('pph21Waterfall.notes.allowanceAnnual', 'Tunjangan tetap / bonus / THR'),
   })
   rows.push({
-    label: 'Total bruto setahun',
+    label: t('pph21Waterfall.rows.totalGross', 'Total bruto setahun'),
     value: brutoTahun,
     variant: 'subtotal',
-    note: 'Total penghasilan kotor',
+    note: t('pph21Waterfall.notes.totalGross', 'Total penghasilan kotor'),
   })
   rows.push({ label: '', variant: 'spacer' })
 
-  rows.push({ label: 'B. Pengurang (Deductions)', variant: 'group' })
+  rows.push({ label: t('pph21Waterfall.groups.deductions', 'B. Pengurang (Deductions)'), variant: 'group' })
   rows.push({
-    label: 'Biaya jabatan',
+    label: t('pph21Waterfall.rows.jobCost', 'Biaya jabatan'),
     value: -biayaJabatan,
-    note: '5% × bruto, maks 6 juta/tahun',
+    note: t('pph21Waterfall.notes.jobCost', '5% × bruto, maks 6 juta/tahun'),
   })
   rows.push({
-    label: 'Iuran pensiun/JHT',
+    label: t('pph21Waterfall.rows.pension', 'Iuran pensiun/JHT'),
     value: -iuranTahun,
-    note: 'Bagian yang dibayar karyawan',
+    note: t('pph21Waterfall.notes.pension', 'Bagian yang dibayar karyawan'),
   })
   if (zakat > 0) {
     rows.push({
-      label: 'Zakat/sumbangan',
+      label: t('pph21Waterfall.rows.zakat', 'Zakat/sumbangan'),
       value: -zakat,
-      note: 'Melalui pemberi kerja',
+      note: t('pph21Waterfall.notes.zakat', 'Melalui pemberi kerja'),
     })
   }
   rows.push({
-    label: 'Total pengurang',
+    label: t('pph21Waterfall.rows.totalDeductions', 'Total pengurang'),
     value: -totalPengurang,
     variant: 'subtotal',
   })
   rows.push({ label: '', variant: 'spacer' })
 
-  rows.push({ label: 'C. Basis Perhitungan Pajak', variant: 'group' })
+  rows.push({ label: t('pph21Waterfall.groups.basis', 'C. Basis Perhitungan Pajak'), variant: 'group' })
   rows.push({
-    label: 'Penghasilan netto',
+    label: t('pph21Waterfall.rows.netIncome', 'Penghasilan netto'),
     value: nettoSetahun,
-    note: 'Bruto - Pengurang',
+    note: t('pph21Waterfall.notes.netIncome', 'Bruto - pengurang'),
   })
   rows.push({
-    label: 'PTKP',
+    label: t('pph21Waterfall.rows.ptkp', 'PTKP'),
     value: -ptkp,
-    note: 'Berdasarkan status keluarga',
+    note: t('pph21Waterfall.notes.ptkp', 'Berdasarkan status keluarga'),
   })
   rows.push({
-    label: 'PKP (dibulatkan)',
+    label: t('pph21Waterfall.rows.pkpRounded', 'PKP (dibulatkan)'),
     value: pkpRounded,
     variant: 'subtotal',
   })
   rows.push({ label: '', variant: 'spacer' })
 
   rows.push({
-    label: 'D. Pajak terutang (tarif Pasal 17)',
+    label: t('pph21Waterfall.groups.taxDue', 'D. Pajak terutang (tarif Pasal 17)'),
     variant: 'group',
   })
   rows.push(
@@ -502,65 +505,102 @@ function buildWaterfallTerRows({
     })),
   )
   rows.push({
-    label: 'Total PPh 21 seharusnya (setahun)',
+    label: t('pph21Waterfall.rows.totalTaxYear', 'Total PPh 21 seharusnya (setahun)'),
     value: pajakSetahun,
     variant: 'subtotal',
-    note: 'Kewajiban pajak 1 tahun',
+    note: t('pph21Waterfall.notes.totalTaxYear', 'Kewajiban pajak 1 tahun'),
   })
   rows.push({ label: '', variant: 'spacer' })
 
-  rows.push({ label: 'E. Status pembayaran (Settlement)', variant: 'group' })
+  rows.push({ label: t('pph21Waterfall.groups.settlement', 'E. Status pembayaran (Settlement)'), variant: 'group' })
   rows.push({
-    label: 'PPh 21 TER per masa',
+    label: t('pph21Waterfall.rows.terPerPeriod', 'PPh 21 TER per masa'),
     value: masaTax,
-    note: `Tarif ${formatPercentLabel(terRate)} × bruto per masa`,
+    note: t('pph21Waterfall.notes.terPerPeriod', 'Tarif {{rate}} × bruto per masa', {
+      rate: formatPercentLabel(terRate),
+    }),
   })
   rows.push({
-    label: '(-) Sudah dipotong Jan–Nov (TER)',
+    label: t('pph21Waterfall.rows.terPaid', '(-) Sudah dipotong Jan–Nov (TER)'),
     value: -terPaid,
-    note: `Tarif ${formatPercentLabel(terRate)} × ${terMonths} masa`,
+    note: t('pph21Waterfall.notes.terPaid', 'Tarif {{rate}} × {{months}} masa', {
+      rate: formatPercentLabel(terRate),
+      months: terMonths,
+    }),
   })
   if (overpaid > 0) {
     rows.push({
-      label: 'Kelebihan TER',
+      label: t('pph21Waterfall.rows.overpaid', 'Kelebihan TER'),
       value: overpaid,
-      note: 'TER melebihi hasil Pasal 17',
+      note: t('pph21Waterfall.notes.overpaid', 'TER melebihi hasil Pasal 17'),
     })
   }
   rows.push({
-    label: 'PPh 21 masa Desember (kurang bayar)',
+    label: t('pph21Waterfall.rows.decemberAdjustment', 'PPh 21 masa Desember (kurang bayar)'),
     value: adjustment,
     variant: 'total',
-    note: 'Sisa kewajiban Desember',
+    note: t('pph21Waterfall.notes.decemberAdjustment', 'Sisa kewajiban Desember'),
   })
   rows.push({ label: '', variant: 'spacer' })
 
-  rows.push({ label: 'F. Take-home pay', variant: 'group' })
+  rows.push({ label: t('pph21Waterfall.groups.takeHome', 'F. Take-home pay'), variant: 'group' })
   rows.push({
-    label: 'Take-home setahun',
+    label: t('pph21Waterfall.rows.takeHomeAnnual', 'Take-home setahun'),
     value: takeHomeAnnual,
-    note: 'Bruto - pajak terutang',
+    note: t('pph21Waterfall.notes.takeHomeAnnual', 'Bruto - pajak terutang'),
   })
   rows.push({
-    label: 'Take-home per masa',
+    label: t('pph21Waterfall.rows.takeHomePeriod', 'Take-home per masa'),
     value: takeHomePerMasa,
-    note: `${months} masa`,
+    note: t('pph21Waterfall.notes.takeHomePeriod', '{{months}} masa', { months }),
   })
 
   return rows
 }
 
 function calculatePph26(input: PPh21Input): TaxResult {
-  const bruto = input.brutoMonthly * input.monthsPaid + input.bonusAnnual
-  const rate = input.foreignTaxRate || 0.2
-  const tax = bruto * rate
+  const months = clampMonths(input.monthsPaid)
+  const salaryAnnual = input.brutoMonthly * months
+  const allowanceAnnual = input.bonusAnnual
+  const bruto = salaryAnnual + allowanceAnnual
+  const decimalRate = ((input.foreignTaxRate ?? 20) / 100)
+  const tax = bruto * decimalRate
+  const rows: TaxBreakdownRow[] = [
+    { label: 'A. Penghasilan bruto WPLN', variant: 'group' },
+    {
+      label: 'Honorarium/jasa (setahun)',
+      value: salaryAnnual,
+      note: `${months} masa`,
+    },
+    {
+      label: 'Bonus/tunjangan',
+      value: allowanceAnnual,
+      note: 'Tambahan tahunan',
+    },
+    {
+      label: 'Total bruto setahun',
+      value: bruto,
+      variant: 'subtotal',
+    },
+    { label: '', variant: 'spacer' },
+    { label: 'B. Tarif PPh 26', variant: 'group' },
+    {
+      label: 'Tarif efektif',
+      value: decimalRate,
+      valueType: 'percent',
+      note: 'Treaty / PMK 164/2023',
+    },
+    { label: '', variant: 'spacer' },
+    { label: 'C. Pajak terutang', variant: 'group' },
+    {
+      label: 'PPh 26 final',
+      value: tax,
+      variant: 'total',
+      note: 'Bukti potong 1721-VI',
+    },
+  ]
   return {
     totalTax: tax,
-    breakdown: [
-      { label: 'Penghasilan Bruto', variant: 'section' },
-      { label: 'Penghasilan bruto', value: bruto },
-      { label: 'Tarif PPh 26', value: rate, valueType: 'percent' },
-      { label: 'PPh 26 final', value: tax, variant: 'total' },
-    ],
+    breakdown: rows,
   }
 }

@@ -1,5 +1,6 @@
 import { PPN_RATES_PER_YEAR } from './constants'
 import type { TaxResult } from './types'
+import i18n from '../../i18n/config'
 
 export interface PpnInput {
   taxYear: string
@@ -18,6 +19,8 @@ export function calculatePpn({
   customRate,
   includePpn,
 }: PpnInput): TaxResult {
+  const t = (key: string, fallback: string, options?: Record<string, unknown>) =>
+    i18n.t(key, { defaultValue: fallback, ...options })
   const rate =
     customRate && customRate > 0
       ? customRate / 100
@@ -36,17 +39,19 @@ export function calculatePpn({
   return {
     totalTax: ppn,
     breakdown: [
-      { label: 'Dasar Pengenaan', variant: 'section' },
+      { label: t('ppnCalc.breakdown.baseSection', 'Dasar Pengenaan'), variant: 'section' },
       {
-        label: 'DPP',
+        label: t('ppnCalc.breakdown.dpp', 'DPP'),
         value: dpp,
-        note: includePpn ? 'harga termasuk PPN' : 'harga sebelum PPN',
+        note: includePpn
+          ? t('ppnCalc.notes.dppInclusive', 'harga termasuk PPN')
+          : t('ppnCalc.notes.dppExclusive', 'harga sebelum PPN'),
         variant: 'subtotal',
       },
-      { label: 'Perhitungan PPN', variant: 'section' },
-      { label: 'Tarif PPN', value: rate, valueType: 'percent' },
-      { label: 'PPN terutang', value: ppn },
-      { label: 'Total tagihan', value: dpp + ppn, variant: 'total' },
+      { label: t('ppnCalc.breakdown.taxSection', 'Perhitungan PPN'), variant: 'section' },
+      { label: t('ppnCalc.breakdown.rate', 'Tarif PPN'), value: rate, valueType: 'percent' },
+      { label: t('ppnCalc.breakdown.tax', 'PPN terutang'), value: ppn },
+      { label: t('ppnCalc.breakdown.total', 'Total tagihan'), value: dpp + ppn, variant: 'total' },
     ],
   }
 }

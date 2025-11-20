@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FormField } from '../components/FormField'
 import { FormulaExplanationCard } from '../components/FormulaExplanationCard'
 import { InfoAlert } from '../components/InfoAlert'
@@ -18,15 +19,15 @@ export const Route = createFileRoute('/pph21')({
   component: Pph21Page,
 })
 
-const subjects: Array<{ value: PPh21SubjectType; label: string }> = [
-  { value: 'pegawai_tetap', label: 'Pegawai Tetap' },
-  { value: 'pensiunan', label: 'Pensiunan' },
-  { value: 'pegawai_tidak_tetap', label: 'Pegawai Tidak Tetap' },
-  { value: 'bukan_pegawai', label: 'Bukan Pegawai' },
-  { value: 'peserta_kegiatan', label: 'Peserta Kegiatan' },
-  { value: 'program_pensiun', label: 'Penarikan Program Pensiun' },
-  { value: 'mantan_pegawai', label: 'Mantan Pegawai' },
-  { value: 'wpln', label: 'PPh 26 (WPLN)' },
+const SUBJECT_OPTIONS: Array<{ value: PPh21SubjectType; labelKey: string }> = [
+  { value: 'pegawai_tetap', labelKey: 'pph21.subjectOptions.pegawai_tetap' },
+  { value: 'pensiunan', labelKey: 'pph21.subjectOptions.pensiunan' },
+  { value: 'pegawai_tidak_tetap', labelKey: 'pph21.subjectOptions.pegawai_tidak_tetap' },
+  { value: 'bukan_pegawai', labelKey: 'pph21.subjectOptions.bukan_pegawai' },
+  { value: 'peserta_kegiatan', labelKey: 'pph21.subjectOptions.peserta_kegiatan' },
+  { value: 'program_pensiun', labelKey: 'pph21.subjectOptions.program_pensiun' },
+  { value: 'mantan_pegawai', labelKey: 'pph21.subjectOptions.mantan_pegawai' },
+  { value: 'wpln', labelKey: 'pph21.subjectOptions.wpln' },
 ]
 
 const ptkpOptions: Array<string> = [
@@ -104,6 +105,7 @@ const createEmptyForm = (): Pph21FormState => ({
 })
 
 function Pph21Page() {
+  const { t } = useTranslation()
   const [form, setForm] = useState<Pph21FormState>(createSampleForm)
 
   useEffect(() => {
@@ -125,6 +127,15 @@ function Pph21Page() {
       [field]: Number.isFinite(numeric) ? numeric : 0,
     }))
   }
+
+  const subjectOptions = useMemo(
+    () =>
+      SUBJECT_OPTIONS.map((option) => ({
+        value: option.value,
+        label: t(option.labelKey),
+      })),
+    [t],
+  )
 
   const normalizedForm = useMemo(
     () => ({
@@ -167,14 +178,18 @@ function Pph21Page() {
   )
   const hasError = totalNegatives.length > 0
 
+  const infoItems = t('pph21.info.points', {
+    returnObjects: true,
+  }) as string[]
+
   return (
     <TaxPageLayout
-      title="Kalkulator PPh 21/26"
-      description="Hitung potongan pajak penghasilan atas pegawai, bukan pegawai, hingga Wajib Pajak luar negeri. Sesuaikan skema lama maupun Tarif Efektif (TER)."
+      title={t('pph21.title')}
+      description={t('pph21.description')}
       form={
         <TaxFormSection
-          title="Data Penghasilan"
-          description="Masukkan nilai bruto dan parameter masa pajak."
+          title={t('pph21.form.title')}
+          description={t('pph21.form.description')}
           actions={
             <>
               <Button
@@ -182,19 +197,19 @@ function Pph21Page() {
                 size="sm"
                 onClick={() => setForm(createEmptyForm())}
               >
-                Kosongkan Form
+                {t('app.buttons.clearForm')}
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setForm(createSampleForm())}
               >
-                Gunakan Contoh
+                {t('app.buttons.useSample')}
               </Button>
             </>
           }
         >
-          <FormField label="Jenis subjek" htmlFor="subjectType">
+          <FormField label={t('pph21.form.fields.subjectType')} htmlFor="subjectType">
             <Select
               id="subjectType"
               value={form.subjectType}
@@ -205,7 +220,7 @@ function Pph21Page() {
                 }))
               }
             >
-              {subjects.map((subject) => (
+              {subjectOptions.map((subject) => (
                 <option key={subject.value} value={subject.value}>
                   {subject.label}
                 </option>
@@ -214,7 +229,10 @@ function Pph21Page() {
           </FormField>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <FormField label="Penghasilan bruto per masa" htmlFor="brutoMonthly">
+            <FormField
+              label={t('pph21.form.fields.brutoMonthly')}
+              htmlFor="brutoMonthly"
+            >
               <NumberInput
                 id="brutoMonthly"
                 value={form.brutoMonthly}
@@ -225,9 +243,9 @@ function Pph21Page() {
             </FormField>
 
             <FormField
-              label="Jumlah masa (bulan/hari)"
+              label={t('pph21.form.fields.monthsPaid')}
               htmlFor="monthsPaid"
-              description="Maksimal 12."
+              description={t('pph21.form.descriptions.monthsPaid')}
             >
               <Input
                 id="monthsPaid"
@@ -244,7 +262,7 @@ function Pph21Page() {
 
           <div className="grid gap-4 md:grid-cols-2">
             <FormField
-              label="Iuran pensiun per masa"
+              label={t('pph21.form.fields.pensionContribution')}
               htmlFor="pensionContribution"
             >
               <NumberInput
@@ -255,7 +273,10 @@ function Pph21Page() {
                 }
               />
             </FormField>
-            <FormField label="Bonus/tantiem tahunan" htmlFor="bonusAnnual">
+            <FormField
+              label={t('pph21.form.fields.bonusAnnual')}
+              htmlFor="bonusAnnual"
+            >
               <NumberInput
                 id="bonusAnnual"
                 value={form.bonusAnnual}
@@ -269,7 +290,7 @@ function Pph21Page() {
           {form.subjectType !== 'wpln' && (
             <>
               <div className="grid gap-4 md:grid-cols-2">
-          <FormField label="Status PTKP" htmlFor="ptkpStatus">
+          <FormField label={t('pph21.form.fields.ptkpStatus')} htmlFor="ptkpStatus">
             <Select
               id="ptkpStatus"
               value={form.ptkpStatus}
@@ -295,9 +316,9 @@ function Pph21Page() {
               </div>
 
               <FormField
-                label="Zakat/Sumbangan (setahun)"
+                label={t('pph21.form.fields.zakat')}
                 htmlFor="zakat"
-                description="Lewat pemberi kerja, opsional"
+                description={t('pph21.form.descriptions.zakat')}
               >
                 <NumberInput
                   id="zakat"
@@ -309,7 +330,7 @@ function Pph21Page() {
               </FormField>
 
               <div className="grid gap-4 md:grid-cols-2">
-                <FormField label="Skema" htmlFor="scheme">
+                <FormField label={t('pph21.form.fields.scheme')} htmlFor="scheme">
                   <Select
                     id="scheme"
                     value={form.scheme}
@@ -320,15 +341,15 @@ function Pph21Page() {
                       }))
                     }
                   >
-                    <option value="lama">Skema lama (Pasal 17)</option>
-                    <option value="ter">TER (Tarif Efektif)</option>
+                    <option value="lama">{t('pph21.schemeOptions.lama')}</option>
+                    <option value="ter">{t('pph21.schemeOptions.ter')}</option>
                   </Select>
                 </FormField>
 
                 <FormField
-                  label="Kategori TER"
+                  label={t('pph21.form.fields.terCategory')}
                   htmlFor="terCategory"
-                  description="Disesuaikan otomatis berdasarkan subjek, bisa diubah manual."
+                  description={t('pph21.form.descriptions.terCategory')}
                 >
                   <Select
                     id="terCategory"
@@ -340,9 +361,9 @@ function Pph21Page() {
                       }))
                     }
                   >
-                    <option value="A">Kategori A</option>
-                    <option value="B">Kategori B</option>
-                    <option value="C">Kategori C</option>
+                    <option value="A">{t('pph21.terOptions.A')}</option>
+                    <option value="B">{t('pph21.terOptions.B')}</option>
+                    <option value="C">{t('pph21.terOptions.C')}</option>
                   </Select>
                 </FormField>
               </div>
@@ -353,10 +374,10 @@ function Pph21Page() {
             <div className="flex items-center justify-between rounded-2xl border border-[#0f1e3d]/15 bg-[#0f1e3d]/5 px-4 py-3">
               <div>
                 <p className="text-sm font-semibold text-[#0f1e3d]">
-                  Hitung harian?
+                  {t('pph21.toggleDaily.title')}
                 </p>
                 <p className="text-xs text-[#0f1e3d]/70">
-                  Gunakan TER harian jika pekerja dibayar per hari.
+                  {t('pph21.toggleDaily.description')}
                 </p>
               </div>
               <Button
@@ -368,7 +389,9 @@ function Pph21Page() {
                   }))
                 }
               >
-                {form.isDailyWorker ? 'Harian' : 'Bulanan'}
+                {form.isDailyWorker
+                  ? t('pph21.toggleDaily.daily')
+                  : t('pph21.toggleDaily.monthly')}
               </Button>
             </div>
           )}
@@ -376,9 +399,9 @@ function Pph21Page() {
           {form.subjectType === 'wpln' && (
             <div className="grid gap-4 md:grid-cols-2">
               <FormField
-                label="Tarif PPh 26"
+                label={t('pph21.wplnField.label')}
                 htmlFor="foreignTaxRate"
-                description="Dalam persen"
+                description={t('pph21.wplnField.description')}
               >
                 <Input
                   id="foreignTaxRate"
@@ -396,7 +419,7 @@ function Pph21Page() {
 
           {hasError && (
             <p className="text-sm text-red-600">
-              Pastikan semua nilai numerik bernilai positif.
+              {t('errors.positiveOnly', { defaultValue: 'Gunakan angka positif.' })}
             </p>
           )}
         </TaxFormSection>
@@ -404,6 +427,7 @@ function Pph21Page() {
       summary={
         <TaxSummaryCard
           total={result.totalTax}
+          meta={t('pph21.summary.meta')}
           terPerPeriod={terPerPeriod}
           decemberAdjustment={decemberAdjustment}
           takeHomeAnnual={takeHomeAnnual}
@@ -413,27 +437,17 @@ function Pph21Page() {
       result={<TaxResultTable breakdown={result.breakdown} />}
       explanation={
         <FormulaExplanationCard
-          title="Formula ringkas"
-          steps={[
-            'DPP dihitung sesuai jenis subjek (50% bruto, TER, atau penuh).',
-            'PTKP digunakan untuk pegawai tetap/pensiunan dengan skema lama.',
-            'PKP dibulatkan ke bawah per Rp1.000 sebelum Pasal 17 diterapkan.',
-            'Skema TER mengikuti kategori A/B/C per PER-2/PJ/2024.',
-          ]}
+          title={t('pph21.explanationTitle')}
+          steps={t('pph21.explanation', { returnObjects: true }) as string[]}
         />
       }
       info={
         <InfoAlert
-          title="Catatan penting"
-          items={[
-            'Tidak ada penyimpanan data, semua perhitungan terjadi di browser.',
-            'PKP dibulatkan ke bawah sesuai ketentuan.',
-            'Pegawai tetap memakai TER Januari–November, lalu Desember menyesuaikan Pasal 17 setahun.',
-            'Tarif TER menggunakan tabel ringkas, sesuaikan dengan ketentuan DJP bila diperlukan.',
-          ]}
+          title={t('pph21.info.goodPractice')}
+          items={infoItems}
           extra={
             <p className="text-xs text-[#5a4100]/80">
-              Hasil bersifat indikatif, konfirmasi sebelum pelaporan SPT Masa/ Tahunan.
+              {t('pph21.info.disclaimer')}
             </p>
           }
         />

@@ -6,6 +6,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 
 import './styles.css'
+import './i18n/config'
 
 // Create a new router instance
 const router = createRouter({

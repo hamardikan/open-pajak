@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FormField } from '../components/FormField'
 import { FormulaExplanationCard } from '../components/FormulaExplanationCard'
 import { InfoAlert } from '../components/InfoAlert'
@@ -36,6 +37,7 @@ const emptyForm = (): Pph23FormState => ({
 })
 
 function Pph23Page() {
+  const { t } = useTranslation()
   const [form, setForm] = useState<Pph23FormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -50,24 +52,27 @@ function Pph23Page() {
 
   return (
     <TaxPageLayout
-      title="Kalkulator PPh 23"
-      description="Hitung PPh 23 untuk jasa, sewa, dividen, dan bunga dengan tarif 2–15%. Gunakan untuk memastikan potongan faktur atau bukti potong."
+      title={t('pph23.title')}
+      description={t('pph23.description')}
       form={
         <TaxFormSection
-          title="Detil Transaksi"
+          title={t('pph23.form.title')}
           actions={
             <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-end">
               <Button variant="outline" onClick={() => setForm(emptyForm())}>
-                Kosongkan Form
+                {t('app.buttons.clearForm')}
               </Button>
               <Button variant="ghost" onClick={() => setForm(sampleForm())}>
-                Gunakan Contoh
+                {t('app.buttons.useSample')}
               </Button>
             </div>
           }
         >
           <div className="grid gap-4 md:grid-cols-2">
-            <FormField label="Jenis penghasilan" htmlFor="serviceType">
+            <FormField
+              label={t('pph23.form.incomeType')}
+              htmlFor="serviceType"
+            >
               <Select
                 id="serviceType"
                 value={form.serviceType}
@@ -78,18 +83,28 @@ function Pph23Page() {
                   }))
                 }
               >
-                <option value="jasaTeknik">Jasa teknik</option>
-                <option value="jasaKonsultan">Jasa konsultan</option>
-                <option value="sewaAlat">Sewa alat</option>
-                <option value="dividen">Dividen</option>
-                <option value="bunga">Bunga</option>
+                <option value="jasaTeknik">
+                  {t('pph23.options.serviceType.jasaTeknik')}
+                </option>
+                <option value="jasaKonsultan">
+                  {t('pph23.options.serviceType.jasaKonsultan')}
+                </option>
+                <option value="sewaAlat">
+                  {t('pph23.options.serviceType.sewaAlat')}
+                </option>
+                <option value="dividen">
+                  {t('pph23.options.serviceType.dividen')}
+                </option>
+                <option value="bunga">
+                  {t('pph23.options.serviceType.bunga')}
+                </option>
               </Select>
             </FormField>
 
             <FormField
-              label="Final?"
+              label={t('pph23.form.isFinal')}
               htmlFor="isFinal"
-              description="Beberapa objek (dividen, bunga) bersifat final."
+              description={t('pph23.form.isFinalDesc')}
             >
               <Select
                 id="isFinal"
@@ -101,13 +116,16 @@ function Pph23Page() {
                   }))
                 }
               >
-                <option value="tidak">Tidak</option>
-                <option value="ya">Ya</option>
+                <option value="tidak">{t('pph23.options.final.no')}</option>
+                <option value="ya">{t('pph23.options.final.yes')}</option>
               </Select>
             </FormField>
           </div>
 
-          <FormField label="Nilai bruto (tanpa PPN)" htmlFor="grossAmount">
+          <FormField
+            label={t('pph23.form.gross')}
+            htmlFor="grossAmount"
+          >
             <NumberInput
               id="grossAmount"
               value={form.grossAmount}
@@ -121,29 +139,21 @@ function Pph23Page() {
       summary={
         <TaxSummaryCard
           total={result.totalTax}
-          label="PPh 23 dipotong"
-          meta="Gunakan sebagai kredit pajak penghasilan."
+          label={t('pph23.summary.label')}
+          meta={t('pph23.summary.meta')}
         />
       }
       result={<TaxResultTable breakdown={result.breakdown} />}
       explanation={
         <FormulaExplanationCard
-          title="Formula"
-          steps={[
-            'DPP untuk PPh 23 = jumlah bruto tanpa PPN.',
-            'Tarif mengikuti Pasal 23 (2% jasa, 4% konsultan, 15% dividen/bunga).',
-            'PPh 23 dipotong = DPP × tarif.',
-          ]}
+          title={t('pph23.explanationTitle')}
+          steps={t('pph23.explanation', { returnObjects: true }) as string[]}
         />
       }
       info={
         <InfoAlert
-          title="Dokumen pendukung"
-          items={[
-            'Faktur/invoice jasa atau sewa.',
-            'Bukti potong resmi untuk kredit pajak.',
-            'Kontrak kerja sama atau SPK.',
-          ]}
+          title={t('pph23.info.title')}
+          items={t('pph23.info.items', { returnObjects: true }) as string[]}
         />
       }
     />

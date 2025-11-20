@@ -1,5 +1,6 @@
 import { PPH4_2_RATES } from './constants'
 import type { TaxResult } from './types'
+import i18n from '../../i18n/config'
 
 export type PPh4Objek =
   | 'sewaTanah'
@@ -16,6 +17,8 @@ export function calculatePph4({
   objectType,
   grossAmount,
 }: PPh4Input): TaxResult {
+  const t = (key: string, fallback: string) =>
+    i18n.t(key, { defaultValue: fallback })
   const dpp = Math.max(0, grossAmount)
   const rate = PPH4_2_RATES[objectType]
   const totalTax = dpp * rate
@@ -23,10 +26,10 @@ export function calculatePph4({
   return {
     totalTax,
     breakdown: [
-      { label: 'Dasar Pengenaan', variant: 'section' },
-      { label: 'Nilai objek', value: dpp },
-      { label: 'Tarif final', value: rate, valueType: 'percent' },
-      { label: 'PPh Final 4(2)', value: totalTax, variant: 'total' },
+      { label: t('pph4_2_calc.breakdown.section', 'Dasar Pengenaan'), variant: 'section' },
+      { label: t('pph4_2_calc.breakdown.value', 'Nilai objek'), value: dpp },
+      { label: t('pph4_2_calc.breakdown.rate', 'Tarif final'), value: rate, valueType: 'percent' },
+      { label: t('pph4_2_calc.breakdown.tax', 'PPh Final 4(2)'), value: totalTax, variant: 'total' },
     ],
   }
 }

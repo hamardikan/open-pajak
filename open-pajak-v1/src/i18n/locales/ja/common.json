@@ -1,0 +1,479 @@
+{
+  "app": {
+    "brand": "Open Pajak",
+    "brandMain": "Open",
+    "brandAccent": "Pajak",
+    "tagline": "オープンソース税務ツールキット",
+    "taglineLine1": "Open Source",
+    "taglineLine2": "Tax Toolkit",
+    "nav": {
+      "home": "ホーム",
+      "pph21": "PPh21/26",
+      "pph22": "PPh22",
+      "pph23": "PPh23",
+      "pph4_2": "PPh4(2)",
+      "ppn": "VAT",
+      "ppnbm": "高級VAT"
+    },
+    "buttons": {
+      "pph21Simulator": "PPh21シミュレーター",
+      "startSimulation": "シミュレーション開始",
+      "clearForm": "クリア",
+      "useSample": "サンプル入力",
+      "openNav": "メニューを開く",
+      "closeNav": "メニューを閉じる"
+    },
+    "menu": {
+      "title": "メインメニュー",
+      "subtitle": "利用する計算ツールを選択してください。"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Open Pajak",
+      "title": "インドネシア税の計算をこの一つで。",
+      "body": "すべての計算はブラウザ内で完結。個人情報やサーバー送信は不要です。申告前のチェックやクイックシミュレーションに最適です。",
+      "ctaPrimary": "計算を始める",
+      "ctaSecondary": "かんたんVAT"
+    },
+    "features": [
+      {
+        "title": "主要6計算ツール",
+        "description": "PPh21/26, 22, 23, Final 4(2), VAT, PPNBMが最新DJP方式に対応。"
+      },
+      {
+        "title": "プライバシー重視",
+        "description": "NIK/氏名/住所などの入力は不要。数値と区分のみ。"
+      },
+      {
+        "title": "透明な計算式",
+        "description": "結果には計算ステップと参照規定を表示。"
+      }
+    ],
+    "calculatorList": {
+      "title": "電卓を選択",
+      "subtitle": "各ページには入力フォーム、結果テーブル、計算メモが含まれます。",
+      "cards": {
+        "pph21": {
+          "title": "PPh21/26",
+          "description": "正社員、非正規、外注、非居住者。"
+        },
+        "pph22": {
+          "title": "PPh22",
+          "description": "輸入、石油・ガス、国営企業、その他。"
+        },
+        "pph23": {
+          "title": "PPh23",
+          "description": "技術サービス、コンサル、機器レンタル、配当、利息。"
+        },
+        "pph4_2": {
+          "title": "PPh4(2)最終",
+          "description": "土地建物賃貸、建設、レストラン、UMKM。"
+        },
+        "ppn": {
+          "title": "VAT",
+          "description": "税込/税抜価格を自動でDPP化。"
+        },
+        "ppnbm": {
+          "title": "高級VAT",
+          "description": "自動車、宝飾品、ハイエンド家電。"
+        }
+      }
+    }
+  },
+  "table": {
+    "component": "項目",
+    "value": "金額 (IDR)",
+    "note": "備考 / 計算式"
+  },
+  "summary": {
+    "taxOverview": "税額サマリー",
+    "takeHome": "手取り額",
+    "totalTax": "年間PPh21/26",
+    "terMonthly": "月次TER",
+    "decAdjustment": "12月清算",
+    "thpAnnual": "年間手取り",
+    "thpPeriod": "期間手取り"
+  },
+  "pph21": {
+    "title": "PPh21/26計算機",
+    "description": "従業員・委託・海外居住者の源泉税を旧制度またはTERで試算します。",
+    "summary": {
+      "meta": "1〜11月はTER、12月にPasal17で精算"
+    },
+    "form": {
+      "title": "所得データ",
+      "description": "総支給額と期間パラメータを入力。",
+      "fields": {
+        "subjectType": "対象区分",
+        "brutoMonthly": "期間あたりの総支給額",
+        "monthsPaid": "期間数 (月/日)",
+        "pensionContribution": "期間ごとの年金拠出",
+        "bonusAnnual": "年間ボーナス/THR",
+        "ptkpStatus": "PTKP区分",
+        "zakat": "宗教寄付（年間）",
+        "scheme": "適用スキーム",
+        "terCategory": "TER区分"
+      },
+      "descriptions": {
+        "monthsPaid": "最大12期間まで。",
+        "zakat": "雇用主経由・任意",
+        "terCategory": "対象に応じ自動設定（手動変更可）"
+      }
+    },
+    "subjectOptions": {
+      "pegawai_tetap": "正社員",
+      "pensiunan": "年金受給者",
+      "pegawai_tidak_tetap": "非正規従業員",
+      "bukan_pegawai": "非従業者",
+      "peserta_kegiatan": "イベント参加者",
+      "program_pensiun": "年金受給引き出し",
+      "mantan_pegawai": "元従業員",
+      "wpln": "PPh26 (非居住者)"
+    },
+    "schemeOptions": {
+      "lama": "旧制度（第17条）",
+      "ter": "TER（実効税率）"
+    },
+    "terOptions": {
+      "A": "カテゴリA",
+      "B": "カテゴリB",
+      "C": "カテゴリC"
+    },
+    "toggleDaily": {
+      "title": "日割りで計算しますか？",
+      "description": "日給の場合はTER日次を使用してください。",
+      "daily": "日次",
+      "monthly": "月次"
+    },
+    "wplnField": {
+      "label": "PPh26税率",
+      "description": "パーセンテージ"
+    },
+    "explanationTitle": "計算式サマリー",
+    "explanation": [
+      "対象者に応じてDPPを計算 (50%総額、TER、または全額)。",
+      "旧制度ではPTKPを適用します。",
+      "PKPは1,000ルピア単位で切り捨て後に第17条税率を適用。",
+      "TER区分はPER-2/PJ/2024に準拠。"
+    ],
+    "info": {
+      "goodPractice": "注意事項",
+      "points": [
+        "データ保存なし。すべてブラウザ内計算。",
+        "PKPは規定に従い切り捨て。",
+        "従業員は1〜11月TER、12月Pasal17で調整。",
+        "TER表は税務当局ガイド準拠。必要に応じて調整。"
+      ],
+      "disclaimer": "参考値です。申告前に確認してください。"
+    }
+  },
+  "pph26": {
+    "title": "PPh26計算機",
+    "description": "非居住者の源泉税をシミュレーションし、条約税率と比較します。"
+  },
+  "pph22": {
+    "title": "PPh22計算機",
+    "description": "輸入、国営企業、石油ガスなどのPPh22徴収を試算。",
+    "form": {
+      "title": "PPh22対象",
+      "description": "DPPの内訳を入力。",
+      "transactionType": "取引タイプ",
+      "transactionValue": "取引額 (CIF/FOB)",
+      "otherCosts": "追加コスト (+)",
+      "otherCostsNote": "保険料・運賃など。",
+      "deduction": "控除 (-)",
+      "deductionNote": "割引や非課税部分など。",
+      "transactionTypeOptions": {
+        "impor": "一般輸入",
+        "migas": "石油・ガス",
+        "bumn": "国営企業の購入",
+        "lainnya": "その他取引"
+      }
+    },
+    "summary": {
+      "label": "徴収PPh22",
+      "meta": "取引タイプに応じた税率"
+    },
+    "explanationTitle": "計算フロー",
+    "explanation": [
+      "DPP = 取引額 + コスト − 控除。",
+      "税率はPER-38/PJ/2013に従う (輸入2.5%等)。",
+      "PPh22 = DPP × 税率。"
+    ],
+    "info": {
+      "title": "チェックポイント",
+      "items": [
+        "品目がPPh22対象か確認。",
+        "関税/PPnBM優遇で税率が変わる場合あり。",
+        "源泉徴収票を保存して年次申告で控除。"
+      ]
+    },
+    "breakdown": {
+      "baseSection": "課税ベース",
+      "taxSection": "税額",
+      "transaction": "取引額",
+      "otherCosts": "追加コスト",
+      "deduction": "控除",
+      "dpp": "DPP (課税標準)",
+      "rate": "PPh22税率",
+      "tax": "徴収PPh22"
+    },
+    "notes": {
+      "otherCosts": "+ その他コスト",
+      "deduction": "- 控除"
+    }
+  },
+  "pph23": {
+    "title": "PPh23計算機",
+    "description": "技術サービス、コンサル、機器レンタル、配当、利息のPPh23を計算。",
+    "form": {
+      "title": "取引詳細",
+      "incomeType": "所得区分",
+      "isFinal": "最終課税?",
+      "isFinalDesc": "配当や利息は最終課税になる場合があります。",
+      "gross": "総額 (VAT除く)"
+    },
+    "options": {
+      "serviceType": {
+        "jasaTeknik": "技術サービス",
+        "jasaKonsultan": "コンサルティング",
+        "sewaAlat": "機器レンタル",
+        "dividen": "配当",
+        "bunga": "利息"
+      },
+      "final": {
+        "yes": "はい",
+        "no": "いいえ"
+      }
+    },
+    "summary": {
+      "label": "PPh23納付額",
+      "meta": "サービス種別に応じた税率"
+    },
+    "explanationTitle": "計算式",
+    "explanation": [
+      "課税標準 = VAT前の総額。",
+      "税率は第23条 (サービス2%、コンサル4%、配当/利息15%) に従う。",
+      "PPh23 = 課税標準 × 税率。"
+    ],
+    "info": {
+      "title": "メモ",
+      "items": [
+        "支払時もしくは債務発生時に源泉。",
+        "1721-VIIで年次控除可能。",
+        "免税証明があれば税率が変わる場合あり。"
+      ]
+    },
+    "breakdown": {
+      "section": "総収入",
+      "gross": "総額",
+      "rate": "PPh23税率",
+      "tax": "源泉PPh23"
+    },
+    "notes": {
+      "final": "最終 (源泉で完結)",
+      "creditable": "年次で控除可"
+    }
+  },
+  "pph4_2_calc": {
+    "title": "PPh4(2)最終計算機",
+    "description": "土地賃貸、建設、レストラン、PP23 UMKMの最終源泉税。",
+    "summary": {
+      "label": "Final PPh 4(2)",
+      "meta": "対象物に応じた自動税率"
+    },
+    "explanationTitle": "手順",
+    "form": {
+      "title": "最終課税オブジェクト",
+      "objectType": "オブジェクト種類",
+      "gross": "総額",
+      "grossDesc": "契約額または売上高を入力。"
+    },
+    "options": {
+      "objectType": {
+        "sewaTanah": "土地/建物賃貸 (10%)",
+        "konstruksi": "建設サービス (3.5%)",
+        "restoran": "レストラン (5%)",
+        "umkmFinal": "PP23 UMKM (0.5%)"
+      }
+    },
+    "explanation": [
+      "課税標準 = オブジェクトごとの総額。",
+      "税率はPP34/2017・PP55/2022に従う。",
+      "Final PPh = 課税標準 × 税率。"
+    ],
+    "info": {
+      "title": "注意",
+      "items": [
+        "最終源泉は年次申告で控除できません。",
+        "建設サービスの税率は事業資格により異なります。",
+        "PP23 UMKMは年間売上5億ルピアの閾値に従います。"
+      ]
+    },
+    "breakdown": {
+      "section": "課税ベース",
+      "value": "対象額",
+      "rate": "最終税率",
+      "tax": "Final PPh 4(2)"
+    }
+  },
+  "ppnCalc": {
+    "title": "VAT計算機",
+    "description": "税込/税抜の価格からDPPとVATを算出。電子請求書の確認に最適。",
+    "summary": {
+      "label": "VAT納付額",
+      "metaInclusive": "価格はVAT込み",
+      "metaExclusive": "価格はVAT別"
+    },
+    "explanationTitle": "DPP計算式",
+    "form": {
+      "title": "取引データ",
+      "taxYear": "課税年度",
+      "basePrice": "販売価格",
+      "basePriceDesc": "下のトグルをオンにすると税込み価格として扱います。",
+      "discount": "割引 (-)",
+      "otherCosts": "追加コスト (+)",
+      "customRate": "特別税率 (任意)",
+      "customRateDesc": "パーセンテージ入力。",
+      "toggleTitle": "価格はVAT込みですか？",
+      "toggleHint": "オンにすると金額をDPPとVATに分解します。",
+      "toggleTrue": "はい、込み",
+      "toggleFalse": "いいえ、別"
+    },
+    "explanation": [
+      "未税価格: DPP = 価格 - 割引 + コスト。",
+      "税込価格: DPP = 価格 / (1 + 税率)。",
+      "VAT = DPP × 税率、請求額 = DPP + VAT。"
+    ],
+    "info": {
+      "title": "ベストプラクティス",
+      "items": [
+        "割引をDPPから除くことを確認。",
+        "PMK優遇がある場合のみ特別税率を使用。",
+        "監査に備えて請求書番号を保管。"
+      ]
+    },
+    "breakdown": {
+      "baseSection": "課税ベース",
+      "dpp": "DPP",
+      "taxSection": "VAT計算",
+      "rate": "VAT税率",
+      "tax": "VAT納付額",
+      "total": "請求総額"
+    },
+    "notes": {
+      "dppInclusive": "税込み価格",
+      "dppExclusive": "税抜き価格"
+    }
+  },
+  "ppnbmCalc": {
+    "title": "高級VAT計算機",
+    "description": "車両、宝飾品、高級家電のPPNBMを試算。",
+    "summary": {
+      "label": "PPNBM納付額",
+      "meta": "DPPはVATベースと同じ"
+    },
+    "explanationTitle": "手順",
+    "form": {
+      "title": "課税対象の詳細",
+      "goodsType": "高級品の種類",
+      "dpp": "VAT基準 (通常は販売価格)",
+      "customRate": "特別税率 (任意)",
+      "customRateDesc": "標準以外の税率を使用する場合。"
+    },
+    "options": {
+      "goodsType": {
+        "kendaraanMewah": "高級車",
+        "perhiasan": "宝飾品",
+        "kapalPesiar": "ヨット",
+        "elektronikPremium": "高級家電"
+      }
+    },
+    "explanation": [
+      "PPNBMのDPPは通常VATと同じ。",
+      "税率は品目グループ (PMK141/2021) によって異なる。",
+      "PPNBM = DPP × 税率。"
+    ],
+    "info": {
+      "title": "注意事項",
+      "items": [
+        "PPNBMは控除不可。",
+        "輸出/KITE優遇の有無を確認。",
+        "請求書ではVATとPPNBMを分けて表示。"
+      ]
+    },
+    "breakdown": {
+      "section": "課税ベース",
+      "dpp": "PPNBM基準",
+      "rate": "PPNBM税率",
+      "tax": "PPNBM納付額"
+    }
+  },
+  "pph21Waterfall": {
+    "groups": {
+      "gross": "A. 総支給額 (Gross)",
+      "deductions": "B. 控除",
+      "basis": "C. 課税ベース",
+      "taxDue": "D. 第17条の税額",
+      "settlement": "E. 清算状況",
+      "takeHome": "F. 手取り"
+    },
+    "rows": {
+      "salaryAnnual": "基本給 (年間)",
+      "allowanceAnnual": "手当/ボーナス (年間)",
+      "totalGross": "年間総支給額",
+      "jobCost": "職務控除",
+      "pension": "年金/JHT拠出",
+      "zakat": "ザカート/寄付",
+      "totalDeductions": "控除合計",
+      "netIncome": "課税所得",
+      "ptkp": "PTKP",
+      "pkpRounded": "PKP (切り捨て)",
+      "totalTaxYear": "年間PPh21",
+      "terPerPeriod": "期間あたり TER",
+      "terPaid": "(-) 1〜11月 TER 控除",
+      "overpaid": "TER 超過",
+      "decemberAdjustment": "12月不足分",
+      "takeHomeAnnual": "年間手取り",
+      "takeHomePeriod": "期間手取り"
+    },
+    "notes": {
+      "salaryAnnual": "概算 {{months}} 期間",
+      "allowanceAnnual": "固定/変動手当・THR",
+      "totalGross": "総支給額",
+      "jobCost": "総額の5% (年最大600万)",
+      "pension": "従業員負担分",
+      "zakat": "雇用主経由",
+      "netIncome": "総額 - 控除",
+      "ptkp": "家族状況による",
+      "totalTaxYear": "年間納税義務",
+      "terPerPeriod": "{{rate}} × 期間の総額",
+      "terPaid": "{{rate}} × {{months}} 期間",
+      "overpaid": "TER がPasal17結果を超過",
+      "decemberAdjustment": "12月の精算額",
+      "takeHomeAnnual": "総額 - 税額",
+      "takeHomePeriod": "{{months}} 期間"
+    },
+    "tierLabel": "ティア{{tier}}: {{rate}} × {{amount}}",
+    "tierNote": "PKP区分 {{lower}} – {{upper}}"
+  },
+  "formulaSource": {
+    "title": "参照資料",
+    "body": "本ツールの計算は次の資料に基づきます",
+    "link": "Buku_PPh2126_Release_20240108.pdf"
+  },
+  "tableSections": {
+    "waterfall": {
+      "gross": "総支給額 (Gross)",
+      "deductions": "控除",
+      "basis": "課税ベース",
+      "taxDue": "課税額",
+      "settlement": "清算状況",
+      "thp": "手取り"
+    }
+  },
+  "errors": {
+    "positiveOnly": "正の数値を入力してください。"
+  }
+}

@@ -1,5 +1,6 @@
 import { formatCurrency } from '../lib/format'
 import { Card, CardTitle } from './ui/card'
+import { useTranslation } from 'react-i18next'
 
 interface TaxSummaryCardProps {
   total: number
@@ -20,20 +21,26 @@ export function TaxSummaryCard({
   takeHomeAnnual,
   takeHomePerPeriod,
 }: TaxSummaryCardProps) {
+  const { t } = useTranslation()
+  const taxLabel = label ?? t('summary.taxOverview')
+
   return (
     <Card className="border border-[#f6ce7d]/60 bg-gradient-to-br from-[#fffaf2] to-[#fff4d8] px-6 py-4 shadow-sm">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="w-full space-y-3">
           <CardTitle className="text-xs font-semibold uppercase tracking-[0.3em] text-[#967000]">
-            {label ?? 'Rangkuman Pajak'}
+            {taxLabel}
           </CardTitle>
           <div className="space-y-2 text-sm text-[#0f1e3d]">
-            <SummaryMetric label="Total PPh 21/26" value={total} />
+            <SummaryMetric label={t('summary.totalTax')} value={total} />
             {typeof terPerPeriod === 'number' && (
-              <SummaryMetric label="TER bulanan" value={terPerPeriod} />
+              <SummaryMetric label={t('summary.terMonthly')} value={terPerPeriod} />
             )}
             {typeof decemberAdjustment === 'number' && (
-              <SummaryMetric label="Kurang bayar Desember" value={decemberAdjustment} />
+              <SummaryMetric
+                label={t('summary.decAdjustment')}
+                value={decemberAdjustment}
+              />
             )}
           </div>
           {meta && (
@@ -43,14 +50,14 @@ export function TaxSummaryCard({
 
         <div className="w-full space-y-3">
           <CardTitle className="text-xs font-semibold uppercase tracking-[0.3em] text-[#967000]">
-            Take-home pay
+            {t('summary.takeHome')}
           </CardTitle>
           <div className="space-y-2 text-sm text-[#0f1e3d]">
             {typeof takeHomeAnnual === 'number' && (
-              <SummaryMetric label="THP setahun" value={takeHomeAnnual} />
+              <SummaryMetric label={t('summary.thpAnnual')} value={takeHomeAnnual} />
             )}
             {typeof takeHomePerPeriod === 'number' && (
-              <SummaryMetric label="THP per masa" value={takeHomePerPeriod} />
+              <SummaryMetric label={t('summary.thpPeriod')} value={takeHomePerPeriod} />
             )}
           </div>
         </div>
