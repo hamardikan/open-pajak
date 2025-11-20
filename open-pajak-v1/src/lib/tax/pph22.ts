@@ -1,4 +1,5 @@
 import { PPH22_RATES } from './constants'
+import { applyRate, rateBpsToPercent } from './utils'
 import type { TaxResult } from './types'
 import i18n from '../../i18n/config'
 
@@ -24,8 +25,8 @@ export function calculatePph22({
   const t = (key: string, fallback: string, options?: Record<string, unknown>) =>
     i18n.t(key, { defaultValue: fallback, ...options })
   const dpp = Math.max(0, transactionValue + otherCosts - deduction)
-  const rate = PPH22_RATES[transactionType]
-  const totalTax = dpp * rate
+  const rateBps = PPH22_RATES[transactionType]
+  const totalTax = applyRate(dpp, rateBps)
 
   return {
     totalTax,
@@ -48,7 +49,11 @@ export function calculatePph22({
         variant: 'subtotal',
       },
       { label: t('pph22.breakdown.taxSection', 'Pajak Terutang'), variant: 'section' },
-      { label: t('pph22.breakdown.rate', 'Tarif PPh 22'), value: rate, valueType: 'percent' },
+      {
+        label: t('pph22.breakdown.rate', 'Tarif PPh 22'),
+        value: rateBpsToPercent(rateBps),
+        valueType: 'percent',
+      },
       { label: t('pph22.breakdown.tax', 'PPh 22 dipungut'), value: totalTax, variant: 'total' },
     ],
   }
