@@ -1,5 +1,6 @@
 import { PPH23_RATES } from './constants'
 import type { TaxResult } from './types'
+import i18n from '../../i18n/config'
 
 export type PPh23ServiceType =
   | 'jasaTeknik'
@@ -19,19 +20,21 @@ export function calculatePph23({
   grossAmount,
   isFinal,
 }: PPh23Input): TaxResult {
+  const t = (key: string, fallback: string) =>
+    i18n.t(key, { defaultValue: fallback })
   const dpp = Math.max(0, grossAmount)
   const rate = PPH23_RATES[serviceType]
   const totalTax = dpp * rate
   return {
     totalTax,
     breakdown: [
-      { label: 'Penghasilan Bruto', variant: 'section' },
-      { label: 'Jumlah bruto', value: dpp },
-      { label: 'Tarif PPh 23', value: rate, valueType: 'percent' },
+      { label: t('pph23.breakdown.section', 'Penghasilan Bruto'), variant: 'section' },
+      { label: t('pph23.breakdown.gross', 'Jumlah bruto'), value: dpp },
+      { label: t('pph23.breakdown.rate', 'Tarif PPh 23'), value: rate, valueType: 'percent' },
       {
-        label: 'PPh 23 dipotong',
+        label: t('pph23.breakdown.tax', 'PPh 23 dipotong'),
         value: totalTax,
-        note: isFinal ? 'Final (selesai di pemotong)' : 'Dapat dikreditkan',
+        note: isFinal ? t('pph23.notes.final', 'Final (selesai di pemotong)') : t('pph23.notes.creditable', 'Dapat dikreditkan'),
         variant: 'total',
       },
     ],

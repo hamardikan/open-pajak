@@ -1,0 +1,480 @@
+{
+  "app": {
+    "brand": "Open Pajak",
+    "brandMain": "Open",
+    "brandAccent": "Pajak",
+    "tagline": "开源税务工具箱",
+    "taglineLine1": "Open Source",
+    "taglineLine2": "Tax Toolkit",
+    "nav": {
+      "home": "首页",
+      "pph21": "PPh21/26",
+      "pph22": "PPh22",
+      "pph23": "PPh23",
+      "pph4_2": "PPh4(2)",
+      "ppn": "增值税",
+      "ppnbm": "奢侈税"
+    },
+    "buttons": {
+      "pph21Simulator": "PPh21 计算器",
+      "startSimulation": "开始试算",
+      "clearForm": "清空表单",
+      "useSample": "载入示例",
+      "github": "GitHub",
+      "openNav": "打开导航",
+      "closeNav": "关闭导航"
+    },
+    "menu": {
+      "title": "主菜单",
+      "subtitle": "请选择要使用的计算器。"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Open Pajak",
+      "title": "一站式印尼税务计算。",
+      "body": "所有计算都在浏览器内完成，不上传任何个人信息。适合快速模拟或申报前复核。",
+      "ctaPrimary": "开始计算",
+      "ctaSecondary": "GitHub"
+    },
+    "features": [
+      {
+        "title": "六大计算模块",
+        "description": "涵盖 PPh21/26、22、23、Final 4(2)、增值税、奢侈税，并符合最新法规。"
+      },
+      {
+        "title": "隐私优先",
+        "description": "无需输入身份证、姓名或地址，仅需数字与交易类型。"
+      },
+      {
+        "title": "计算透明",
+        "description": "每项结果都附带计算步骤与法规出处。"
+      }
+    ],
+    "calculatorList": {
+      "title": "选择计算器",
+      "subtitle": "每个页面都提供输入表单、结果表与公式说明。",
+      "cards": {
+        "pph21": {
+          "title": "PPh21/26",
+          "description": "覆盖员工、非员工以及境外纳税人。"
+        },
+        "pph22": {
+          "title": "PPh22",
+          "description": "进口、油气、国企采购及其他特殊交易。"
+        },
+        "pph23": {
+          "title": "PPh23",
+          "description": "技术服务、咨询、设备租赁、股息、利息。"
+        },
+        "pph4_2": {
+          "title": "Final PPh4(2)",
+          "description": "土地出租、建筑工程、餐饮、PP23 中小企业。"
+        },
+        "ppn": {
+          "title": "增值税",
+          "description": "自动计算含税/未税价格的 DPP。"
+        },
+        "ppnbm": {
+          "title": "奢侈税",
+          "description": "车辆、珠宝、高端电子产品。"
+        }
+      }
+    }
+  },
+  "table": {
+    "component": "项目",
+    "value": "金额 (印尼盾)",
+    "note": "说明 / 公式"
+  },
+  "summary": {
+    "taxOverview": "税额摘要",
+    "takeHome": "实得收入",
+    "totalTax": "年度 PPh21/26",
+    "terMonthly": "月度 TER",
+    "decAdjustment": "12 月补缴",
+    "thpAnnual": "年度实得",
+    "thpPeriod": "每期实得"
+  },
+  "pph21": {
+    "title": "PPh21/26 计算器",
+    "description": "针对员工、外包与境外纳税人，支持传统及 TER 方案切换。",
+    "summary": {
+      "meta": "1-11 月走 TER，12 月按第 17 条补差"
+    },
+    "form": {
+      "title": "收入资料",
+      "description": "请输入毛收入及期间参数。",
+      "fields": {
+        "subjectType": "主体类型",
+        "brutoMonthly": "每期毛收入",
+        "monthsPaid": "期数 (月/日)",
+        "pensionContribution": "每期养老缴费",
+        "bonusAnnual": "年度奖金/THR",
+        "ptkpStatus": "PTKP 状态",
+        "zakat": "宗教捐献 (年)",
+        "scheme": "扣缴方案",
+        "terCategory": "TER 类别"
+      },
+      "descriptions": {
+        "monthsPaid": "最多 12 期。",
+        "zakat": "经由雇主，选填",
+        "terCategory": "系统根据主体自动设置，可手动修改"
+      }
+    },
+    "subjectOptions": {
+      "pegawai_tetap": "正式员工",
+      "pensiunan": "退休人员",
+      "pegawai_tidak_tetap": "非正式员工",
+      "bukan_pegawai": "非员工",
+      "peserta_kegiatan": "活动参与者",
+      "program_pensiun": "养老金领取",
+      "mantan_pegawai": "离职员工",
+      "wpln": "PPh26（非居民）"
+    },
+    "schemeOptions": {
+      "lama": "旧方案（第17条）",
+      "ter": "TER（有效税率）"
+    },
+    "terOptions": {
+      "A": "类别 A",
+      "B": "类别 B",
+      "C": "类别 C"
+    },
+    "toggleDaily": {
+      "title": "使用日薪计算？",
+      "description": "若按日支付，请切换至 TER 日率。",
+      "daily": "日薪",
+      "monthly": "月薪"
+    },
+    "wplnField": {
+      "label": "PPh26 税率",
+      "description": "百分比"
+    },
+    "explanationTitle": "快速公式",
+    "explanation": [
+      "按主体类型计算 DPP（50% 毛额、TER 或全额）。",
+      "旧方案需套用 PTKP。",
+      "PKP 向下取整至 1,000 印尼盾后再套用第 17 条税率。",
+      "TER 分类遵循 PER-2/PJ/2024。"
+    ],
+    "info": {
+      "goodPractice": "注意事项",
+      "points": [
+        "所有计算均在浏览器执行，不存储数据。",
+        "PKP 按法规向下取整。",
+        "员工 1-11 月使用 TER，12 月用第17条汇总。",
+        "TER 表遵循税局指引，可按企业需求调整。"
+      ],
+      "disclaimer": "仅供参考，申报前请再次核实。"
+    }
+  },
+  "pph26": {
+    "title": "PPh26 计算器",
+    "description": "模拟境外纳税人代扣并比较协定税率与国内税率。"
+  },
+  "pph22": {
+    "title": "PPh22 计算器",
+    "description": "适用于进口、国企采购、油气行业等场景，快速估算 PPh22。",
+    "form": {
+      "title": "PPh22 标的",
+      "description": "填写 DPP 细节。",
+      "transactionType": "交易类型",
+      "transactionValue": "交易金额 (CIF/FOB)",
+      "otherCosts": "附加成本 (+)",
+      "otherCostsNote": "如保险、运费等。",
+      "deduction": "扣除 (-)",
+      "deductionNote": "折扣、非 DPP 项或豁免部分。",
+      "transactionTypeOptions": {
+        "impor": "一般进口",
+        "migas": "油气行业",
+        "bumn": "国企采购",
+        "lainnya": "其他交易"
+      }
+    },
+    "summary": {
+      "label": "应收 PPh22",
+      "meta": "税率依据交易类型"
+    },
+    "explanationTitle": "计算流程",
+    "explanation": [
+      "DPP = 金额 + 成本 − 扣除。",
+      "税率参考 PER-38/PJ/2013（进口 2.5%、油气 2%、国企 1.5%）。",
+      "PPh22 = DPP × 税率。"
+    ],
+    "info": {
+      "title": "检查清单",
+      "items": [
+        "确认货物属于 PPh22 范围。",
+        "若享有关税/PPnBM 优惠，税率可能不同。",
+        "保留扣缴凭证以便年度抵扣。"
+      ]
+    },
+    "breakdown": {
+      "baseSection": "计税基础",
+      "taxSection": "应缴税额",
+      "transaction": "交易金额",
+      "otherCosts": "附加成本",
+      "deduction": "扣除",
+      "dpp": "DPP（计税基数）",
+      "rate": "PPh22 税率",
+      "tax": "应收 PPh22"
+    },
+    "notes": {
+      "otherCosts": "+ 其他成本",
+      "deduction": "- 扣除"
+    }
+  },
+  "pph23": {
+    "title": "PPh23 计算器",
+    "description": "计算技术服务、咨询、设备租赁、股息或利息的 PPh23。",
+    "form": {
+      "title": "交易详情",
+      "incomeType": "收入类型",
+      "isFinal": "是否最终税?",
+      "isFinalDesc": "股息与利息通常为最终代扣。",
+      "gross": "不含增值税的金额"
+    },
+    "options": {
+      "serviceType": {
+        "jasaTeknik": "技术服务",
+        "jasaKonsultan": "咨询服务",
+        "sewaAlat": "设备租赁",
+        "dividen": "股息",
+        "bunga": "利息"
+      },
+      "final": {
+        "yes": "是",
+        "no": "否"
+      }
+    },
+    "summary": {
+      "label": "应缴 PPh23",
+      "meta": "税率取决于服务类型"
+    },
+    "explanationTitle": "计算公式",
+    "explanation": [
+      "计税基数 = 不含增值税的总额。",
+      "税率依照第23条（服务2%，咨询4%，股息/利息15%）。",
+      "PPh23 = 计税基数 × 税率。"
+    ],
+    "info": {
+      "title": "提示",
+      "items": [
+        "在付款或债务发生时代扣。",
+        "使用 1721-VII 作为年度抵扣凭证。",
+        "若收款方有免税证明，税率可能不同。"
+      ]
+    },
+    "breakdown": {
+      "section": "毛收入",
+      "gross": "金额",
+      "rate": "PPh23 税率",
+      "tax": "应扣 PPh23"
+    },
+    "notes": {
+      "final": "最终税（扣缴即完结）",
+      "creditable": "可在年度抵扣"
+    }
+  },
+  "pph4_2_calc": {
+    "title": "Final PPh 4(2) 计算器",
+    "description": "适用于土地租赁、建筑、餐饮及 PP23 中小企业的最终预扣税。",
+    "summary": {
+      "label": "Final PPh 4(2)",
+      "meta": "系统自动匹配税率"
+    },
+    "explanationTitle": "计算步骤",
+    "form": {
+      "title": "最终课税对象",
+      "objectType": "对象类型",
+      "gross": "毛额",
+      "grossDesc": "输入合同金额或营业额。"
+    },
+    "options": {
+      "objectType": {
+        "sewaTanah": "土地/建筑租赁 (10%)",
+        "konstruksi": "建筑服务 (3.5%)",
+        "restoran": "餐饮业 (5%)",
+        "umkmFinal": "PP23 中小企业 (0.5%)"
+      }
+    },
+    "explanation": [
+      "计税基数 = 对应对象的毛额。",
+      "税率依据 PP34/2017 与 PP55/2022。",
+      "Final PPh = 基数 × 税率。"
+    ],
+    "info": {
+      "title": "注意",
+      "items": [
+        "此为最终代扣，年度申报不可抵扣。",
+        "建筑服务税率与企业资质相关。",
+        "PP23 中小企业遵守 5 亿印尼盾的营业额门槛。"
+      ]
+    },
+    "breakdown": {
+      "section": "计税基础",
+      "value": "对象金额",
+      "rate": "最终税率",
+      "tax": "Final PPh 4(2)"
+    }
+  },
+  "ppnCalc": {
+    "title": "增值税计算器",
+    "description": "适用于含税或未税价格，自动拆分 DPP 与增值税，方便核对电子发票。",
+    "summary": {
+      "label": "应缴增值税",
+      "metaInclusive": "价格含税",
+      "metaExclusive": "价格未含税"
+    },
+    "explanationTitle": "DPP 公式",
+    "form": {
+      "title": "交易数据",
+      "taxYear": "课税年度",
+      "basePrice": "售价",
+      "basePriceDesc": "如启用下方开关，请输入含税价格。",
+      "discount": "折扣 (-)",
+      "otherCosts": "其他成本 (+)",
+      "customRate": "自定义税率 (可选)",
+      "customRateDesc": "以百分比表示。",
+      "toggleTitle": "售价是否含税？",
+      "toggleHint": "开启以拆分为 DPP + 增值税。",
+      "toggleTrue": "是，含税",
+      "toggleFalse": "否，未含税"
+    },
+    "explanation": [
+      "未含税：DPP = 售价 − 折扣 + 成本。",
+      "含税：DPP = 售价 / (1 + 税率)。",
+      "VAT = DPP × 税率；合计 = DPP + VAT。"
+    ],
+    "info": {
+      "title": "最佳实践",
+      "items": [
+        "确保折扣已从 DPP 扣除。",
+        "仅在享受 PMK 优惠时使用特殊税率。",
+        "保存发票编号以备审计。"
+      ]
+    },
+    "breakdown": {
+      "baseSection": "计税基础",
+      "dpp": "DPP",
+      "taxSection": "增值税计算",
+      "rate": "增值税税率",
+      "tax": "应缴增值税",
+      "total": "应收总额"
+    },
+    "notes": {
+      "dppInclusive": "价格含税",
+      "dppExclusive": "价格未含税"
+    }
+  },
+  "ppnbmCalc": {
+    "title": "奢侈品税计算器",
+    "description": "用于车辆、珠宝、高端电子产品的 PPNBM 试算。",
+    "summary": {
+      "label": "应缴 PPNBM",
+      "meta": "DPP 与增值税基数一致"
+    },
+    "explanationTitle": "计算步骤",
+    "form": {
+      "title": "奢侈品信息",
+      "goodsType": "奢侈品类型",
+      "dpp": "增值税基数（通常为售价）",
+      "customRate": "自定义税率 (可选)",
+      "customRateDesc": "当需要不同于默认税率时使用。"
+    },
+    "options": {
+      "goodsType": {
+        "kendaraanMewah": "豪华车辆",
+        "perhiasan": "珠宝/宝石",
+        "kapalPesiar": "游艇",
+        "elektronikPremium": "高端电子"
+      }
+    },
+    "explanation": [
+      "PPNBM 的 DPP 通常与增值税相同。",
+      "税率依产品类别 (PMK141/2021)。",
+      "PPNBM = DPP × 税率。"
+    ],
+    "info": {
+      "title": "温馨提示",
+      "items": [
+        "PPNBM 不可抵扣。",
+        "注意出口/KITE 等免税政策。",
+        "发票中请分别列示 VAT 与 PPNBM。"
+      ]
+    },
+    "breakdown": {
+      "section": "计税基础",
+      "dpp": "PPNBM 基数",
+      "rate": "PPNBM 税率",
+      "tax": "应缴 PPNBM"
+    }
+  },
+  "pph21Waterfall": {
+    "groups": {
+      "gross": "A. 毛收入",
+      "deductions": "B. 扣除项",
+      "basis": "C. 计税基础",
+      "taxDue": "D. 应纳税额（第17条）",
+      "settlement": "E. 结算状态",
+      "takeHome": "F. 实得收入"
+    },
+    "rows": {
+      "salaryAnnual": "基本薪资（年）",
+      "allowanceAnnual": "津贴/奖金（年）",
+      "totalGross": "年毛收入合计",
+      "jobCost": "职务扣除",
+      "pension": "养老/JHT 个人部分",
+      "zakat": "宗教捐赠",
+      "totalDeductions": "扣除总额",
+      "netIncome": "净所得",
+      "ptkp": "PTKP",
+      "pkpRounded": "PKP（取整）",
+      "totalTaxYear": "全年应缴 PPh21",
+      "terPerPeriod": "每期 TER",
+      "terPaid": "(-) 1-11 月 TER 扣缴",
+      "overpaid": "TER 多扣",
+      "decemberAdjustment": "12 月补缴",
+      "takeHomeAnnual": "年实得",
+      "takeHomePeriod": "每期实得"
+    },
+    "notes": {
+      "salaryAnnual": "约 {{months}} 期",
+      "allowanceAnnual": "固定/变动津贴及奖金",
+      "totalGross": "总毛收入",
+      "jobCost": "毛收入的 5%，年上限 600 万",
+      "pension": "由员工承担",
+      "zakat": "通过雇主",
+      "netIncome": "毛收入 − 扣除",
+      "ptkp": "依据家庭状况",
+      "totalTaxYear": "全年应纳税",
+      "terPerPeriod": "{{rate}} × 每期毛收入",
+      "terPaid": "{{rate}} × {{months}} 期",
+      "overpaid": "TER 超出 Pasal 17 结果",
+      "decemberAdjustment": "12 月需补缴",
+      "takeHomeAnnual": "毛收入 − 税额",
+      "takeHomePeriod": "{{months}} 期"
+    },
+    "tierLabel": "档次 {{tier}}: {{rate}} × {{amount}}",
+    "tierNote": "PKP 档 {{lower}} – {{upper}}"
+  },
+  "formulaSource": {
+    "title": "公式参考",
+    "body": "所有计算依据",
+    "link": "Buku_PPh2126_Release_20240108.pdf"
+  },
+  "tableSections": {
+    "waterfall": {
+      "gross": "毛收入",
+      "deductions": "扣除项",
+      "basis": "计税基础",
+      "taxDue": "应纳税额",
+      "settlement": "结算状态",
+      "thp": "实得收入"
+    }
+  },
+  "errors": {
+    "positiveOnly": "请输入正数。"
+  }
+}

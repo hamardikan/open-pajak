@@ -1,5 +1,6 @@
 import { PPH22_RATES } from './constants'
 import type { TaxResult } from './types'
+import i18n from '../../i18n/config'
 
 export type PPh22TransactionType =
   | 'impor'
@@ -20,6 +21,8 @@ export function calculatePph22({
   otherCosts,
   deduction,
 }: PPh22Input): TaxResult {
+  const t = (key: string, fallback: string, options?: Record<string, unknown>) =>
+    i18n.t(key, { defaultValue: fallback, ...options })
   const dpp = Math.max(0, transactionValue + otherCosts - deduction)
   const rate = PPH22_RATES[transactionType]
   const totalTax = dpp * rate
@@ -27,14 +30,26 @@ export function calculatePph22({
   return {
     totalTax,
     breakdown: [
-      { label: 'Dasar Pengenaan', variant: 'section' },
-      { label: 'Nilai transaksi', value: transactionValue },
-      { label: 'Penyesuaian biaya', value: otherCosts, note: '+ biaya lain' },
-      { label: 'Pengurang', value: deduction, note: '- potongan' },
-      { label: 'Dasar pungut (DPP)', value: dpp, variant: 'subtotal' },
-      { label: 'Pajak Terutang', variant: 'section' },
-      { label: 'Tarif PPh 22', value: rate, valueType: 'percent' },
-      { label: 'PPh 22 dipungut', value: totalTax, variant: 'total' },
+      { label: t('pph22.breakdown.baseSection', 'Dasar Pengenaan'), variant: 'section' },
+      { label: t('pph22.breakdown.transaction', 'Nilai transaksi'), value: transactionValue },
+      {
+        label: t('pph22.breakdown.otherCosts', 'Penyesuaian biaya'),
+        value: otherCosts,
+        note: t('pph22.notes.otherCosts', '+ biaya lain'),
+      },
+      {
+        label: t('pph22.breakdown.deduction', 'Pengurang'),
+        value: deduction,
+        note: t('pph22.notes.deduction', '- potongan'),
+      },
+      {
+        label: t('pph22.breakdown.dpp', 'Dasar pungut (DPP)'),
+        value: dpp,
+        variant: 'subtotal',
+      },
+      { label: t('pph22.breakdown.taxSection', 'Pajak Terutang'), variant: 'section' },
+      { label: t('pph22.breakdown.rate', 'Tarif PPh 22'), value: rate, valueType: 'percent' },
+      { label: t('pph22.breakdown.tax', 'PPh 22 dipungut'), value: totalTax, variant: 'total' },
     ],
   }
 }

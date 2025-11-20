@@ -16,16 +16,20 @@ export function TaxFormSection({
 }: TaxFormSectionProps) {
   return (
     <>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        {description && (
-          <p className="mt-1 text-sm text-[#0f1e3d]/70">{description}</p>
-        )}
-        {actions && (
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            {actions}
+      <CardHeader className="pb-4">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <CardTitle className="text-lg font-semibold text-[#0f1e3d]">
+              {title}
+            </CardTitle>
+            {description && (
+              <p className="mt-1 text-sm text-[#0f1e3d]/70">{description}</p>
+            )}
           </div>
-        )}
+          {actions ? (
+            <div className="flex flex-wrap justify-end gap-2">{actions}</div>
+          ) : null}
+        </div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">{children}</div>

@@ -1,0 +1,480 @@
+{
+  "app": {
+    "brand": "Open Pajak",
+    "brandMain": "Open",
+    "brandAccent": "Pajak",
+    "tagline": "Open Source Tax Toolkit",
+    "taglineLine1": "Open Source",
+    "taglineLine2": "Tax Toolkit",
+    "nav": {
+      "home": "Home",
+      "pph21": "PPh 21/26",
+      "pph22": "PPh 22",
+      "pph23": "PPh 23",
+      "pph4_2": "PPh 4(2)",
+      "ppn": "VAT",
+      "ppnbm": "Luxury VAT"
+    },
+    "buttons": {
+      "pph21Simulator": "PPh 21 Simulator",
+      "startSimulation": "Start simulation",
+      "clearForm": "Clear form",
+      "useSample": "Use sample",
+      "github": "GitHub",
+      "openNav": "Open navigation",
+      "closeNav": "Close navigation"
+    },
+    "menu": {
+      "title": "Main menu",
+      "subtitle": "Choose the calculator you need."
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Open Pajak",
+      "title": "All-in-one Indonesian tax calculators.",
+      "body": "Everything runs entirely in your browser—no personal data, no backend. Perfect for quick simulations or reviewing liabilities before filing.",
+      "ctaPrimary": "Start calculating",
+      "ctaSecondary": "GitHub"
+    },
+    "features": [
+      {
+        "title": "6 major calculators",
+        "description": "PPh 21/26, 22, 23, Final 4(2), VAT, and Luxury VAT follow the latest DJP formulas."
+      },
+      {
+        "title": "Privacy first",
+        "description": "We never ask for NIK, names, or addresses—only numbers and transaction types."
+      },
+      {
+        "title": "Transparent formulas",
+        "description": "Every result ships with a step-by-step table and regulation reference."
+      }
+    ],
+    "calculatorList": {
+      "title": "Pick a calculator",
+      "subtitle": "Each page offers form inputs, a results table, and formula notes.",
+      "cards": {
+        "pph21": {
+          "title": "PPh 21/26",
+          "description": "Employees, non-employees, and non-residents."
+        },
+        "pph22": {
+          "title": "PPh 22",
+          "description": "Imports, oil & gas, SOE purchases, special cases."
+        },
+        "pph23": {
+          "title": "PPh 23",
+          "description": "Technical services, consulting, equipment lease, dividends, interest."
+        },
+        "pph4_2": {
+          "title": "Final PPh 4(2)",
+          "description": "Land lease, construction, restaurants, PP23 MSMEs."
+        },
+        "ppn": {
+          "title": "VAT",
+          "description": "Auto DPP for inclusive/exclusive pricing."
+        },
+        "ppnbm": {
+          "title": "Luxury VAT",
+          "description": "Vehicles, jewelry, premium electronics."
+        }
+      }
+    }
+  },
+  "table": {
+    "component": "Component",
+    "value": "Amount (IDR)",
+    "note": "Note / Formula"
+  },
+  "summary": {
+    "taxOverview": "Tax overview",
+    "takeHome": "Take-home pay",
+    "totalTax": "Total PPh 21/26",
+    "terMonthly": "Monthly TER",
+    "decAdjustment": "December true-up",
+    "thpAnnual": "Annual THP",
+    "thpPeriod": "THP per period"
+  },
+  "pph21": {
+    "title": "PPh 21/26 calculator",
+    "description": "Estimate withholding for employees, contractors, and foreign taxpayers. Compare legacy vs TER schemes.",
+    "summary": {
+      "meta": "TER for Jan–Nov; December reconciles Pasal 17"
+    },
+    "form": {
+      "title": "Income data",
+      "description": "Enter gross income and tax period parameters.",
+      "fields": {
+        "subjectType": "Subject type",
+        "brutoMonthly": "Gross income per period",
+        "monthsPaid": "Number of periods (month/day)",
+        "pensionContribution": "Pension contribution per period",
+        "bonusAnnual": "Annual bonus/THR",
+        "ptkpStatus": "PTKP status",
+        "zakat": "Zakat/Donation (annual)",
+        "scheme": "Scheme",
+        "terCategory": "TER category"
+      },
+      "descriptions": {
+        "monthsPaid": "Maximum 12.",
+        "zakat": "Via employer, optional",
+        "terCategory": "Auto-set based on subject; you can override it."
+      }
+    },
+    "subjectOptions": {
+      "pegawai_tetap": "Permanent employee",
+      "pensiunan": "Pensioner",
+      "pegawai_tidak_tetap": "Non-permanent employee",
+      "bukan_pegawai": "Non-employee",
+      "peserta_kegiatan": "Event participant",
+      "program_pensiun": "Pension withdrawal",
+      "mantan_pegawai": "Former employee",
+      "wpln": "PPh 26 (non-resident)"
+    },
+    "schemeOptions": {
+      "lama": "Legacy scheme (Pasal 17)",
+      "ter": "TER (Effective rate)"
+    },
+    "terOptions": {
+      "A": "Category A",
+      "B": "Category B",
+      "C": "Category C"
+    },
+    "toggleDaily": {
+      "title": "Use daily calculation?",
+      "description": "Switch to daily TER when the worker is paid per day.",
+      "daily": "Daily",
+      "monthly": "Monthly"
+    },
+    "wplnField": {
+      "label": "PPh 26 rate",
+      "description": "Percentage"
+    },
+    "explanationTitle": "Quick formula",
+    "explanation": [
+      "Tax base depends on subject (50% gross, TER, or full).",
+      "PTKP applies to staff/pensioners under the legacy scheme.",
+      "PKP is rounded down to the nearest IDR 1,000 before Pasal 17.",
+      "TER categories follow PER-2/PJ/2024."
+    ],
+    "info": {
+      "goodPractice": "Key reminders",
+      "points": [
+        "Nothing is stored; calculations stay in your browser.",
+        "PKP is rounded down per regulation.",
+        "Employees use TER for Jan–Nov and reconcile with Pasal 17 in December.",
+        "TER tables follow DJP guidance—adjust if your company uses custom mappings."
+      ],
+      "disclaimer": "Estimates only. Validate before filing."
+    }
+  },
+  "pph26": {
+    "title": "PPh 26 calculator",
+    "description": "Simulate non-resident withholding and compare treaty vs domestic rates."
+  },
+  "pph22": {
+    "title": "PPh 22 calculator",
+    "description": "Simulate PPh 22 collections for import, SOE purchases, oil & gas, or other special cases.",
+    "form": {
+      "title": "PPh 22 object",
+      "description": "Provide DPP details.",
+      "transactionType": "Transaction type",
+      "transactionValue": "Transaction value (CIF/FOB)",
+      "otherCosts": "Additional costs (+)",
+      "otherCostsNote": "Insurance, freight, or other adjustments.",
+      "deduction": "Deduction (-)",
+      "deductionNote": "Discounts, non-DPP components, or exemptions.",
+      "transactionTypeOptions": {
+        "impor": "General import",
+        "migas": "Oil & gas industry",
+        "bumn": "Specific SOE purchase",
+        "lainnya": "Other transaction"
+      }
+    },
+    "summary": {
+      "label": "PPh 22 collected",
+      "meta": "Rate follows transaction type"
+    },
+    "explanationTitle": "Calculation flow",
+    "explanation": [
+      "DPP = Value + other costs − deductions.",
+      "Rates follow PER-38/PJ/2013 (import 2.5%, oil & gas 2%, SOE 1.5%).",
+      "PPh 22 = DPP × rate."
+    ],
+    "info": {
+      "title": "Review checklist",
+      "items": [
+        "Confirm the goods are PPh 22 objects.",
+        "Rates may change if customs/VAT incentives apply.",
+        "Keep the withholding slip for annual tax credit."
+      ]
+    },
+    "breakdown": {
+      "baseSection": "Tax base",
+      "taxSection": "Tax due",
+      "transaction": "Transaction value",
+      "otherCosts": "Additional costs",
+      "deduction": "Deduction",
+      "dpp": "DPP (tax base)",
+      "rate": "PPh 22 rate",
+      "tax": "PPh 22 collected"
+    },
+    "notes": {
+      "otherCosts": "+ other costs",
+      "deduction": "- deduction"
+    }
+  },
+  "pph23": {
+    "title": "PPh 23 calculator",
+    "description": "Compute PPh 23 for technical services, consulting, equipment rental, dividends, or interest.",
+    "form": {
+      "title": "Transaction details",
+      "incomeType": "Income type",
+      "isFinal": "Final?",
+      "isFinalDesc": "Dividends and interest are usually final.",
+      "gross": "Gross amount (before VAT)"
+    },
+    "options": {
+      "serviceType": {
+        "jasaTeknik": "Technical services",
+        "jasaKonsultan": "Consulting",
+        "sewaAlat": "Equipment lease",
+        "dividen": "Dividend",
+        "bunga": "Interest"
+      },
+      "final": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "summary": {
+      "label": "PPh 23 due",
+      "meta": "Rate depends on service type"
+    },
+    "explanationTitle": "Formula",
+    "explanation": [
+      "Tax base = gross amount before VAT.",
+      "Rates follow Pasal 23 (2% services, 4% consulting, 15% dividend/interest).",
+      "PPh 23 = tax base × rate."
+    ],
+    "info": {
+      "title": "Notes",
+      "items": [
+        "Withhold at payment or when it becomes payable.",
+        "Use form 1721-VII to claim credit in the annual return.",
+        "Rates change if the recipient has an exemption letter."
+      ]
+    },
+    "breakdown": {
+      "section": "Gross income",
+      "gross": "Gross amount",
+      "rate": "PPh 23 rate",
+      "tax": "PPh 23 withheld"
+    },
+    "notes": {
+      "final": "Final (settled at withholding)",
+      "creditable": "Creditable"
+    }
+  },
+  "pph4_2_calc": {
+    "title": "Final PPh 4(2) calculator",
+    "description": "Final withholding for land lease, construction, restaurants, and PP23 MSMEs.",
+    "summary": {
+      "label": "Final PPh 4(2)",
+      "meta": "Rate auto-selected by object"
+    },
+    "explanationTitle": "Steps",
+    "form": {
+      "title": "Final object data",
+      "objectType": "Object type",
+      "gross": "Gross amount",
+      "grossDesc": "Use contract value or turnover."
+    },
+    "options": {
+      "objectType": {
+        "sewaTanah": "Land/building lease (10%)",
+        "konstruksi": "Construction services (3.5%)",
+        "restoran": "Restaurant business (5%)",
+        "umkmFinal": "PP23 MSME (0.5%)"
+      }
+    },
+    "explanation": [
+      "Tax base = gross amount per object.",
+      "Rates follow PP 34/2017 and PP 55/2022.",
+      "Final PPh = tax base × rate."
+    ],
+    "info": {
+      "title": "Notes",
+      "items": [
+        "Final withholding cannot be credited in annual return.",
+        "Construction rates depend on company qualification.",
+        "PP23 UMKM follows the 500M IDR turnover threshold."
+      ]
+    },
+    "breakdown": {
+      "section": "Tax base",
+      "value": "Object value",
+      "rate": "Final rate",
+      "tax": "Final PPh 4(2)"
+    }
+  },
+  "ppnCalc": {
+    "title": "VAT calculator",
+    "description": "Compute DPP and VAT for inclusive or exclusive pricing—ideal for checking e-invoices.",
+    "summary": {
+      "label": "VAT due",
+      "metaInclusive": "Price is VAT-inclusive",
+      "metaExclusive": "Price excludes VAT"
+    },
+    "explanationTitle": "VAT formula",
+    "form": {
+      "title": "Transaction data",
+      "taxYear": "Tax year",
+      "basePrice": "Selling price",
+      "basePriceDesc": "Enter VAT-inclusive price if toggle below is on.",
+      "discount": "Discount (-)",
+      "otherCosts": "Other costs (+)",
+      "customRate": "Custom rate (optional)",
+      "customRateDesc": "In percent.",
+      "toggleTitle": "Is the price VAT-inclusive?",
+      "toggleHint": "Toggle to split the amount into DPP + VAT.",
+      "toggleTrue": "Yes, inclusive",
+      "toggleFalse": "No, exclusive"
+    },
+    "explanation": [
+      "If price excludes VAT: DPP = price − discount + other costs.",
+      "If price includes VAT: DPP = price / (1 + rate).",
+      "VAT = DPP × rate; total invoice = DPP + VAT."
+    ],
+    "info": {
+      "title": "Good practices",
+      "items": [
+        "Ensure discounts are deducted from DPP.",
+        "Use custom rates only if you have PMK incentives.",
+        "Keep invoice numbers for audit trail."
+      ]
+    },
+    "breakdown": {
+      "baseSection": "Tax base",
+      "dpp": "DPP",
+      "taxSection": "VAT calculation",
+      "rate": "VAT rate",
+      "tax": "VAT due",
+      "total": "Total invoice"
+    },
+    "notes": {
+      "dppInclusive": "price is VAT-inclusive",
+      "dppExclusive": "price before VAT"
+    }
+  },
+  "ppnbmCalc": {
+    "title": "Luxury VAT calculator",
+    "description": "Simulate PPNBM for vehicles, jewelry, premium electronics.",
+    "summary": {
+      "label": "PPNBM due",
+      "meta": "DPP mirrors VAT base"
+    },
+    "explanationTitle": "Steps",
+    "form": {
+      "title": "Luxury goods details",
+      "goodsType": "Goods type",
+      "dpp": "VAT base (usually selling price)",
+      "customRate": "Custom rate (optional)",
+      "customRateDesc": "Use when rate differs from default."
+    },
+    "options": {
+      "goodsType": {
+        "kendaraanMewah": "Luxury vehicle",
+        "perhiasan": "Jewelry/gemstone",
+        "kapalPesiar": "Yacht",
+        "elektronikPremium": "Premium electronics"
+      }
+    },
+    "explanation": [
+      "PPNBM base typically equals VAT base.",
+      "Rates depend on product group (PMK 141/2021).",
+      "PPNBM = base × rate."
+    ],
+    "info": {
+      "title": "Remember",
+      "items": [
+        "PPNBM cannot be credited.",
+        "Check for export/KITE exemptions.",
+        "Always separate VAT and PPNBM on invoices."
+      ]
+    },
+    "breakdown": {
+      "section": "Tax base",
+      "dpp": "PPNBM base",
+      "rate": "PPNBM rate",
+      "tax": "PPNBM due"
+    }
+  },
+  "pph21Waterfall": {
+    "groups": {
+      "gross": "A. Gross income",
+      "deductions": "B. Deductions",
+      "basis": "C. Tax base",
+      "taxDue": "D. Tax due (Pasal 17)",
+      "settlement": "E. Settlement status",
+      "takeHome": "F. Take-home pay"
+    },
+    "rows": {
+      "salaryAnnual": "Base salary (annual)",
+      "allowanceAnnual": "Allowances/bonus (annual)",
+      "totalGross": "Total gross income",
+      "jobCost": "Job-related deduction",
+      "pension": "Pension/JHT contribution",
+      "zakat": "Zakat/donation",
+      "totalDeductions": "Total deductions",
+      "netIncome": "Net income",
+      "ptkp": "PTKP",
+      "pkpRounded": "Rounded PKP",
+      "totalTaxYear": "Total annual PPh 21",
+      "terPerPeriod": "PPh 21 TER per period",
+      "terPaid": "(-) TER withheld Jan–Nov",
+      "overpaid": "TER overpaid",
+      "decemberAdjustment": "December adjustment (underpaid)",
+      "takeHomeAnnual": "Annual take-home",
+      "takeHomePeriod": "Take-home per period"
+    },
+    "notes": {
+      "salaryAnnual": "Approx. {{months}} periods",
+      "allowanceAnnual": "Fixed/variable allowances & bonus",
+      "totalGross": "Total gross income",
+      "jobCost": "5% of gross, max 6M/year",
+      "pension": "Employee-paid portion",
+      "zakat": "Via employer",
+      "netIncome": "Gross − deductions",
+      "ptkp": "Based on family status",
+      "totalTaxYear": "Full-year liability",
+      "terPerPeriod": "{{rate}} × gross per period",
+      "terPaid": "{{rate}} × {{months}} periods",
+      "overpaid": "TER exceeds Pasal 17 result",
+      "decemberAdjustment": "Remaining liability in December",
+      "takeHomeAnnual": "Gross − tax",
+      "takeHomePeriod": "{{months}} periods"
+    },
+    "tierLabel": "Tier {{tier}}: {{rate}} × {{amount}}",
+    "tierNote": "PKP layer {{lower}} – {{upper}}"
+  },
+  "formulaSource": {
+    "title": "Formula reference",
+    "body": "All calculations refer to",
+    "link": "Buku_PPh2126_Release_20240108.pdf"
+  },
+  "tableSections": {
+    "waterfall": {
+      "gross": "Gross income",
+      "deductions": "Deductions",
+      "basis": "Tax base",
+      "taxDue": "Tax due",
+      "settlement": "Settlement",
+      "thp": "Take-home pay"
+    }
+  },
+  "errors": {
+    "positiveOnly": "Use positive numbers only."
+  }
+}

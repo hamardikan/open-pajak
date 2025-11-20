@@ -1,0 +1,480 @@
+{
+  "app": {
+    "brand": "Open Pajak",
+    "brandMain": "Open",
+    "brandAccent": "Pajak",
+    "tagline": "Open Source Tax Toolkit",
+    "taglineLine1": "Open Source",
+    "taglineLine2": "Tax Toolkit",
+    "nav": {
+      "home": "Beranda",
+      "pph21": "PPh 21/26",
+      "pph22": "PPh 22",
+      "pph23": "PPh 23",
+      "pph4_2": "PPh 4(2)",
+      "ppn": "PPN",
+      "ppnbm": "PPNBM"
+    },
+    "buttons": {
+      "pph21Simulator": "Simulasi PPh 21",
+      "startSimulation": "Mulai simulasi",
+      "clearForm": "Kosongkan Form",
+      "useSample": "Gunakan Contoh",
+      "github": "GitHub",
+      "openNav": "Buka navigasi",
+      "closeNav": "Tutup navigasi"
+    },
+    "menu": {
+      "title": "Menu utama",
+      "subtitle": "Pilih kalkulator yang ingin digunakan."
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Open Pajak",
+      "title": "Kalkulator pajak Indonesia serba ada.",
+      "body": "Semua perhitungan berjalan sepenuhnya di browser Anda. Tidak ada data pribadi, tidak ada backend. Cocok untuk simulasi cepat maupun review kewajiban pajak sebelum lapor.",
+      "ctaPrimary": "Mulai hitung",
+      "ctaSecondary": "GitHub"
+    },
+    "features": [
+      {
+        "title": "6 kalkulator utama",
+        "description": "PPh 21/26, 22, 23, Final 4(2), PPN, dan PPNBM mengikuti desain dan formula DJP terbaru."
+      },
+      {
+        "title": "Privasi terjaga",
+        "description": "Tidak ada input NIK, nama, atau alamat. Hanya angka dan jenis transaksi."
+      },
+      {
+        "title": "Formula transparan",
+        "description": "Setiap hasil disertai tabel langkah hitung dan referensi rumus."
+      }
+    ],
+    "calculatorList": {
+      "title": "Pilih kalkulator",
+      "subtitle": "Setiap halaman memiliki form input, tabel hasil, dan catatan rumus.",
+      "cards": {
+        "pph21": {
+          "title": "PPh 21/26",
+          "description": "Pegawai tetap, tidak tetap, bukan pegawai, hingga WPLN."
+        },
+        "pph22": {
+          "title": "PPh 22",
+          "description": "Impor, migas, BUMN, dan transaksi tertentu."
+        },
+        "pph23": {
+          "title": "PPh 23",
+          "description": "Jasa teknik, konsultan, sewa alat, dividen, bunga."
+        },
+        "pph4_2": {
+          "title": "PPh Final 4(2)",
+          "description": "Sewa tanah, konstruksi, restoran, UMKM final."
+        },
+        "ppn": {
+          "title": "PPN",
+          "description": "DPP otomatis untuk harga termasuk/di luar PPN."
+        },
+        "ppnbm": {
+          "title": "PPNBM",
+          "description": "Barang mewah kendaraan, perhiasan, elektronik."
+        }
+      }
+    }
+  },
+  "table": {
+    "component": "Komponen",
+    "value": "Nilai (Rp)",
+    "note": "Keterangan"
+  },
+  "summary": {
+    "taxOverview": "Rangkuman Pajak",
+    "takeHome": "Take-home pay",
+    "totalTax": "Total PPh 21/26",
+    "terMonthly": "TER bulanan",
+    "decAdjustment": "Kurang bayar Desember",
+    "thpAnnual": "THP setahun",
+    "thpPeriod": "THP per masa"
+  },
+  "pph21": {
+    "title": "Kalkulator PPh 21/26",
+    "description": "Hitung potongan pajak penghasilan atas pegawai, bukan pegawai, hingga Wajib Pajak luar negeri. Sesuaikan skema lama maupun Tarif Efektif (TER).",
+    "summary": {
+      "meta": "TER Jan–Nov, selisih Pasal 17 dibayar di Desember"
+    },
+    "form": {
+      "title": "Data Penghasilan",
+      "description": "Masukkan nilai bruto dan parameter masa pajak.",
+      "fields": {
+        "subjectType": "Jenis subjek",
+        "brutoMonthly": "Penghasilan bruto per masa",
+        "monthsPaid": "Jumlah masa (bulan/hari)",
+        "pensionContribution": "Iuran pensiun per masa",
+        "bonusAnnual": "Bonus/tantiem tahunan",
+        "ptkpStatus": "Status PTKP",
+        "zakat": "Zakat/Sumbangan (setahun)",
+        "scheme": "Skema",
+        "terCategory": "Kategori TER"
+      },
+      "descriptions": {
+        "monthsPaid": "Maksimal 12.",
+        "zakat": "Lewat pemberi kerja, opsional",
+        "terCategory": "Disesuaikan otomatis berdasarkan subjek, bisa diubah manual."
+      }
+    },
+    "subjectOptions": {
+      "pegawai_tetap": "Pegawai tetap",
+      "pensiunan": "Pensiunan",
+      "pegawai_tidak_tetap": "Pegawai tidak tetap",
+      "bukan_pegawai": "Bukan pegawai",
+      "peserta_kegiatan": "Peserta kegiatan",
+      "program_pensiun": "Penarikan program pensiun",
+      "mantan_pegawai": "Mantan pegawai",
+      "wpln": "PPh 26 (WPLN)"
+    },
+    "schemeOptions": {
+      "lama": "Skema lama (Pasal 17)",
+      "ter": "TER (Tarif Efektif)"
+    },
+    "terOptions": {
+      "A": "Kategori A",
+      "B": "Kategori B",
+      "C": "Kategori C"
+    },
+    "toggleDaily": {
+      "title": "Hitung harian?",
+      "description": "Gunakan TER harian jika pekerja dibayar per hari.",
+      "daily": "Harian",
+      "monthly": "Bulanan"
+    },
+    "wplnField": {
+      "label": "Tarif PPh 26",
+      "description": "Dalam persen"
+    },
+    "explanationTitle": "Formula ringkas",
+    "explanation": [
+      "DPP dihitung sesuai jenis subjek (50% bruto, TER, atau penuh).",
+      "PTKP digunakan untuk pegawai tetap/pensiunan dengan skema lama.",
+      "PKP dibulatkan ke bawah per Rp1.000 sebelum Pasal 17 diterapkan.",
+      "Skema TER mengikuti kategori A/B/C per PER-2/PJ/2024."
+    ],
+    "info": {
+      "goodPractice": "Catatan penting",
+      "points": [
+        "Tidak ada penyimpanan data, semua perhitungan terjadi di browser.",
+        "PKP dibulatkan ke bawah sesuai ketentuan.",
+        "Pegawai tetap memakai TER Januari–November, lalu Desember menyesuaikan Pasal 17 setahun.",
+        "Tarif TER menggunakan tabel ringkas, sesuaikan dengan ketentuan DJP bila diperlukan."
+      ],
+      "disclaimer": "Hasil bersifat indikatif, konfirmasi sebelum pelaporan SPT Masa/ Tahunan."
+    }
+  },
+  "pph26": {
+    "title": "Kalkulator PPh 26",
+    "description": "Simulasikan pemotongan pajak Wajib Pajak luar negeri dan bandingkan tarif treaty atau foreign tax credit."
+  },
+  "pph22": {
+    "title": "Kalkulator PPh 22",
+    "description": "Simulasikan pemungutan PPh 22 atas transaksi impor, BUMN, industri migas, dan transaksi khusus lain.",
+    "form": {
+      "title": "Objek PPh 22",
+      "description": "Masukkan rincian nilai DPP.",
+      "transactionType": "Jenis transaksi",
+      "transactionValue": "Nilai transaksi (CIF/FOB)",
+      "otherCosts": "Penyesuaian biaya (+)",
+      "otherCostsNote": "Mis. biaya asuransi, freight, atau lain-lain.",
+      "deduction": "Pengurang (-)",
+      "deductionNote": "Masukkan diskon, nilai non-DPP, atau pembebasan.",
+      "transactionTypeOptions": {
+        "impor": "Impor umum",
+        "migas": "Industri migas",
+        "bumn": "Pembelian BUMN tertentu",
+        "lainnya": "Transaksi lain"
+      }
+    },
+    "summary": {
+      "label": "PPh 22 dipungut",
+      "meta": "Tarif mengikuti jenis transaksi"
+    },
+    "explanationTitle": "Alur perhitungan",
+    "explanation": [
+      "DPP = Nilai transaksi + biaya lain - pengurang.",
+      "Tarif mengikuti PER-38/PJ/2013 (impor 2.5%, migas 2%, BUMN 1.5%).",
+      "PPh 22 = DPP × tarif."
+    ],
+    "info": {
+      "title": "Tips pengecekan",
+      "items": [
+        "Pastikan barang termasuk dalam daftar objek PPh 22.",
+        "Tarif dapat berbeda jika ada fasilitas kepabeanan/PPnBM.",
+        "Simpan bukti potong untuk kredit di SPT Tahunan."
+      ]
+    },
+    "breakdown": {
+      "baseSection": "Dasar Pengenaan",
+      "taxSection": "Pajak Terutang",
+      "transaction": "Nilai transaksi",
+      "otherCosts": "Penyesuaian biaya",
+      "deduction": "Pengurang",
+      "dpp": "Dasar pungut (DPP)",
+      "rate": "Tarif PPh 22",
+      "tax": "PPh 22 dipungut"
+    },
+    "notes": {
+      "otherCosts": "+ biaya lain",
+      "deduction": "- potongan"
+    }
+  },
+  "pph23": {
+    "title": "Kalkulator PPh 23",
+    "description": "Hitung PPh 23 atas jasa teknik, konsultan, sewa alat, dividen, atau bunga.",
+    "form": {
+      "title": "Detil Transaksi",
+      "incomeType": "Jenis penghasilan",
+      "isFinal": "Final?",
+      "isFinalDesc": "Beberapa objek (dividen, bunga) bersifat final.",
+      "gross": "Nilai bruto (tanpa PPN)"
+    },
+    "options": {
+      "serviceType": {
+        "jasaTeknik": "Jasa teknik",
+        "jasaKonsultan": "Jasa konsultan",
+        "sewaAlat": "Sewa alat",
+        "dividen": "Dividen",
+        "bunga": "Bunga"
+      },
+      "final": {
+        "yes": "Ya",
+        "no": "Tidak"
+      }
+    },
+    "summary": {
+      "label": "PPh 23 terutang",
+      "meta": "Tarif mengikuti objek jasa"
+    },
+    "explanationTitle": "Formula",
+    "explanation": [
+      "DPP untuk PPh 23 = jumlah bruto tanpa PPN.",
+      "Tarif mengacu Pasal 23 (2% jasa, 4% konsultan, 15% dividen/bunga).",
+      "PPh 23 = DPP × tarif."
+    ],
+    "info": {
+      "title": "Catatan penting",
+      "items": [
+        "Wajib dipotong saat pembayaran atau saat terutang.",
+        "Gunakan bukti potong 1721-VII untuk kredit di SPT Tahunan.",
+        "Tarif bisa berubah jika penerima punya Surat Keterangan Bebas."
+      ]
+    },
+    "breakdown": {
+      "section": "Penghasilan Bruto",
+      "gross": "Jumlah bruto",
+      "rate": "Tarif PPh 23",
+      "tax": "PPh 23 dipotong"
+    },
+    "notes": {
+      "final": "Final (selesai di pemotong)",
+      "creditable": "Dapat dikreditkan"
+    }
+  },
+  "pph4_2_calc": {
+    "title": "Kalkulator PPh Final 4(2)",
+    "description": "Pungutan final untuk sewa tanah/bangunan, konstruksi, restoran, hingga UMKM PP 23/2018.",
+    "summary": {
+      "label": "PPh Final 4(2)",
+      "meta": "Tarif otomatis berdasarkan objek"
+    },
+    "explanationTitle": "Langkah hitung",
+    "form": {
+      "title": "Data objek final",
+      "objectType": "Jenis objek",
+      "gross": "Nilai bruto",
+      "grossDesc": "Isi sesuai nilai kontrak/omzet."
+    },
+    "options": {
+      "objectType": {
+        "sewaTanah": "Sewa tanah/bangunan (10%)",
+        "konstruksi": "Jasa konstruksi (3,5%)",
+        "restoran": "Usaha restoran (5%)",
+        "umkmFinal": "UMKM Final (0,5%)"
+      }
+    },
+    "explanation": [
+      "DPP = Nilai bruto sesuai objek.",
+      "Tarif final mengikuti PP 34/2017 dan PP 55/2022.",
+      "PPh Final = DPP × tarif."
+    ],
+    "info": {
+      "title": "Catatan",
+      "items": [
+        "Pemotongan bersifat final, tidak bisa dikreditkan.",
+        "Tarif jasa konstruksi bergantung pada kualifikasi usaha.",
+        "UMKM final mengikuti batas omzet Rp 500 juta/tahun."
+      ]
+    },
+    "breakdown": {
+      "section": "Dasar Pengenaan",
+      "value": "Nilai objek",
+      "rate": "Tarif final",
+      "tax": "PPh Final 4(2)"
+    }
+  },
+  "ppnCalc": {
+    "title": "Kalkulator PPN",
+    "description": "Hitung DPP dan PPN untuk harga termasuk maupun belum termasuk PPN. Cocok untuk memeriksa faktur pajak dan e-invoice.",
+    "summary": {
+      "label": "PPN terutang",
+      "metaInclusive": "Harga sudah termasuk PPN",
+      "metaExclusive": "Harga belum termasuk PPN"
+    },
+    "explanationTitle": "Formula DPP",
+    "form": {
+      "title": "Data transaksi",
+      "taxYear": "Tahun pajak",
+      "basePrice": "Harga jual",
+      "basePriceDesc": "Isi harga termasuk PPN jika mode di bawah aktif.",
+      "discount": "Diskon (-)",
+      "otherCosts": "Biaya lain (+)",
+      "customRate": "Tarif khusus (opsional)",
+      "customRateDesc": "Dalam persen.",
+      "toggleTitle": "Harga sudah termasuk PPN?",
+      "toggleHint": "Aktifkan untuk memecah nilai menjadi DPP + PPN.",
+      "toggleTrue": "Ya, termasuk",
+      "toggleFalse": "Belum termasuk"
+    },
+    "explanation": [
+      "Jika harga belum termasuk PPN: DPP = Harga jual - diskon + biaya lain.",
+      "Jika harga sudah termasuk PPN: DPP = Harga / (1 + tarif).",
+      "PPN = DPP × tarif; total tagihan = DPP + PPN."
+    ],
+    "info": {
+      "title": "Praktik baik",
+      "items": [
+        "Pastikan diskon sudah dikurangi dari DPP.",
+        "Gunakan tarif khusus bila memperoleh fasilitas PMK.",
+        "Simpan nomor faktur pajak untuk audit trail."
+      ]
+    },
+    "breakdown": {
+      "baseSection": "Dasar Pengenaan",
+      "dpp": "DPP",
+      "taxSection": "Perhitungan PPN",
+      "rate": "Tarif PPN",
+      "tax": "PPN terutang",
+      "total": "Total tagihan"
+    },
+    "notes": {
+      "dppInclusive": "harga termasuk PPN",
+      "dppExclusive": "harga sebelum PPN"
+    }
+  },
+  "ppnbmCalc": {
+    "title": "Kalkulator PPNBM",
+    "description": "Simulasikan tarif PPNBM untuk kendaraan, perhiasan, elektronik mewah.",
+    "summary": {
+      "label": "PPNBM terutang",
+      "meta": "DPP mengikuti nilai PPN"
+    },
+    "explanationTitle": "Langkah hitung",
+    "form": {
+      "title": "Detil Barang Kena PPNBM",
+      "goodsType": "Jenis barang mewah",
+      "dpp": "DPP PPN (biasanya harga jual)",
+      "customRate": "Tarif khusus (opsional)",
+      "customRateDesc": "Isi bila tarif berbeda dari default."
+    },
+    "options": {
+      "goodsType": {
+        "kendaraanMewah": "Kendaraan mewah",
+        "perhiasan": "Perhiasan/permata",
+        "kapalPesiar": "Kapal pesiar",
+        "elektronikPremium": "Elektronik premium"
+      }
+    },
+    "explanation": [
+      "DPP PPNBM umumnya sama dengan DPP PPN.",
+      "Tarif berbeda untuk tiap kelompok barang (PMK 141/2021).",
+      "PPNBM = DPP × tarif."
+    ],
+    "info": {
+      "title": "Ingat",
+      "items": [
+        "PPNBM tidak dapat dikreditkan.",
+        "Perhatikan fasilitas untuk ekspor/KITE.",
+        "Pisahkan PPN dan PPNBM di dokumen penjualan."
+      ]
+    },
+    "breakdown": {
+      "section": "Dasar Pengenaan",
+      "dpp": "DPP PPNBM",
+      "rate": "Tarif PPNBM",
+      "tax": "PPNBM terutang"
+    }
+  },
+  "pph21Waterfall": {
+    "groups": {
+      "gross": "A. Penghasilan Bruto (Gross)",
+      "deductions": "B. Pengurang (Deductions)",
+      "basis": "C. Basis Perhitungan Pajak",
+      "taxDue": "D. Pajak terutang (Pasal 17)",
+      "settlement": "E. Status pembayaran (Settlement)",
+      "takeHome": "F. Take-home pay"
+    },
+    "rows": {
+      "salaryAnnual": "Gaji pokok (setahun)",
+      "allowanceAnnual": "Tunjangan/bonus (setahun)",
+      "totalGross": "Total bruto setahun",
+      "jobCost": "Biaya jabatan",
+      "pension": "Iuran pensiun/JHT",
+      "zakat": "Zakat/sumbangan",
+      "totalDeductions": "Total pengurang",
+      "netIncome": "Penghasilan netto",
+      "ptkp": "PTKP",
+      "pkpRounded": "PKP (dibulatkan)",
+      "totalTaxYear": "Total PPh 21 seharusnya (setahun)",
+      "terPerPeriod": "PPh 21 TER per masa",
+      "terPaid": "(-) Sudah dipotong Jan–Nov (TER)",
+      "overpaid": "Kelebihan TER",
+      "decemberAdjustment": "PPh 21 masa Desember (kurang bayar)",
+      "takeHomeAnnual": "Take-home setahun",
+      "takeHomePeriod": "Take-home per masa"
+    },
+    "notes": {
+      "salaryAnnual": "Estimasi {{months}} masa",
+      "allowanceAnnual": "Tunjangan tetap / bonus / THR",
+      "totalGross": "Total penghasilan kotor",
+      "jobCost": "5% × bruto, maks 6 juta/tahun",
+      "pension": "Bagian yang dibayar karyawan",
+      "zakat": "Melalui pemberi kerja",
+      "netIncome": "Bruto - pengurang",
+      "ptkp": "Berdasarkan status keluarga",
+      "totalTaxYear": "Kewajiban pajak 1 tahun",
+      "terPerPeriod": "Tarif {{rate}} × bruto per masa",
+      "terPaid": "Tarif {{rate}} × {{months}} masa",
+      "overpaid": "TER melebihi hasil Pasal 17",
+      "decemberAdjustment": "Sisa kewajiban Desember",
+      "takeHomeAnnual": "Bruto - pajak terutang",
+      "takeHomePeriod": "{{months}} masa"
+    },
+    "tierLabel": "Tier {{tier}}: {{rate}} × {{amount}}",
+    "tierNote": "Lapisan PKP {{lower}} – {{upper}}"
+  },
+  "formulaSource": {
+    "title": "Rujukan Formula",
+    "body": "Seluruh kalkulasi merujuk pada",
+    "link": "Buku_PPh2126_Release_20240108.pdf"
+  },
+  "tableSections": {
+    "waterfall": {
+      "gross": "Penghasilan Bruto (Gross)",
+      "deductions": "Pengurang (Deductions)",
+      "basis": "Basis Perhitungan Pajak",
+      "taxDue": "Pajak terutang",
+      "settlement": "Status pembayaran",
+      "thp": "Take-home pay"
+    }
+  },
+  "errors": {
+    "positiveOnly": "Pastikan semua nilai numerik bernilai positif."
+  }
+}

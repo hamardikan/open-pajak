@@ -1,23 +1,32 @@
 import { Link, useRouterState } from '@tanstack/react-router'
-import { Menu, X } from 'lucide-react'
+import { Github, Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { cn } from '../lib/cn'
 import { Button } from './ui/button'
 import type { ReactNode } from 'react'
+import { availableLocales, changeLocale } from '../i18n/config'
 
-const NAV_LINKS: Array<{ to: string; label: string }> = [
-  { to: '/', label: 'Beranda' },
-  { to: '/pph21', label: 'PPh 21/26' },
-  { to: '/pph22', label: 'PPh 22' },
-  { to: '/pph23', label: 'PPh 23' },
-  { to: '/pph4-2', label: 'PPh 4(2)' },
-  { to: '/ppn', label: 'PPN' },
-  { to: '/ppnbm', label: 'PPNBM' },
+const GITHUB_URL = 'https://github.com/hamardikan/open-pajak'
+
+const NAV_LINKS: Array<{ to: string; labelKey: string }> = [
+  { to: '/', labelKey: 'app.nav.home' },
+  { to: '/pph21', labelKey: 'app.nav.pph21' },
+  { to: '/pph22', labelKey: 'app.nav.pph22' },
+  { to: '/pph23', labelKey: 'app.nav.pph23' },
+  { to: '/pph4-2', labelKey: 'app.nav.pph4_2' },
+  { to: '/ppn', labelKey: 'app.nav.ppn' },
+  { to: '/ppnbm', labelKey: 'app.nav.ppnbm' },
 ]
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
   const { location } = useRouterState()
+  const { t, i18n } = useTranslation()
+
+  const handleLocaleChange = (value: string) => {
+    changeLocale(value)
+  }
 
   const renderNav = (variant: 'dark' | 'light') => (
     <nav className="flex flex-col gap-2 text-sm font-semibold md:flex-row md:items-center md:gap-1">
@@ -42,7 +51,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             )}
             onClick={() => setOpen(false)}
           >
-            {item.label}
+            {t(item.labelKey)}
           </Link>
         )
       })}
@@ -59,22 +68,48 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className="text-[#f9c74f]">P</span>
             </div>
             <div className="leading-tight">
-              <p className="text-lg font-semibold">
-                <span>Open </span>
-                <span className="text-[#f9c74f]">Pajak</span>
+              <p className="text-lg font-semibold leading-snug">
+                <span>{t('app.brandMain')}</span>{' '}
+                <span className="text-[#f9c74f]">{t('app.brandAccent')}</span>
               </p>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white">
-                <span className="text-white">Open Source </span>
-                <span className="text-[#f9c74f]">Tax Toolkit</span>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white">
+                {t('app.taglineLine1')}
+              </p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#f9c74f]">
+                {t('app.taglineLine2')}
               </p>
             </div>
           </Link>
 
           <div className="hidden flex-1 items-center justify-between gap-4 md:flex">
             <div className="flex-1">{renderNav('dark')}</div>
-            <Button asChild variant="accent">
-              <Link to="/pph21">Simulasi PPh 21</Link>
-            </Button>
+            <div className="flex items-center gap-2">
+              <select
+                aria-label="Change language"
+                value={i18n.language}
+                onChange={(event) => handleLocaleChange(event.target.value)}
+                className="rounded-full border border-white/40 bg-white/10 px-3 py-2 text-xs uppercase tracking-widest text-white outline-none backdrop-blur"
+              >
+                {availableLocales.map((locale) => (
+                  <option key={locale.code} value={locale.code} className="text-black">
+                    {`${locale.emoji} ${locale.label}`}
+                  </option>
+                ))}
+              </select>
+              <Button variant="accent" asChild>
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <Github className="size-4" />
+                  <span className="uppercase tracking-wide text-xs">
+                    {t('app.buttons.github')}
+                  </span>
+                </a>
+              </Button>
+            </div>
           </div>
 
           <Button
@@ -82,7 +117,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             variant="ghost"
             className="md:hidden bg-white text-[#0f1e3d] shadow-md shadow-black/10 hover:bg-white/90"
             onClick={() => setOpen(true)}
-            aria-label="Buka navigasi"
+            aria-label={t('app.buttons.openNav')}
           >
             <Menu />
           </Button>
@@ -99,15 +134,15 @@ export function AppShell({ children }: { children: ReactNode }) {
       >
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <p className="text-lg font-semibold text-[#0f1e3d]">Menu utama</p>
-            <p className="text-xs text-[#0f1e3d]/70">
-              Pilih kalkulator yang ingin digunakan.
+            <p className="text-lg font-semibold text-[#0f1e3d]">
+              {t('app.menu.title')}
             </p>
+            <p className="text-xs text-[#0f1e3d]/70">{t('app.menu.subtitle')}</p>
           </div>
           <Button
             variant="outline"
             size="icon"
-            aria-label="Tutup navigasi"
+            aria-label={t('app.buttons.closeNav')}
             onClick={() => setOpen(false)}
           >
             <X />
@@ -115,8 +150,23 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
         <div className="space-y-4">
           {renderNav('light')}
-          <Button asChild className="w-full">
-            <Link to="/pph21">Mulai simulasi</Link>
+          <select
+            aria-label="Change language"
+            value={i18n.language}
+            onChange={(event) => handleLocaleChange(event.target.value)}
+            className="w-full rounded-full border border-[#0f1e3d]/20 px-3 py-2 text-sm"
+          >
+            {availableLocales.map((locale) => (
+              <option key={locale.code} value={locale.code}>
+                {`${locale.emoji} ${locale.label}`}
+              </option>
+            ))}
+          </select>
+          <Button asChild className="w-full" variant="outline">
+            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
+              <Github className="size-4" />
+              {t('app.buttons.github')}
+            </a>
           </Button>
         </div>
       </div>

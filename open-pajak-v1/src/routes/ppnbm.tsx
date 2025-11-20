@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FormField } from '../components/FormField'
 import { FormulaExplanationCard } from '../components/FormulaExplanationCard'
 import { InfoAlert } from '../components/InfoAlert'
@@ -37,6 +38,7 @@ export const Route = createFileRoute('/ppnbm')({
 })
 
 function PpnbmPage() {
+  const { t } = useTranslation()
   const [form, setForm] = useState<PpnbmFormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -51,23 +53,26 @@ function PpnbmPage() {
 
   return (
     <TaxPageLayout
-      title="Kalkulator PPNBM"
-      description="Perkirakan PPNBM untuk barang mewah (kendaraan, perhiasan, kapal pesiar, elektronik premium)."
+      title={t('ppnbmCalc.title')}
+      description={t('ppnbmCalc.description')}
       form={
         <TaxFormSection
-          title="Detil Barang Kena PPNBM"
+          title={t('ppnbmCalc.form.title')}
           actions={
             <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-end">
               <Button variant="outline" onClick={() => setForm(emptyForm())}>
-                Kosongkan Form
+                {t('app.buttons.clearForm')}
               </Button>
               <Button variant="ghost" onClick={() => setForm(sampleForm())}>
-                Gunakan Contoh
+                {t('app.buttons.useSample')}
               </Button>
             </div>
           }
         >
-          <FormField label="Jenis barang mewah" htmlFor="goodsType">
+          <FormField
+            label={t('ppnbmCalc.form.goodsType')}
+            htmlFor="goodsType"
+          >
             <Select
               id="goodsType"
               value={form.goodsType}
@@ -78,14 +83,22 @@ function PpnbmPage() {
                 }))
               }
             >
-              <option value="kendaraanMewah">Kendaraan mewah</option>
-              <option value="perhiasan">Perhiasan/permata</option>
-              <option value="kapalPesiar">Kapal pesiar</option>
-              <option value="elektronikPremium">Elektronik premium</option>
+              <option value="kendaraanMewah">
+                {t('ppnbmCalc.options.goodsType.kendaraanMewah')}
+              </option>
+              <option value="perhiasan">
+                {t('ppnbmCalc.options.goodsType.perhiasan')}
+              </option>
+              <option value="kapalPesiar">
+                {t('ppnbmCalc.options.goodsType.kapalPesiar')}
+              </option>
+              <option value="elektronikPremium">
+                {t('ppnbmCalc.options.goodsType.elektronikPremium')}
+              </option>
             </Select>
           </FormField>
 
-          <FormField label="DPP PPN (biasanya harga jual)" htmlFor="dppPpn">
+          <FormField label={t('ppnbmCalc.form.dpp')} htmlFor="dppPpn">
             <NumberInput
               id="dppPpn"
               value={form.dppPpn}
@@ -96,9 +109,9 @@ function PpnbmPage() {
           </FormField>
 
           <FormField
-            label="Tarif khusus (opsional)"
+            label={t('ppnbmCalc.form.customRate')}
             htmlFor="customRate"
-            description="Isi bila tarif berbeda dari default."
+            description={t('ppnbmCalc.form.customRateDesc')}
           >
             <Input
               id="customRate"
@@ -125,36 +138,28 @@ function PpnbmPage() {
               })
             }
           >
-            Gunakan contoh
+            {t('app.buttons.useSample')}
           </Button>
         </TaxFormSection>
       }
       summary={
         <TaxSummaryCard
           total={result.totalTax}
-          label="PPNBM terutang"
-          meta="DPP mengikuti nilai PPN."
+          label={t('ppnbmCalc.summary.label')}
+          meta={t('ppnbmCalc.summary.meta')}
         />
       }
       result={<TaxResultTable breakdown={result.breakdown} />}
       explanation={
         <FormulaExplanationCard
-          title="Langkah hitung"
-          steps={[
-            'DPP PPNBM umumnya sama dengan DPP PPN.',
-            'Tarif berbeda untuk tiap kelompok barang (PMK 141/PMK.010/2021).',
-            'PPNBM = DPP × tarif; ditambahkan pada faktur pajak.',
-          ]}
+          title={t('ppnbmCalc.explanationTitle')}
+          steps={t('ppnbmCalc.explanation', { returnObjects: true }) as string[]}
         />
       }
       info={
         <InfoAlert
-          title="Ingat"
-          items={[
-            'PPNBM tidak dapat dikreditkan.',
-            'Perhatikan fasilitas pembebasan untuk ekspor atau KITE.',
-            'Selalu pisahkan PPN dan PPNBM di dokumen penjualan.',
-          ]}
+          title={t('ppnbmCalc.info.title')}
+          items={t('ppnbmCalc.info.items', { returnObjects: true }) as string[]}
         />
       }
     />

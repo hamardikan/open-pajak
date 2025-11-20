@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FormField } from '../components/FormField'
 import { FormulaExplanationCard } from '../components/FormulaExplanationCard'
 import { InfoAlert } from '../components/InfoAlert'
@@ -33,6 +34,7 @@ const emptyForm = (): Pph4FormState => ({
 })
 
 function Pph4Page() {
+  const { t } = useTranslation()
   const [form, setForm] = useState<Pph4FormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -47,23 +49,26 @@ function Pph4Page() {
 
   return (
     <TaxPageLayout
-      title="Kalkulator PPh Final Pasal 4 ayat (2)"
-      description="Simulasi pemotongan final untuk sewa tanah/bangunan, jasa konstruksi, usaha restoran, dan UMKM final per PP 55/2022."
+      title={t('pph4_2_calc.title')}
+      description={t('pph4_2_calc.description')}
       form={
         <TaxFormSection
-          title="Data objek final"
+          title={t('pph4_2_calc.form.title')}
           actions={
             <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-end">
               <Button variant="outline" onClick={() => setForm(emptyForm())}>
-                Kosongkan Form
+                {t('app.buttons.clearForm')}
               </Button>
               <Button variant="ghost" onClick={() => setForm(sampleForm())}>
-                Gunakan Contoh
+                {t('app.buttons.useSample')}
               </Button>
             </div>
           }
         >
-          <FormField label="Jenis objek" htmlFor="objectType">
+          <FormField
+            label={t('pph4_2_calc.form.objectType')}
+            htmlFor="objectType"
+          >
             <Select
               id="objectType"
               value={form.objectType}
@@ -74,17 +79,25 @@ function Pph4Page() {
                 }))
               }
             >
-              <option value="sewaTanah">Sewa tanah/bangunan (10%)</option>
-              <option value="konstruksi">Jasa konstruksi (3.5%)</option>
-              <option value="restoran">Usaha restoran (5%)</option>
-              <option value="umkmFinal">UMKM PP 55/2022 (0.5%)</option>
+              <option value="sewaTanah">
+                {t('pph4_2_calc.options.objectType.sewaTanah')}
+              </option>
+              <option value="konstruksi">
+                {t('pph4_2_calc.options.objectType.konstruksi')}
+              </option>
+              <option value="restoran">
+                {t('pph4_2_calc.options.objectType.restoran')}
+              </option>
+              <option value="umkmFinal">
+                {t('pph4_2_calc.options.objectType.umkmFinal')}
+              </option>
             </Select>
           </FormField>
 
           <FormField
-            label="Nilai bruto"
+            label={t('pph4_2_calc.form.gross')}
             htmlFor="grossAmount"
-            description="Isi sesuai nilai kontrak/omzet."
+            description={t('pph4_2_calc.form.grossDesc')}
           >
             <NumberInput
               id="grossAmount"
@@ -99,29 +112,21 @@ function Pph4Page() {
       summary={
         <TaxSummaryCard
           total={result.totalTax}
-          label="PPh Final dipotong"
-          meta="Tarif otomatis mengikuti jenis objek."
+          label={t('pph4_2_calc.summary.label')}
+          meta={t('pph4_2_calc.summary.meta')}
         />
       }
       result={<TaxResultTable breakdown={result.breakdown} />}
       explanation={
         <FormulaExplanationCard
-          title="Langkah hitung"
-          steps={[
-            'Dasar Pengenaan Pajak (DPP) = Nilai bruto sesuai objek.',
-            'Tarif final mengikuti pasal khusus (PP 34/2017 & PP 55/2022).',
-            'PPh Final = DPP × tarif.',
-          ]}
+          title={t('pph4_2_calc.explanationTitle')}
+          steps={t('pph4_2_calc.explanation', { returnObjects: true }) as string[]}
         />
       }
       info={
         <InfoAlert
-          title="Catatan"
-          items={[
-            'Penarikan bersifat final, tidak dapat dikreditkan di SPT Tahunan.',
-            'Jasa konstruksi memiliki tarif berbeda jika kualifikasi perusahaan berubah.',
-            'UMKM final mengikuti batas omzet Rp 500 juta/tahun.',
-          ]}
+          title={t('pph4_2_calc.info.title')}
+          items={t('pph4_2_calc.info.items', { returnObjects: true }) as string[]}
         />
       }
     />

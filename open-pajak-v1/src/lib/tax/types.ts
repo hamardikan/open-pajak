@@ -3,7 +3,7 @@ export type TaxBreakdownRow = {
   value?: number | string
   valueType?: 'currency' | 'percent' | 'text'
   note?: string
-  variant?: 'section' | 'subtotal' | 'total'
+  variant?: 'section' | 'subtotal' | 'total' | 'group' | 'spacer'
 }
 
 export type TaxResult = {

@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FormField } from '../components/FormField'
 import { FormulaExplanationCard } from '../components/FormulaExplanationCard'
 import { InfoAlert } from '../components/InfoAlert'
@@ -39,6 +40,7 @@ export const Route = createFileRoute('/pph22')({
 })
 
 function Pph22Page() {
+  const { t } = useTranslation()
   const [form, setForm] = useState<Pph22FormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -55,24 +57,27 @@ function Pph22Page() {
 
   return (
     <TaxPageLayout
-      title="Kalkulator PPh 22"
-      description="Simulasikan pemungutan PPh 22 atas transaksi impor, BUMN, industri migas, dan transaksi khusus lain. Cocok untuk memperkirakan potongan pada saat pembayaran."
+      title={t('pph22.title')}
+      description={t('pph22.description')}
       form={
         <TaxFormSection
-          title="Objek PPh 22"
-          description="Masukkan rincian nilai DPP."
+          title={t('pph22.form.title')}
+          description={t('pph22.form.description')}
           actions={
             <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-end">
               <Button variant="outline" onClick={() => setForm(emptyForm())}>
-                Kosongkan Form
+                {t('app.buttons.clearForm')}
               </Button>
               <Button variant="ghost" onClick={() => setForm(sampleForm())}>
-                Gunakan Contoh
+                {t('app.buttons.useSample')}
               </Button>
             </div>
           }
         >
-          <FormField label="Jenis transaksi" htmlFor="transactionType">
+          <FormField
+            label={t('pph22.form.transactionType')}
+            htmlFor="transactionType"
+          >
             <Select
               id="transactionType"
               value={form.transactionType}
@@ -83,15 +88,26 @@ function Pph22Page() {
                 }))
               }
             >
-              <option value="impor">Impor umum</option>
-              <option value="migas">Industri migas</option>
-              <option value="bumn">Pembelian BUMN tertentu</option>
-              <option value="lainnya">Transaksi lain</option>
+              <option value="impor">
+                {t('pph22.form.transactionTypeOptions.impor')}
+              </option>
+              <option value="migas">
+                {t('pph22.form.transactionTypeOptions.migas')}
+              </option>
+              <option value="bumn">
+                {t('pph22.form.transactionTypeOptions.bumn')}
+              </option>
+              <option value="lainnya">
+                {t('pph22.form.transactionTypeOptions.lainnya')}
+              </option>
             </Select>
           </FormField>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <FormField label="Nilai transaksi (CIF/FOB)" htmlFor="transactionValue">
+            <FormField
+              label={t('pph22.form.transactionValue')}
+              htmlFor="transactionValue"
+            >
               <NumberInput
                 id="transactionValue"
                 value={form.transactionValue}
@@ -101,9 +117,9 @@ function Pph22Page() {
               />
             </FormField>
             <FormField
-              label="Penyesuaian biaya (+)"
+              label={t('pph22.form.otherCosts')}
               htmlFor="otherCosts"
-              description="Mis. biaya asuransi, freight, atau lain-lain."
+              description={t('pph22.form.otherCostsNote')}
             >
               <NumberInput
                 id="otherCosts"
@@ -116,9 +132,9 @@ function Pph22Page() {
           </div>
 
           <FormField
-            label="Pengurang (-)"
+            label={t('pph22.form.deduction')}
             htmlFor="deduction"
-            description="Masukkan potongan seperti diskon, nilai non-DPP, atau pembebasan PPN."
+            description={t('pph22.form.deductionNote')}
           >
             <NumberInput
               id="deduction"
@@ -133,29 +149,21 @@ function Pph22Page() {
       summary={
         <TaxSummaryCard
           total={result.totalTax}
-          label="PPh 22 dipungut"
-          meta="Tarif mengikuti jenis transaksi"
+          label={t('pph22.summary.label')}
+          meta={t('pph22.summary.meta')}
         />
       }
       result={<TaxResultTable breakdown={result.breakdown} />}
       explanation={
         <FormulaExplanationCard
-          title="Alur perhitungan"
-          steps={[
-            'Dasar pungut (DPP) = Nilai transaksi + biaya lain - pengurang.',
-            'Tarif mengikuti PER-38/PJ/2013 (impor 2.5%, migas 2%, BUMN 1.5%).',
-            'PPh 22 = DPP × tarif.',
-          ]}
+          title={t('pph22.explanationTitle')}
+          steps={t('pph22.explanation', { returnObjects: true }) as string[]}
         />
       }
       info={
         <InfoAlert
-          title="Tips pengecekan"
-          items={[
-            'Pastikan barang termasuk dalam daftar objek PPh 22.',
-            'Tarif dapat berbeda jika ada fasilitas kepabeanan/PPnBM.',
-            'Simpan bukti potong untuk kredit di SPT Tahunan.',
-          ]}
+          title={t('pph22.info.title')}
+          items={t('pph22.info.items', { returnObjects: true }) as string[]}
         />
       }
     />

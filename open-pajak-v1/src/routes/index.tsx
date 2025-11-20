@@ -1,95 +1,79 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
-import { ArrowRightIcon, Calculator, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowRightIcon, Calculator, Github, ShieldCheck, Sparkles } from 'lucide-react'
 import { Card, CardContent } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { FormulaSourceNote } from '../components/FormulaSourceNote'
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
 })
 
-const calculators: Array<{
-  to: string
-  title: string
-  description: string
-}> = [
-  {
-    to: '/pph21',
-    title: 'PPh 21/26',
-    description: 'Pegawai tetap, tidak tetap, bukan pegawai, hingga WPLN.',
-  },
-  {
-    to: '/pph22',
-    title: 'PPh 22',
-    description: 'Impor, migas, BUMN, dan transaksi tertentu.',
-  },
-  {
-    to: '/pph23',
-    title: 'PPh 23',
-    description: 'Jasa teknik, konsultan, sewa alat, dividen, bunga.',
-  },
-  {
-    to: '/pph4-2',
-    title: 'PPh Final 4(2)',
-    description: 'Sewa tanah, konstruksi, restoran, UMKM final.',
-  },
-  {
-    to: '/ppn',
-    title: 'PPN',
-    description: 'DPP otomatis untuk harga termasuk/di luar PPN.',
-  },
-  {
-    to: '/ppnbm',
-    title: 'PPNBM',
-    description: 'Barang mewah kendaraan, perhiasan, elektronik.',
-  },
+const calculatorCards = [
+  { to: '/pph21', titleKey: 'home.calculatorList.cards.pph21.title', descKey: 'home.calculatorList.cards.pph21.description' },
+  { to: '/pph22', titleKey: 'home.calculatorList.cards.pph22.title', descKey: 'home.calculatorList.cards.pph22.description' },
+  { to: '/pph23', titleKey: 'home.calculatorList.cards.pph23.title', descKey: 'home.calculatorList.cards.pph23.description' },
+  { to: '/pph4-2', titleKey: 'home.calculatorList.cards.pph4_2.title', descKey: 'home.calculatorList.cards.pph4_2.description' },
+  { to: '/ppn', titleKey: 'home.calculatorList.cards.ppn.title', descKey: 'home.calculatorList.cards.ppn.description' },
+  { to: '/ppnbm', titleKey: 'home.calculatorList.cards.ppnbm.title', descKey: 'home.calculatorList.cards.ppnbm.description' },
 ]
 
+const GITHUB_URL = 'https://github.com/hamardikan/open-pajak'
+
 function HomePage() {
+  const { t } = useTranslation()
+  const features = (t('home.features', { returnObjects: true }) as Array<{
+    title: string
+    description: string
+  }>) ?? []
+
   return (
     <div className="space-y-10">
       <section className="grid gap-8 rounded-[32px] bg-white/80 p-8 shadow-xl shadow-[#0f1e3d]/5 md:grid-cols-2">
         <div className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[#f5a524]">
-            Open Pajak
+            {t('home.hero.eyebrow')}
           </p>
           <h1 className="text-4xl font-bold text-[#0f1e3d]">
-            Kalkulator pajak Indonesia serba ada.
+            {t('home.hero.title')}
           </h1>
           <p className="text-[#0f1e3d]/70 text-lg">
-            Semua perhitungan berjalan sepenuhnya di browser Anda. Tidak ada data
-            pribadi, tidak ada backend. Cocok untuk simulasi cepat maupun review
-            kewajiban pajak sebelum lapor.
+            {t('home.hero.body')}
           </p>
           <div className="flex flex-wrap gap-3">
             <Button asChild size="lg" variant="accent">
               <Link to="/pph21">
-                Mulai hitung <ArrowRightIcon className="size-4" />
+                {t('home.hero.ctaPrimary')} <ArrowRightIcon className="size-4" />
               </Link>
             </Button>
             <Button variant="outline" asChild size="lg">
-              <Link to="/ppn">PPN Cepat</Link>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2"
+              >
+                <Github className="size-4" />
+                {t('home.hero.ctaSecondary')}
+              </a>
             </Button>
           </div>
         </div>
 
         <div className="grid gap-4">
-          <Highlight
-            icon={<Calculator className="size-6" />}
-            title="6 kalkulator utama"
-            description="PPh 21/26, 22, 23, Final 4(2), PPN, dan PPNBM mengikuti desain dan formula DJP terbaru."
-          />
-          <Highlight
-            icon={<ShieldCheck className="size-6" />}
-            title="Privasi terjaga"
-            description="Tidak ada input NIK, nama, atau alamat. Hanya angka dan jenis transaksi."
-          />
-          <Highlight
-            icon={<Sparkles className="size-6" />}
-            title="Formula transparan"
-            description="Setiap hasil disertai tabel langkah hitung dan referensi rumus."
-          />
+          {features.map((feature, index) => {
+            const icons = [Calculator, ShieldCheck, Sparkles]
+            const Icon = icons[index] ?? Calculator
+            return (
+              <Highlight
+                key={feature.title}
+                icon={<Icon className="size-6" />}
+                title={feature.title}
+                description={feature.description}
+              />
+            )
+          })}
         </div>
       </section>
 
@@ -97,27 +81,27 @@ function HomePage() {
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-2xl font-semibold text-[#0f1e3d]">
-              Pilih kalkulator
+              {t('home.calculatorList.title')}
             </h2>
             <p className="text-sm text-[#0f1e3d]/70">
-              Setiap halaman memiliki form input, tabel hasil, dan catatan rumus.
+              {t('home.calculatorList.subtitle')}
             </p>
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          {calculators.map((calc) => (
+          {calculatorCards.map((calc) => (
             <Card key={calc.to} className="p-0">
               <CardContent className="p-6 space-y-3">
                 <p className="text-sm font-semibold text-[#f5a524]">
-                  Kalkulator Pajak
+                  {t('app.brand')}
                 </p>
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <h3 className="text-xl font-bold text-[#0f1e3d]">
-                      {calc.title}
+                      {t(calc.titleKey)}
                     </h3>
                     <p className="text-sm text-[#0f1e3d]/70">
-                      {calc.description}
+                      {t(calc.descKey)}
                     </p>
                   </div>
                   <Button asChild variant="accent" size="icon">

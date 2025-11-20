@@ -2,6 +2,7 @@ import { cn } from '../lib/cn'
 import { Card } from './ui/card'
 import { FormulaSourceNote } from './FormulaSourceNote'
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface TaxPageLayoutProps {
   title: string
@@ -26,11 +27,12 @@ export function TaxPageLayout({
   footer,
   className,
 }: TaxPageLayoutProps) {
+  const { t } = useTranslation()
   return (
     <section className={cn('space-y-6', className)}>
       <div className="space-y-3 text-center lg:text-left">
         <p className="text-xs font-semibold uppercase tracking-widest text-[#f5a524]">
-          Open Pajak
+          {t('app.brand')}
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-[#0f1e3d]">
           {title}
@@ -40,9 +42,9 @@ export function TaxPageLayout({
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card className="p-0">{form}</Card>
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           {summary}
-          <Card>{result}</Card>
+          <Card className="flex-1">{result}</Card>
         </div>
       </div>
 
