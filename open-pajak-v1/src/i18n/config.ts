@@ -8,7 +8,7 @@ import zh from './locales/zh/common.json'
 import zhTW from './locales/zh-TW/common.json'
 
 export const availableLocales = [
-	{ code: 'id', label: 'Bahasa Indonesia', emoji: '🇮🇩' },
+	{ code: 'id', label: 'Indonesia', emoji: '🇮🇩' },
 	{ code: 'en', label: 'English', emoji: '🇺🇸' },
 	{ code: 'ja', label: '日本語', emoji: '🇯🇵' },
 	{ code: 'zh', label: '简体中文', emoji: '🇨🇳' },
