@@ -1,11 +1,11 @@
 import { Link, useRouterState } from '@tanstack/react-router'
-import { Github, Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { Check, ChevronDown, Github, Menu, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { availableLocales, changeLocale } from '../i18n/config'
 import { cn } from '../lib/cn'
 import { Button } from './ui/button'
 import type { ReactNode } from 'react'
-import { availableLocales, changeLocale } from '../i18n/config'
 
 const GITHUB_URL = 'https://github.com/hamardikan/open-pajak'
 
@@ -21,12 +21,39 @@ const NAV_LINKS: Array<{ to: string; labelKey: string }> = [
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false)
+  const langDropdownRef = useRef<HTMLDivElement>(null)
   const { location } = useRouterState()
   const { t, i18n } = useTranslation()
 
   const handleLocaleChange = (value: string) => {
     changeLocale(value)
+    setLangDropdownOpen(false)
   }
+
+  const currentLocale = availableLocales.find((locale) => locale.code === i18n.language) || availableLocales[0]
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langDropdownRef.current && !langDropdownRef.current.contains(event.target as Node)) {
+        setLangDropdownOpen(false)
+      }
+    }
+
+    if (langDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [langDropdownOpen])
+
+  useEffect(() => {
+    if (!open) {
+      setLangDropdownOpen(false)
+    }
+  }, [open])
 
   const renderNav = (variant: 'dark' | 'light') => (
     <nav className="flex flex-col gap-2 text-sm font-semibold md:flex-row md:items-center md:gap-1">
@@ -34,7 +61,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         const active = location.pathname === item.to
         const activeClass =
           variant === 'dark'
-            ? 'bg-white/70 text-[#0f1e3d] shadow-lg shadow-[#0f1e3d]/30 backdrop-blur'
+            ? 'bg-[#f9c74f] text-[#0f1e3d] shadow-md shadow-[#f9c74f]/25 font-bold'
             : 'bg-[#f9c74f]/90 text-[#0f1e3d] shadow-lg shadow-[#f5a524]/40'
         const inactiveClass =
           variant === 'dark'
@@ -83,19 +110,50 @@ export function AppShell({ children }: { children: ReactNode }) {
 
           <div className="hidden flex-1 items-center justify-between gap-4 md:flex">
             <div className="flex-1">{renderNav('dark')}</div>
-            <div className="flex items-center gap-2">
-              <select
-                aria-label="Change language"
-                value={i18n.language}
-                onChange={(event) => handleLocaleChange(event.target.value)}
-                className="rounded-full border border-white/40 bg-white/10 px-3 py-2 text-xs uppercase tracking-widest text-white outline-none backdrop-blur"
-              >
-                {availableLocales.map((locale) => (
-                  <option key={locale.code} value={locale.code} className="text-black">
-                    {`${locale.emoji} ${locale.label}`}
-                  </option>
-                ))}
-              </select>
+            <div className="flex items-center gap-4">
+              <div ref={langDropdownRef} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  aria-label="Change language"
+                  className="flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-3 py-1.5 text-xs uppercase tracking-wider text-white/90 outline-none backdrop-blur transition-all hover:bg-white/10 hover:text-white"
+                >
+                  <span>{currentLocale.emoji}</span>
+                  <span>{currentLocale.label.toUpperCase()}</span>
+                  <ChevronDown
+                    className={cn(
+                      'size-3.5 transition-transform',
+                      langDropdownOpen && 'rotate-180',
+                    )}
+                  />
+                </button>
+                {langDropdownOpen && (
+                  <div className="absolute right-0 top-full z-50 mt-2 min-w-[160px] rounded-lg border border-white/10 bg-[#121e3c] shadow-lg shadow-black/20">
+                    {availableLocales.map((locale) => {
+                      const isSelected = locale.code === i18n.language
+                      return (
+                        <button
+                          key={locale.code}
+                          type="button"
+                          onClick={() => handleLocaleChange(locale.code)}
+                          className={cn(
+                            'flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-sm text-white/90 transition-colors first:rounded-t-lg last:rounded-b-lg',
+                            isSelected
+                              ? 'bg-white/10 font-medium text-white'
+                              : 'hover:bg-white/5 hover:text-white',
+                          )}
+                        >
+                          <span className="flex items-center gap-2">
+                            <span>{locale.emoji}</span>
+                            <span>{locale.label}</span>
+                          </span>
+                          {isSelected && <Check className="size-4 text-[#f9c74f]" />}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
               <Button variant="accent" asChild>
                 <a
                   href={GITHUB_URL}
@@ -150,18 +208,51 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
         <div className="space-y-4">
           {renderNav('light')}
-          <select
-            aria-label="Change language"
-            value={i18n.language}
-            onChange={(event) => handleLocaleChange(event.target.value)}
-            className="w-full rounded-full border border-[#0f1e3d]/20 px-3 py-2 text-sm"
-          >
-            {availableLocales.map((locale) => (
-              <option key={locale.code} value={locale.code}>
-                {`${locale.emoji} ${locale.label}`}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+              aria-label="Change language"
+              className="flex w-full items-center justify-between rounded-lg border border-[#0f1e3d]/20 bg-white px-3 py-2 text-sm text-[#0f1e3d] outline-none transition-all hover:bg-[#0f1e3d]/5"
+            >
+              <span className="flex items-center gap-2">
+                <span>{currentLocale.emoji}</span>
+                <span>{currentLocale.label}</span>
+              </span>
+              <ChevronDown
+                className={cn(
+                  'size-4 text-[#0f1e3d] transition-transform',
+                  langDropdownOpen && 'rotate-180',
+                )}
+              />
+            </button>
+            {langDropdownOpen && (
+              <div className="absolute inset-x-0 top-full z-50 mt-2 rounded-lg border border-[#0f1e3d]/10 bg-white shadow-lg">
+                {availableLocales.map((locale) => {
+                  const isSelected = locale.code === i18n.language
+                  return (
+                    <button
+                      key={locale.code}
+                      type="button"
+                      onClick={() => handleLocaleChange(locale.code)}
+                      className={cn(
+                        'flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-sm text-[#0f1e3d] transition-colors first:rounded-t-lg last:rounded-b-lg',
+                        isSelected
+                          ? 'bg-[#f9c74f]/20 font-medium text-[#0f1e3d]'
+                          : 'hover:bg-[#0f1e3d]/5',
+                      )}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span>{locale.emoji}</span>
+                        <span>{locale.label}</span>
+                      </span>
+                      {isSelected && <Check className="size-4 text-[#f9c74f]" />}
+                    </button>
+                  )
+                })}
+              </div>
+            )}
+          </div>
           <Button asChild className="w-full" variant="outline">
             <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
               <Github className="size-4" />
