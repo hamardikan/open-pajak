@@ -142,10 +142,17 @@
       "countLabel": "{{count}} 笔",
       "groupLabel": "未分组",
       "empty": "尚未保存任何凭证。",
+      "noResult": "没有符合搜索条件的凭证。",
       "batchTitle": "批量批次",
       "batchEmpty": "尚无批量上传。",
       "downloadBatch": "下载批次 Excel",
-      "openBatch": "打开批次"
+      "viewBatch": "展开凭证",
+      "hideBatch": "收起凭证",
+      "searchPlaceholder": "搜索凭证或分组...",
+      "sortLabel": "排序",
+      "sortNewest": "最新",
+      "sortOldest": "最旧",
+      "sortName": "名称 A-Z"
     },
     "bulk": {
       "title": "批量上传 (Excel)",
@@ -174,7 +181,9 @@
       "title": "税额凭证",
       "meta": "凭证 ID",
       "group": "分组",
-      "identifier": "编号"
+      "identifier": "编号",
+      "visitSite": "访问网站",
+      "github": "GitHub"
     }
   },
   "pph21": {

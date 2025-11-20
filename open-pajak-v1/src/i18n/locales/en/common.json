@@ -142,10 +142,17 @@
       "countLabel": "{{count}} receipts",
       "groupLabel": "Ungrouped",
       "empty": "No receipts saved yet.",
+      "noResult": "No receipts match your search.",
       "batchTitle": "Bulk batches",
       "batchEmpty": "No bulk uploads yet.",
       "downloadBatch": "Download batch Excel",
-      "openBatch": "Open batch"
+      "viewBatch": "Show receipts",
+      "hideBatch": "Hide receipts",
+      "searchPlaceholder": "Search receipts or groups...",
+      "sortLabel": "Sort",
+      "sortNewest": "Newest",
+      "sortOldest": "Oldest",
+      "sortName": "A-Z"
     },
     "bulk": {
       "title": "Bulk upload (Excel)",
@@ -174,7 +181,9 @@
       "title": "Tax receipt",
       "meta": "Receipt ID",
       "group": "Group",
-      "identifier": "Identifier"
+      "identifier": "Identifier",
+      "visitSite": "Visit Site",
+      "github": "GitHub"
     }
   },
   "pph21": {

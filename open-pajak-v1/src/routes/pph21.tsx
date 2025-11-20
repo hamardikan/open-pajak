@@ -581,15 +581,6 @@ function Pph21Page() {
     downloadBatchWorkbook(batch, entries)
   }
 
-  const handleOpenBatchRecord = (batchId: string) => {
-    const batch = batches.find((item) => item.id === batchId)
-    if (!batch) return
-    const record = receipts.find((entry) => entry.id === batch.recordIds[0])
-    if (!record) return
-    handleViewReceipt(record)
-    setHistoryOpen(false)
-  }
-
   const handleDownloadTemplate = () => {
     downloadWorkbook('open-pajak-bulk-template.xls', [
       { name: 'Bulk Template', rows: BULK_TEMPLATE_SHEET },
@@ -1011,7 +1002,6 @@ function Pph21Page() {
         onDownloadReceipt={handleDownloadReceipt}
         onPrintReceipt={handlePrintReceipt}
         onDownloadBatch={(batch) => handleDownloadBatch(batch.id)}
-        onOpenBatchRecord={(batch) => handleOpenBatchRecord(batch.id)}
         onTemplateDownload={handleDownloadTemplate}
         onBulkUpload={handleBulkUpload}
         bulkStatus={bulkStatus}

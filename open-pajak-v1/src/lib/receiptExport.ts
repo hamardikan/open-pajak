@@ -110,7 +110,10 @@ export const downloadBatchWorkbook = (
 export const openPrintableReceipt = (receipt: TaxReceipt) => {
   if (typeof window === 'undefined' || typeof document === 'undefined') return
 
-  const t = (key: string) => i18n.t(key)
+  const t = (key: string, fallback?: string) =>
+    i18n.t(key, { defaultValue: fallback })
+  const visitSiteLabel = t('receipts.print.visitSite', 'Visit Site')
+  const githubLabel = t('receipts.print.github', 'GitHub')
   const dateFormatter = new Intl.DateTimeFormat(receipt.locale ?? 'id', {
     dateStyle: 'medium',
     timeStyle: 'short',
@@ -186,10 +189,10 @@ export const openPrintableReceipt = (receipt: TaxReceipt) => {
                 </div>
               </div>
               <div class="cta-links">
-                <a href="https://openpajak.hamardikan.com" target="_blank" rel="noreferrer">Visit Site</a>
+                <a href="https://openpajak.hamardikan.com" target="_blank" rel="noreferrer">${visitSiteLabel}</a>
                 <a class="secondary" href="https://github.com/hamardikan" target="_blank" rel="noreferrer">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12.02c0 5.1 3.3 9.42 7.89 10.95.58.1.79-.25.79-.55 0-.27-.01-1.15-.02-2.08-3.21.7-3.89-1.55-3.89-1.55-.53-1.36-1.28-1.72-1.28-1.72-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.95.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.28 1.2-3.09-.12-.3-.52-1.52.11-3.16 0 0 .97-.31 3.18 1.18a11.07 11.07 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.64.24 2.86.12 3.16.75.81 1.2 1.83 1.2 3.09 0 4.42-2.7 5.39-5.27 5.67.41.36.77 1.07.77 2.16 0 1.56-.02 2.82-.02 3.2 0 .31.21.66.8.55 4.58-1.54 7.88-5.85 7.88-10.95C23.5 5.65 18.35.5 12 .5Z"/></svg>
-                  GitHub
+                  ${githubLabel}
                 </a>
               </div>
             </div>

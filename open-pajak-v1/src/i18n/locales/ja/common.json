@@ -142,10 +142,17 @@
       "countLabel": "{{count}} 件",
       "groupLabel": "グループなし",
       "empty": "保存されたレシートはまだありません。",
+      "noResult": "検索条件に一致するレシートはありません。",
       "batchTitle": "バルクバッチ",
       "batchEmpty": "一括アップロードはまだありません。",
       "downloadBatch": "バッチExcelをダウンロード",
-      "openBatch": "バッチを開く"
+      "viewBatch": "レシートを表示",
+      "hideBatch": "レシートを隠す",
+      "searchPlaceholder": "レシート・グループを検索...",
+      "sortLabel": "並び替え",
+      "sortNewest": "新しい順",
+      "sortOldest": "古い順",
+      "sortName": "A-Z"
     },
     "bulk": {
       "title": "バルクアップロード（Excel）",
@@ -174,7 +181,9 @@
       "title": "税額レシート",
       "meta": "レシートID",
       "group": "グループ",
-      "identifier": "識別子"
+      "identifier": "識別子",
+      "visitSite": "サイトを見る",
+      "github": "GitHub"
     }
   },
   "pph21": {

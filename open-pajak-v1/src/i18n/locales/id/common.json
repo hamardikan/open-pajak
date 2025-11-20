@@ -142,10 +142,17 @@
       "countLabel": "{{count}} bukti",
       "groupLabel": "Tanpa grup",
       "empty": "Belum ada bukti yang disimpan.",
+      "noResult": "Tidak ada bukti yang cocok dengan pencarian.",
       "batchTitle": "Batch unggahan",
       "batchEmpty": "Belum ada unggahan massal.",
       "downloadBatch": "Unduh Excel batch",
-      "openBatch": "Buka batch"
+      "viewBatch": "Tampilkan bukti",
+      "hideBatch": "Sembunyikan bukti",
+      "searchPlaceholder": "Cari bukti atau grup...",
+      "sortLabel": "Urutkan",
+      "sortNewest": "Terbaru",
+      "sortOldest": "Terlama",
+      "sortName": "A-Z"
     },
     "bulk": {
       "title": "Unggahan massal (Excel)",
@@ -174,7 +181,9 @@
       "title": "Bukti pajak",
       "meta": "ID bukti",
       "group": "Grup",
-      "identifier": "Identitas"
+      "identifier": "Identitas",
+      "visitSite": "Kunjungi situs",
+      "github": "GitHub"
     }
   },
   "pph21": {
