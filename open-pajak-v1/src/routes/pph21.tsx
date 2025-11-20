@@ -204,15 +204,20 @@ const SUBJECT_TYPES: Array<PPh21SubjectType> = [
 ]
 
 const extractMetrics = (rows: Array<TaxBreakdownRow>) => {
-  const findValue = (label: string) => {
-    const row = rows.find((item) => item.label === label)
+  const findValue = (id: string, fallbackLabel: string) => {
+    const row =
+      rows.find((item) => item.id === id) ??
+      rows.find((item) => item.label === fallbackLabel)
     return typeof row?.value === 'number' ? row.value : undefined
   }
   return {
-    takeHomeAnnual: findValue('Take-home setahun'),
-    takeHomePerPeriod: findValue('Take-home per masa'),
-    terPerPeriod: findValue('PPh 21 TER per masa'),
-    decemberAdjustment: findValue('Penyesuaian Desember'),
+    takeHomeAnnual: findValue('take_home_annual', 'Take-home setahun'),
+    takeHomePerPeriod: findValue('take_home_period', 'Take-home per masa'),
+    terPerPeriod: findValue('ter_per_period', 'PPh 21 TER per masa'),
+    decemberAdjustment: findValue(
+      'december_adjustment',
+      'Penyesuaian Desember',
+    ),
   }
 }
 

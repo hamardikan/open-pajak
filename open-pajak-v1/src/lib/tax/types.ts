@@ -1,5 +1,6 @@
 export type TaxBreakdownRow = {
   label: string
+  id?: string
   value?: number | string
   valueType?: 'currency' | 'percent' | 'text'
   note?: string

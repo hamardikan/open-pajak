@@ -37,7 +37,7 @@ const emptyForm = (): Pph23FormState => ({
 })
 
 function Pph23Page() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [form, setForm] = useState<Pph23FormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -48,7 +48,10 @@ function Pph23Page() {
     [form],
   )
 
-  const result = useMemo(() => calculatePph23(normalizedForm), [normalizedForm])
+  const result = useMemo(
+    () => calculatePph23(normalizedForm),
+    [normalizedForm, i18n.language],
+  )
 
   return (
     <TaxPageLayout

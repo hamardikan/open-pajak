@@ -38,7 +38,7 @@ export const Route = createFileRoute('/ppnbm')({
 })
 
 function PpnbmPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [form, setForm] = useState<PpnbmFormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -49,7 +49,10 @@ function PpnbmPage() {
     [form],
   )
 
-  const result = useMemo(() => calculatePpnbm(normalizedForm), [normalizedForm])
+  const result = useMemo(
+    () => calculatePpnbm(normalizedForm),
+    [normalizedForm, i18n.language],
+  )
 
   return (
     <TaxPageLayout

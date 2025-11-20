@@ -40,7 +40,7 @@ export const Route = createFileRoute('/pph22')({
 })
 
 function Pph22Page() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [form, setForm] = useState<Pph22FormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -53,7 +53,10 @@ function Pph22Page() {
     [form],
   )
 
-  const result = useMemo(() => calculatePph22(normalizedForm), [normalizedForm])
+  const result = useMemo(
+    () => calculatePph22(normalizedForm),
+    [normalizedForm, i18n.language],
+  )
 
   return (
     <TaxPageLayout

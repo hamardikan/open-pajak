@@ -126,6 +126,7 @@ function calculatePegawaiTetap(
           valueType: 'percent',
         },
         {
+          id: 'ter_per_period',
           label: 'PPh 21 TER per masa',
           value: masaTax,
           note: `${months} masa`,
@@ -156,8 +157,9 @@ function calculatePegawaiTetap(
         variant: 'total',
       })
       rows.push({ label: 'Take-home pay', variant: 'section' })
-      rows.push({ label: 'Take-home setahun', value: takeHomeAnnual })
+      rows.push({ id: 'take_home_annual', label: 'Take-home setahun', value: takeHomeAnnual })
       rows.push({
+        id: 'take_home_period',
         label: 'Take-home per masa',
         value: takeHomePerMasa,
         note: `${months} masa`,
@@ -229,8 +231,9 @@ function calculatePegawaiTetap(
     { label: 'PPh 21 setahun', value: pajakSetahun },
     { label: `PPh 21 ${months} masa`, value: totalTax, variant: 'total' },
     { label: 'Take-home pay', variant: 'section' },
-    { label: 'Take-home setahun', value: takeHomeAnnual },
+    { id: 'take_home_annual', label: 'Take-home setahun', value: takeHomeAnnual },
     {
+      id: 'take_home_period',
       label: 'Take-home per masa',
       value: takeHomePerMasa,
       note: `${months} masa`,
@@ -530,6 +533,7 @@ function buildWaterfallTerRows({
 
   rows.push({ label: t('pph21Waterfall.groups.settlement', 'E. Status pembayaran (Settlement)'), variant: 'group' })
   rows.push({
+    id: 'ter_per_period',
     label: t('pph21Waterfall.rows.terPerPeriod', 'PPh 21 TER per masa'),
     value: masaTax,
     note: t('pph21Waterfall.notes.terPerPeriod', 'Tarif {{rate}} × bruto per masa', {
@@ -552,6 +556,7 @@ function buildWaterfallTerRows({
     })
   }
   rows.push({
+    id: 'december_adjustment',
     label: t('pph21Waterfall.rows.decemberAdjustment', 'PPh 21 masa Desember (kurang bayar)'),
     value: adjustment,
     variant: 'total',
@@ -561,11 +566,13 @@ function buildWaterfallTerRows({
 
   rows.push({ label: t('pph21Waterfall.groups.takeHome', 'F. Take-home pay'), variant: 'group' })
   rows.push({
+    id: 'take_home_annual',
     label: t('pph21Waterfall.rows.takeHomeAnnual', 'Take-home setahun'),
     value: takeHomeAnnual,
     note: t('pph21Waterfall.notes.takeHomeAnnual', 'Bruto - pajak terutang'),
   })
   rows.push({
+    id: 'take_home_period',
     label: t('pph21Waterfall.rows.takeHomePeriod', 'Take-home per masa'),
     value: takeHomePerMasa,
     note: t('pph21Waterfall.notes.takeHomePeriod', '{{months}} masa', { months }),
