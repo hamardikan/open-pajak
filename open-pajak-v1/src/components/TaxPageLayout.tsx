@@ -12,6 +12,7 @@ interface TaxPageLayoutProps {
   summary: ReactNode
   explanation: ReactNode
   info?: ReactNode
+  toolbar?: ReactNode
   footer?: ReactNode
   className?: string
 }
@@ -24,6 +25,7 @@ export function TaxPageLayout({
   summary,
   explanation,
   info,
+  toolbar,
   footer,
   className,
 }: TaxPageLayoutProps) {
@@ -47,6 +49,8 @@ export function TaxPageLayout({
           <Card className="flex-1">{result}</Card>
         </div>
       </div>
+
+      {toolbar && <div>{toolbar}</div>}
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>{explanation}</Card>

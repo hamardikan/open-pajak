@@ -96,6 +96,96 @@
     "thpAnnual": "年度实得",
     "thpPeriod": "每期实得"
   },
+  "receipts": {
+    "defaultTitle": "{{type}}凭证",
+    "panel": {
+      "title": "凭证与历史",
+      "subtitle": "保存本次结果，或管理批量上传。"
+    },
+    "actions": {
+      "preview": "查看凭证",
+      "history": "历史",
+      "save": "保存凭证",
+      "downloadPdf": "打印 / PDF",
+      "downloadExcel": "下载 Excel",
+      "delete": "删除",
+      "scrollTop": "回到顶部"
+    },
+    "modal": {
+      "title": "凭证预览",
+      "name": "凭证名称",
+      "identifier": "编号 / 员工码",
+      "group": "分组 / 项目",
+      "groupHint": "使用相同标签可将多笔凭证归类。",
+      "created": "创建时间",
+      "breakdownTitle": "逐级明细",
+      "dataTitle": "表单快照",
+      "source": {
+        "manual": "手动输入",
+        "bulk": "批量上传"
+      }
+    },
+    "summary": {
+      "totalTax": "税额合计",
+      "terMonthly": "每期 TER",
+      "decAdjustment": "12 月结算",
+      "thpAnnual": "年度实得",
+      "thpPeriod": "每期实得"
+    },
+    "boolean": {
+      "true": "是",
+      "false": "否"
+    },
+    "history": {
+      "title": "凭证历史",
+      "recordsCount": "共 {{count}} 笔",
+      "countLabel": "{{count}} 笔",
+      "groupLabel": "未分组",
+      "empty": "尚未保存任何凭证。",
+      "noResult": "没有符合搜索条件的凭证。",
+      "batchTitle": "批量批次",
+      "batchEmpty": "尚无批量上传。",
+      "downloadBatch": "下载批次 Excel",
+      "viewBatch": "展开凭证",
+      "hideBatch": "收起凭证",
+      "searchPlaceholder": "搜索凭证或分组...",
+      "sortLabel": "排序",
+      "sortNewest": "最新",
+      "sortOldest": "最旧",
+      "sortName": "名称 A-Z"
+    },
+    "bulk": {
+      "title": "批量上传 (Excel)",
+      "description": "利用模板导入多笔 PPh21/26 试算。",
+      "downloadTemplate": "下载 Excel 模板",
+      "uploadLabel": "上传 Excel (.xls)",
+      "pending": "正在处理 {{count}} 行…",
+      "success": "已将 {{count}} 笔凭证保存至「{{group}}」",
+      "error": "处理文件失败，请检查格式。",
+      "untitled": "未命名凭证"
+    },
+    "fields": {
+      "subjectType": "主体类型",
+      "brutoMonthly": "每期毛收入",
+      "monthsPaid": "发薪期数",
+      "pensionContribution": "养老缴费",
+      "bonusAnnual": "奖金",
+      "ptkpStatus": "PTKP 状态",
+      "scheme": "方案",
+      "terCategory": "TER 类别",
+      "zakatOrDonation": "宗教捐献",
+      "foreignTaxRate": "PPh26 税率",
+      "isDailyWorker": "日薪制"
+    },
+    "print": {
+      "title": "税额凭证",
+      "meta": "凭证 ID",
+      "group": "分组",
+      "identifier": "编号",
+      "visitSite": "访问网站",
+      "github": "GitHub"
+    }
+  },
   "pph21": {
     "title": "PPh21/26 计算器",
     "description": "针对员工、外包与境外纳税人，支持传统及 TER 方案切换。",

@@ -46,7 +46,7 @@ export const Route = createFileRoute('/ppn')({
 })
 
 function PpnPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [form, setForm] = useState<PpnFormState>(sampleForm)
 
   const normalizedForm = useMemo(
@@ -59,7 +59,10 @@ function PpnPage() {
     [form],
   )
 
-  const result = useMemo(() => calculatePpn(normalizedForm), [normalizedForm])
+  const result = useMemo(
+    () => calculatePpn(normalizedForm),
+    [normalizedForm, i18n.language],
+  )
   const handleCustomRateChange = (value: string) => {
     const numeric = Number(value)
     setForm((prev) => ({
