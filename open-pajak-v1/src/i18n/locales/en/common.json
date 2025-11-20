@@ -96,6 +96,96 @@
     "thpAnnual": "Annual THP",
     "thpPeriod": "THP per period"
   },
+  "receipts": {
+    "defaultTitle": "{{type}} receipt",
+    "panel": {
+      "title": "Receipt & history",
+      "subtitle": "Save this result or manage bulk uploads."
+    },
+    "actions": {
+      "preview": "Preview receipt",
+      "history": "History",
+      "save": "Save receipt",
+      "downloadPdf": "Print / PDF",
+      "downloadExcel": "Download Excel",
+      "delete": "Delete",
+      "scrollTop": "Back to top"
+    },
+    "modal": {
+      "title": "Receipt preview",
+      "name": "Receipt title",
+      "identifier": "Identifier / employee code",
+      "group": "Group / project",
+      "groupHint": "Use the same label to bundle related receipts.",
+      "created": "Created at",
+      "breakdownTitle": "Waterfall breakdown",
+      "dataTitle": "Form snapshot",
+      "source": {
+        "manual": "Manual entry",
+        "bulk": "Bulk upload"
+      }
+    },
+    "summary": {
+      "totalTax": "Total tax",
+      "terMonthly": "TER per period",
+      "decAdjustment": "December true-up",
+      "thpAnnual": "Annual THP",
+      "thpPeriod": "THP per period"
+    },
+    "boolean": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "history": {
+      "title": "Receipt history",
+      "recordsCount": "{{count}} receipts total",
+      "countLabel": "{{count}} receipts",
+      "groupLabel": "Ungrouped",
+      "empty": "No receipts saved yet.",
+      "noResult": "No receipts match your search.",
+      "batchTitle": "Bulk batches",
+      "batchEmpty": "No bulk uploads yet.",
+      "downloadBatch": "Download batch Excel",
+      "viewBatch": "Show receipts",
+      "hideBatch": "Hide receipts",
+      "searchPlaceholder": "Search receipts or groups...",
+      "sortLabel": "Sort",
+      "sortNewest": "Newest",
+      "sortOldest": "Oldest",
+      "sortName": "A-Z"
+    },
+    "bulk": {
+      "title": "Bulk upload (Excel)",
+      "description": "Import multiple employees for PPh 21/26 via our template.",
+      "downloadTemplate": "Download Excel template",
+      "uploadLabel": "Upload Excel (.xls)",
+      "pending": "Processing {{count}} row(s)…",
+      "success": "Saved {{count}} receipts under \"{{group}}\"",
+      "error": "Failed to process the file. Please verify the columns.",
+      "untitled": "Untitled receipt"
+    },
+    "fields": {
+      "subjectType": "Subject type",
+      "brutoMonthly": "Gross / period",
+      "monthsPaid": "Paid periods",
+      "pensionContribution": "Pension contribution",
+      "bonusAnnual": "Bonus",
+      "ptkpStatus": "PTKP status",
+      "scheme": "Scheme",
+      "terCategory": "TER category",
+      "zakatOrDonation": "Zakat / donation",
+      "foreignTaxRate": "Foreign tax rate",
+      "isDailyWorker": "Daily worker"
+    },
+    "print": {
+      "title": "Tax receipt",
+      "meta": "Receipt ID",
+      "group": "Group",
+      "identifier": "Identifier",
+      "visitSite": "Visit Site",
+      "github": "GitHub"
+    }
+  },
   "pph21": {
     "title": "PPh 21/26 calculator",
     "description": "Estimate withholding for employees, contractors, and foreign taxpayers. Compare legacy vs TER schemes.",

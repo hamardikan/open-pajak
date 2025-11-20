@@ -1,4 +1,5 @@
 import { PPH23_RATES } from './constants'
+import { applyRate, rateBpsToPercent } from './utils'
 import type { TaxResult } from './types'
 import i18n from '../../i18n/config'
 
@@ -23,14 +24,18 @@ export function calculatePph23({
   const t = (key: string, fallback: string) =>
     i18n.t(key, { defaultValue: fallback })
   const dpp = Math.max(0, grossAmount)
-  const rate = PPH23_RATES[serviceType]
-  const totalTax = dpp * rate
+  const rateBps = PPH23_RATES[serviceType]
+  const totalTax = applyRate(dpp, rateBps)
   return {
     totalTax,
     breakdown: [
       { label: t('pph23.breakdown.section', 'Penghasilan Bruto'), variant: 'section' },
       { label: t('pph23.breakdown.gross', 'Jumlah bruto'), value: dpp },
-      { label: t('pph23.breakdown.rate', 'Tarif PPh 23'), value: rate, valueType: 'percent' },
+      {
+        label: t('pph23.breakdown.rate', 'Tarif PPh 23'),
+        value: rateBpsToPercent(rateBps),
+        valueType: 'percent',
+      },
       {
         label: t('pph23.breakdown.tax', 'PPh 23 dipotong'),
         value: totalTax,

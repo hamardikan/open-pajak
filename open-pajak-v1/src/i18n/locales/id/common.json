@@ -96,6 +96,96 @@
     "thpAnnual": "THP setahun",
     "thpPeriod": "THP per masa"
   },
+  "receipts": {
+    "defaultTitle": "Bukti {{type}}",
+    "panel": {
+      "title": "Ekspor & riwayat",
+      "subtitle": "Simpan hasil ini atau kelola unggahan massal."
+    },
+    "actions": {
+      "preview": "Tinjau bukti",
+      "history": "Riwayat",
+      "save": "Simpan bukti",
+      "downloadPdf": "Cetak / PDF",
+      "downloadExcel": "Unduh Excel",
+      "delete": "Hapus",
+      "scrollTop": "Kembali ke atas"
+    },
+    "modal": {
+      "title": "Pratinjau bukti",
+      "name": "Nama bukti",
+      "identifier": "Kode unik / karyawan",
+      "group": "Grup / proyek",
+      "groupHint": "Gunakan label yang sama untuk mengelompokkan beberapa bukti.",
+      "created": "Dibuat pada",
+      "breakdownTitle": "Rincian waterfall",
+      "dataTitle": "Snapshot formulir",
+      "source": {
+        "manual": "Input manual",
+        "bulk": "Unggahan massal"
+      }
+    },
+    "summary": {
+      "totalTax": "Total pajak",
+      "terMonthly": "TER per masa",
+      "decAdjustment": "Penyesuaian Desember",
+      "thpAnnual": "THP setahun",
+      "thpPeriod": "THP per masa"
+    },
+    "boolean": {
+      "true": "Ya",
+      "false": "Tidak"
+    },
+    "history": {
+      "title": "Riwayat bukti",
+      "recordsCount": "{{count}} bukti tersimpan",
+      "countLabel": "{{count}} bukti",
+      "groupLabel": "Tanpa grup",
+      "empty": "Belum ada bukti yang disimpan.",
+      "noResult": "Tidak ada bukti yang cocok dengan pencarian.",
+      "batchTitle": "Batch unggahan",
+      "batchEmpty": "Belum ada unggahan massal.",
+      "downloadBatch": "Unduh Excel batch",
+      "viewBatch": "Tampilkan bukti",
+      "hideBatch": "Sembunyikan bukti",
+      "searchPlaceholder": "Cari bukti atau grup...",
+      "sortLabel": "Urutkan",
+      "sortNewest": "Terbaru",
+      "sortOldest": "Terlama",
+      "sortName": "A-Z"
+    },
+    "bulk": {
+      "title": "Unggahan massal (Excel)",
+      "description": "Impor beberapa karyawan PPh 21/26 dengan template kami.",
+      "downloadTemplate": "Unduh template Excel",
+      "uploadLabel": "Unggah Excel (.xls)",
+      "pending": "Memproses {{count}} baris…",
+      "success": "Berhasil menyimpan {{count}} bukti ke \"{{group}}\"",
+      "error": "Gagal memproses file. Mohon periksa formatnya.",
+      "untitled": "Bukti tanpa nama"
+    },
+    "fields": {
+      "subjectType": "Jenis subjek",
+      "brutoMonthly": "Bruto per masa",
+      "monthsPaid": "Jumlah masa dibayar",
+      "pensionContribution": "Iuran pensiun",
+      "bonusAnnual": "Bonus",
+      "ptkpStatus": "Status PTKP",
+      "scheme": "Skema",
+      "terCategory": "Kategori TER",
+      "zakatOrDonation": "Zakat / donasi",
+      "foreignTaxRate": "Tarif PPh 26",
+      "isDailyWorker": "Pekerja harian"
+    },
+    "print": {
+      "title": "Bukti pajak",
+      "meta": "ID bukti",
+      "group": "Grup",
+      "identifier": "Identitas",
+      "visitSite": "Kunjungi situs",
+      "github": "GitHub"
+    }
+  },
   "pph21": {
     "title": "Kalkulator PPh 21/26",
     "description": "Hitung potongan pajak penghasilan atas pegawai, bukan pegawai, hingga Wajib Pajak luar negeri. Sesuaikan skema lama maupun Tarif Efektif (TER).",
