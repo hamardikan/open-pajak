@@ -1,4 +1,5 @@
-import { PPN_RATES_PER_YEAR } from './constants'
+import { PPN_RATES_PER_YEAR, RATE_SCALE } from './constants'
+import { applyRate, rateBpsToPercent } from './utils'
 import type { TaxResult } from './types'
 import i18n from '../../i18n/config'
 
@@ -21,19 +22,23 @@ export function calculatePpn({
 }: PpnInput): TaxResult {
   const t = (key: string, fallback: string, options?: Record<string, unknown>) =>
     i18n.t(key, { defaultValue: fallback, ...options })
-  const rate =
+  const rateBps =
     customRate && customRate > 0
-      ? customRate / 100
-      : PPN_RATES_PER_YEAR[taxYear] ?? 0.11
+      ? Math.round(customRate * 100)
+      : PPN_RATES_PER_YEAR[taxYear] ?? PPN_RATES_PER_YEAR['2024']
+  const rateDecimal = rateBpsToPercent(rateBps)
+  const grossBase = Math.max(0, basePrice - discount + otherCosts)
 
   let dpp: number
   let ppn: number
   if (includePpn) {
-    dpp = (basePrice - discount + otherCosts) / (1 + rate)
-    ppn = basePrice - discount + otherCosts - dpp
+    const numerator = BigInt(Math.round(grossBase)) * BigInt(RATE_SCALE)
+    const denominator = BigInt(RATE_SCALE + rateBps)
+    dpp = Number((numerator + denominator / 2n) / denominator)
+    ppn = grossBase - dpp
   } else {
-    dpp = Math.max(0, basePrice - discount + otherCosts)
-    ppn = dpp * rate
+    dpp = grossBase
+    ppn = applyRate(dpp, rateBps)
   }
 
   return {
@@ -49,7 +54,11 @@ export function calculatePpn({
         variant: 'subtotal',
       },
       { label: t('ppnCalc.breakdown.taxSection', 'Perhitungan PPN'), variant: 'section' },
-      { label: t('ppnCalc.breakdown.rate', 'Tarif PPN'), value: rate, valueType: 'percent' },
+      {
+        label: t('ppnCalc.breakdown.rate', 'Tarif PPN'),
+        value: rateDecimal,
+        valueType: 'percent',
+      },
       { label: t('ppnCalc.breakdown.tax', 'PPN terutang'), value: ppn },
       { label: t('ppnCalc.breakdown.total', 'Total tagihan'), value: dpp + ppn, variant: 'total' },
     ],

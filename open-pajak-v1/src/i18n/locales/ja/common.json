@@ -96,6 +96,96 @@
     "thpAnnual": "年間手取り",
     "thpPeriod": "期間手取り"
   },
+  "receipts": {
+    "defaultTitle": "{{type}}レシート",
+    "panel": {
+      "title": "レシートと履歴",
+      "subtitle": "結果を保存したり、一括取り込みを管理できます。"
+    },
+    "actions": {
+      "preview": "レシートを表示",
+      "history": "履歴",
+      "save": "レシートを保存",
+      "downloadPdf": "印刷 / PDF",
+      "downloadExcel": "Excel をダウンロード",
+      "delete": "削除",
+      "scrollTop": "トップへ戻る"
+    },
+    "modal": {
+      "title": "レシートのプレビュー",
+      "name": "レシート名",
+      "identifier": "ID / 社員コード",
+      "group": "グループ / プロジェクト",
+      "groupHint": "同じラベルで複数のレシートをまとめられます。",
+      "created": "作成日時",
+      "breakdownTitle": "ウォーターフォール明細",
+      "dataTitle": "入力スナップショット",
+      "source": {
+        "manual": "手入力",
+        "bulk": "一括アップロード"
+      }
+    },
+    "summary": {
+      "totalTax": "総税額",
+      "terMonthly": "期間あたり TER",
+      "decAdjustment": "12月清算",
+      "thpAnnual": "年間手取り",
+      "thpPeriod": "期間手取り"
+    },
+    "boolean": {
+      "true": "はい",
+      "false": "いいえ"
+    },
+    "history": {
+      "title": "レシート履歴",
+      "recordsCount": "合計 {{count}} 件",
+      "countLabel": "{{count}} 件",
+      "groupLabel": "グループなし",
+      "empty": "保存されたレシートはまだありません。",
+      "noResult": "検索条件に一致するレシートはありません。",
+      "batchTitle": "バルクバッチ",
+      "batchEmpty": "一括アップロードはまだありません。",
+      "downloadBatch": "バッチExcelをダウンロード",
+      "viewBatch": "レシートを表示",
+      "hideBatch": "レシートを隠す",
+      "searchPlaceholder": "レシート・グループを検索...",
+      "sortLabel": "並び替え",
+      "sortNewest": "新しい順",
+      "sortOldest": "古い順",
+      "sortName": "A-Z"
+    },
+    "bulk": {
+      "title": "バルクアップロード（Excel）",
+      "description": "テンプレートを使ってPPh21/26の従業員をまとめて取り込みます。",
+      "downloadTemplate": "Excel テンプレートをダウンロード",
+      "uploadLabel": "Excel(.xls) をアップロード",
+      "pending": "{{count}} 件を処理中…",
+      "success": "「{{group}}」に{{count}}件のレシートを保存しました",
+      "error": "ファイルを処理できませんでした。形式を確認してください。",
+      "untitled": "名称未設定のレシート"
+    },
+    "fields": {
+      "subjectType": "課税対象",
+      "brutoMonthly": "各期間の総額",
+      "monthsPaid": "対象期間数",
+      "pensionContribution": "年金拠出",
+      "bonusAnnual": "賞与",
+      "ptkpStatus": "PTKP区分",
+      "scheme": "方式",
+      "terCategory": "TER区分",
+      "zakatOrDonation": "ザカート / 寄付",
+      "foreignTaxRate": "PPh26税率",
+      "isDailyWorker": "日額労働者"
+    },
+    "print": {
+      "title": "税額レシート",
+      "meta": "レシートID",
+      "group": "グループ",
+      "identifier": "識別子",
+      "visitSite": "サイトを見る",
+      "github": "GitHub"
+    }
+  },
   "pph21": {
     "title": "PPh21/26計算機",
     "description": "従業員・委託・海外居住者の源泉税を旧制度またはTERで試算します。",

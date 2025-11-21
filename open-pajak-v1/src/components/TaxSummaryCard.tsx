@@ -23,10 +23,12 @@ export function TaxSummaryCard({
 }: TaxSummaryCardProps) {
   const { t } = useTranslation()
   const taxLabel = label ?? t('summary.taxOverview')
+  const showTakeHome =
+    typeof takeHomeAnnual === 'number' || typeof takeHomePerPeriod === 'number'
 
   return (
     <Card className="border border-[#f6ce7d]/60 bg-gradient-to-br from-[#fffaf2] to-[#fff4d8] px-6 py-4 shadow-sm">
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className={`grid gap-6 ${showTakeHome ? 'lg:grid-cols-2' : ''}`}>
         <div className="space-y-3">
           <CardTitle className="text-xs font-semibold uppercase tracking-[0.3em] text-[#967000]">
             {taxLabel}
@@ -48,19 +50,21 @@ export function TaxSummaryCard({
           )}
         </div>
 
-        <div className="space-y-3">
-          <CardTitle className="text-xs font-semibold uppercase tracking-[0.3em] text-[#967000]">
-            {t('summary.takeHome')}
-          </CardTitle>
-          <div className="space-y-2 text-sm text-[#0f1e3d]">
-            {typeof takeHomeAnnual === 'number' && (
-              <SummaryMetric label={t('summary.thpAnnual')} value={takeHomeAnnual} />
-            )}
-            {typeof takeHomePerPeriod === 'number' && (
-              <SummaryMetric label={t('summary.thpPeriod')} value={takeHomePerPeriod} />
-            )}
+        {showTakeHome && (
+          <div className="space-y-3">
+            <CardTitle className="text-xs font-semibold uppercase tracking-[0.3em] text-[#967000]">
+              {t('summary.takeHome')}
+            </CardTitle>
+            <div className="space-y-2 text-sm text-[#0f1e3d]">
+              {typeof takeHomeAnnual === 'number' && (
+                <SummaryMetric label={t('summary.thpAnnual')} value={takeHomeAnnual} />
+              )}
+              {typeof takeHomePerPeriod === 'number' && (
+                <SummaryMetric label={t('summary.thpPeriod')} value={takeHomePerPeriod} />
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Card>
   )

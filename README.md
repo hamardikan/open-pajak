@@ -2,6 +2,19 @@
 
 Open Pajak is a fully client-side tax calculator for the Indonesian tax regime. The SPA bundles calculators for PPh 21/26, PPh 22, PPh 23, PPh Final Pasal 4(2), PPN, and PPNBM, and turns every calculation into a transparent table + formula narrative so practitioners can audit each step. All inputs stay in the browser—no personal identifiers (NIK, names, addresses) are ever collected or stored.
 
+## Live Demo
+
+- **Production**: https://openpajak.hamardikan.com  
+  (Deployable bundle hosted on Cloudflare Pages – mirrors the code inside `open-pajak-v1/`.)
+
+## Recent Highlights
+
+- ✨ **Receipt workspace** — save simulations to local storage, export Excel/PDF receipts, and print the redesigned letterhead with CTA buttons to the website & GitHub repo.
+- 📤 **Bulk upload via Excel** — template download + offline uploads create grouped receipts, now expandable inline with per-entry preview/export.
+- 🌐 **Full localization pass** — language changes now re-run calculations instantly (tables, waterfall notes, summaries, and export layouts react to locale switches).
+- 📚 **Improved history drawer** — search + sort controls, scrollable layout, and batch receipts shown in place.
+- 🖨️ **Polished PDF** — hidden iframe print workflow to avoid blank tabs and a full-width navy header that matches the site branding.
+
 ## Key Capabilities
 
 - Multi-tax coverage: switch between `/pph21`, `/pph22`, `/pph23`, `/pph4-2`, `/ppn`, and `/ppnbm` via the TanStack Router powered `AppShell` navigation.
@@ -71,3 +84,15 @@ Add new tests next to their pages/engines (e.g., `src/routes/pph21/pph21.page.te
 ## License
 
 This project is provided as-is for educational and operational use in calculating Indonesian taxes. Consult professional tax advisors before relying on the outputs for filings.
+
+## Community & Contributors
+
+Open Pajak is an open-source project maintained by the community. Shout-out to the folks who have pushed code so far:
+
+- **[@hamardikan](https://github.com/hamardikan)** (project owner & maintainer)
+- **[@lynxluna](https://github.com/lynxluna)** (Didiet Noor)
+- **[@revanp](https://github.com/revanp)** (Revan Pratama)
+- **[@ulilalbabn](https://github.com/ulilalbabn)** (Ulil Albab)
+- ...and everyone who reports bugs, suggests UX improvements, or contributes new calculators/features.
+
+Want to help? Open an issue or PR in this repository—UI polish, localization tweaks, and regulation updates are always welcome.

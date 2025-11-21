@@ -1,10 +1,10 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { ArrowRightIcon, Calculator, Github, ShieldCheck, Sparkles } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Card, CardContent } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { FormulaSourceNote } from '../components/FormulaSourceNote'
 import type { ReactNode } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -26,11 +26,11 @@ function HomePage() {
   const features = (t('home.features', { returnObjects: true }) as Array<{
     title: string
     description: string
-  }>) ?? []
+  }>)
 
   return (
     <div className="space-y-10">
-      <section className="grid gap-8 rounded-[32px] bg-white/80 p-8 shadow-xl shadow-[#0f1e3d]/5 md:grid-cols-2">
+      <section className="grid gap-8 rounded-[32px] bg-white/80 p-8 shadow-xl shadow-[#0f1e3d]/5 md:grid-cols-2 md:items-center">
         <div className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[#f5a524]">
             {t('home.hero.eyebrow')}
@@ -131,9 +131,11 @@ function Highlight({
   description: string
 }) {
   return (
-    <div className="flex gap-4 rounded-3xl border border-[#0f1e3d]/10 bg-[#0f1e3d]/5 p-4 text-[#0f1e3d]">
-      <div className="flex size-14 items-center justify-center rounded-2xl bg-white text-[#0f1e3d] shadow-lg">
-        {icon}
+    <div className="flex gap-4 rounded-3xl border border-[#0f1e3d]/10 bg-[#0f1e3d]/5 p-4 text-[#0f1e3d] md:items-center">
+      <div className="flex aspect-square size-14 items-center justify-center rounded-2xl bg-white text-[#0f1e3d] shadow-lg">
+        <div className="flex size-full items-center justify-center">
+          {icon}
+        </div>
       </div>
       <div className="space-y-1">
         <p className="text-base font-semibold">{title}</p>

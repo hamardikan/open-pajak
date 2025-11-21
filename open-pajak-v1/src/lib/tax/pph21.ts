@@ -1,8 +1,10 @@
 import {
+  applyRate,
   getPTKP,
   getTerBulananRate,
   getTerHarianRate,
   hitungPajakPasal17,
+  rateBpsToPercent,
   roundDownToThousand,
 } from './utils'
 import { PASAL17_LAYERS } from './constants'
@@ -34,6 +36,8 @@ export interface PPh21Input {
 }
 
 const clampMonths = (months: number) => Math.min(12, Math.max(1, months || 1))
+const FIVE_PERCENT_BPS = 500
+const FIFTY_PERCENT_BPS = 5000
 
 export function calculatePph21(input: PPh21Input): TaxResult {
   switch (input.subjectType) {
@@ -41,7 +45,7 @@ export function calculatePph21(input: PPh21Input): TaxResult {
       const months = clampMonths(input.monthsPaid)
       const brutoTahun = input.brutoMonthly * months + input.bonusAnnual
       const iuranTahun = input.pensionContribution * months
-      const biayaJabatan = Math.min(brutoTahun * 0.05, 6000000)
+      const biayaJabatan = Math.min(applyRate(brutoTahun, FIVE_PERCENT_BPS), 6000000)
       const nettoSetahun =
         brutoTahun - biayaJabatan - iuranTahun - input.zakatOrDonation
       const ptkp = getPTKP(input.ptkpStatus)
@@ -102,22 +106,27 @@ function calculatePegawaiTetap(
   } = context
 
   if (input.scheme === 'ter') {
-    const terRate = getTerBulananRate(input.terCategory, input.brutoMonthly)
-    const masaTax = input.brutoMonthly * terRate
+    const terRateBps = getTerBulananRate(input.terCategory, input.brutoMonthly)
+    const masaTax = applyRate(input.brutoMonthly, terRateBps)
     const terMonths = Math.min(11, months)
     const terPaid = masaTax * terMonths
 
     if (months < 12) {
-      const bonusTax = input.bonusAnnual * terRate
+      const bonusTax = applyRate(input.bonusAnnual, terRateBps)
       const total = terPaid + bonusTax
       const takeHomeAnnual = brutoTahun - total
-      const takeHomePerMasa = takeHomeAnnual / Math.max(1, months)
+      const takeHomePerMasa = Math.round(takeHomeAnnual / Math.max(1, months))
 
       const rows: Array<TaxBreakdownRow> = [
         { label: 'Penghasilan Masa TER', variant: 'section' },
         { label: 'Bruto per masa', value: input.brutoMonthly },
-        { label: 'Tarif TER', value: terRate, valueType: 'percent' },
         {
+          label: 'Tarif TER',
+          value: rateBpsToPercent(terRateBps),
+          valueType: 'percent',
+        },
+        {
+          id: 'ter_per_period',
           label: 'PPh 21 TER per masa',
           value: masaTax,
           note: `${months} masa`,
@@ -148,8 +157,9 @@ function calculatePegawaiTetap(
         variant: 'total',
       })
       rows.push({ label: 'Take-home pay', variant: 'section' })
-      rows.push({ label: 'Take-home setahun', value: takeHomeAnnual })
+      rows.push({ id: 'take_home_annual', label: 'Take-home setahun', value: takeHomeAnnual })
       rows.push({
+        id: 'take_home_period',
         label: 'Take-home per masa',
         value: takeHomePerMasa,
         note: `${months} masa`,
@@ -167,7 +177,7 @@ function calculatePegawaiTetap(
     const totalTax = terPaid + adjustment
 
     const takeHomeAnnual = brutoTahun - totalTax
-    const takeHomePerMasa = takeHomeAnnual / Math.max(1, months)
+    const takeHomePerMasa = Math.round(takeHomeAnnual / Math.max(1, months))
 
     const pasal17Rows = buildPasal17TierRows(pkpRounded)
     const breakdown = buildWaterfallTerRows({
@@ -183,7 +193,7 @@ function calculatePegawaiTetap(
       pkpRounded,
       pasal17Rows,
       pajakSetahun,
-      terRate,
+      terRateBps,
       masaTax,
       terPaid,
       terMonths,
@@ -199,9 +209,9 @@ function calculatePegawaiTetap(
     }
   }
 
-  const totalTax = (pajakSetahun / 12) * months
+  const totalTax = Math.round((pajakSetahun * months) / 12)
   const takeHomeAnnual = brutoTahun - totalTax
-  const takeHomePerMasa = takeHomeAnnual / Math.max(1, months)
+  const takeHomePerMasa = Math.round(takeHomeAnnual / Math.max(1, months))
 
   const breakdown: Array<TaxBreakdownRow> = [
     { label: 'Penghasilan', variant: 'section' },
@@ -221,8 +231,9 @@ function calculatePegawaiTetap(
     { label: 'PPh 21 setahun', value: pajakSetahun },
     { label: `PPh 21 ${months} masa`, value: totalTax, variant: 'total' },
     { label: 'Take-home pay', variant: 'section' },
-    { label: 'Take-home setahun', value: takeHomeAnnual },
+    { id: 'take_home_annual', label: 'Take-home setahun', value: takeHomeAnnual },
     {
+      id: 'take_home_period',
       label: 'Take-home per masa',
       value: takeHomePerMasa,
       note: `${months} masa`,
@@ -238,12 +249,12 @@ function calculatePegawaiTetap(
 function calculatePensiunan(input: PPh21Input): TaxResult {
   const months = clampMonths(input.monthsPaid)
   const brutoTahun = input.brutoMonthly * months + input.bonusAnnual
-  const biayaPensiun = Math.min(brutoTahun * 0.05, 2400000)
+  const biayaPensiun = Math.min(applyRate(brutoTahun, FIVE_PERCENT_BPS), 2400000)
   const netto = brutoTahun - biayaPensiun - input.zakatOrDonation
   const ptkp = getPTKP(input.ptkpStatus)
   const pkpRounded = roundDownToThousand(Math.max(0, netto - ptkp))
   const pajakSetahun = hitungPajakPasal17(pkpRounded)
-  const totalTax = (pajakSetahun / 12) * months
+  const totalTax = Math.round((pajakSetahun * months) / 12)
 
   return {
     totalTax,
@@ -272,15 +283,19 @@ function calculatePensiunan(input: PPh21Input): TaxResult {
 function calculatePegawaiTidakTetap(input: PPh21Input): TaxResult {
   const months = clampMonths(input.monthsPaid)
   if (input.isDailyWorker) {
-    const terRate = getTerHarianRate(input.terCategory, input.brutoMonthly)
-    const taxPerDay = input.brutoMonthly * terRate
+    const terRateBps = getTerHarianRate(input.terCategory, input.brutoMonthly)
+    const taxPerDay = applyRate(input.brutoMonthly, terRateBps)
     const total = taxPerDay * months
     return {
       totalTax: total,
       breakdown: [
         { label: 'Penghasilan Harian', variant: 'section' },
         { label: 'Upah harian', value: input.brutoMonthly },
-        { label: 'Tarif TER harian', value: terRate, valueType: 'percent' },
+        {
+          label: 'Tarif TER harian',
+          value: rateBpsToPercent(terRateBps),
+          valueType: 'percent',
+        },
         { label: 'PPh 21 per hari', value: taxPerDay },
         { label: 'Total masa', value: total, variant: 'total' },
       ],
@@ -288,21 +303,25 @@ function calculatePegawaiTidakTetap(input: PPh21Input): TaxResult {
   }
 
   if (input.brutoMonthly <= 2500000) {
-    const terRate = getTerBulananRate(input.terCategory, input.brutoMonthly)
-    const masaTax = input.brutoMonthly * terRate
+    const terRateBps = getTerBulananRate(input.terCategory, input.brutoMonthly)
+    const masaTax = applyRate(input.brutoMonthly, terRateBps)
     return {
       totalTax: masaTax * months,
       breakdown: [
         { label: 'Penghasilan', variant: 'section' },
         { label: 'Bruto bulanan', value: input.brutoMonthly },
-        { label: 'Tarif TER', value: terRate, valueType: 'percent' },
+        {
+          label: 'Tarif TER',
+          value: rateBpsToPercent(terRateBps),
+          valueType: 'percent',
+        },
         { label: 'PPh 21 per masa', value: masaTax },
         { label: 'Total masa', value: masaTax * months, variant: 'total' },
       ],
     }
   }
 
-  const dpp = 0.5 * input.brutoMonthly
+  const dpp = applyRate(input.brutoMonthly, FIFTY_PERCENT_BPS)
   const pajakMasa = hitungPajakPasal17(dpp)
   const totalTax = pajakMasa * months
 
@@ -320,7 +339,7 @@ function calculatePegawaiTidakTetap(input: PPh21Input): TaxResult {
 
 function calculateBukanPegawai(input: PPh21Input): TaxResult {
   const bruto = input.brutoMonthly * input.monthsPaid + input.bonusAnnual
-  const dpp = bruto * 0.5
+  const dpp = applyRate(bruto, FIFTY_PERCENT_BPS)
   const tax = hitungPajakPasal17(dpp)
   return {
     totalTax: tax,
@@ -355,8 +374,8 @@ function formatNumber(value: number) {
   return integerFormatter.format(Math.round(value))
 }
 
-function formatPercentLabel(rate: number) {
-  const percent = rate * 100
+function formatPercentLabel(rateBps: number) {
+  const percent = rateBps / 100
   return percent % 1 === 0 ? `${percent.toFixed(0)}%` : `${percent.toFixed(2)}%`
 }
 
@@ -372,10 +391,10 @@ function buildPasal17TierRows(pkpRounded: number): TaxBreakdownRow[] {
     if (taxable <= 0) return
     const upperBound = lowerBound + taxable
     layers.push({
-      label: `Tier ${index + 1}: ${formatPercentLabel(layer.rate)} × ${formatNumber(
+      label: `Tier ${index + 1}: ${formatPercentLabel(layer.rateBps)} × ${formatNumber(
         taxable,
       )}`,
-      value: taxable * layer.rate,
+      value: applyRate(taxable, layer.rateBps),
       note: `Lapisan PKP ${formatNumber(lowerBound)} – ${formatNumber(upperBound)}`,
     })
     remaining -= taxable
@@ -397,7 +416,7 @@ function buildWaterfallTerRows({
   pkpRounded,
   pasal17Rows,
   pajakSetahun,
-  terRate,
+  terRateBps,
   masaTax,
   terPaid,
   terMonths,
@@ -418,7 +437,7 @@ function buildWaterfallTerRows({
   pkpRounded: number
   pasal17Rows: TaxBreakdownRow[]
   pajakSetahun: number
-  terRate: number
+  terRateBps: number
   masaTax: number
   terPaid: number
   terMonths: number
@@ -514,17 +533,18 @@ function buildWaterfallTerRows({
 
   rows.push({ label: t('pph21Waterfall.groups.settlement', 'E. Status pembayaran (Settlement)'), variant: 'group' })
   rows.push({
+    id: 'ter_per_period',
     label: t('pph21Waterfall.rows.terPerPeriod', 'PPh 21 TER per masa'),
     value: masaTax,
     note: t('pph21Waterfall.notes.terPerPeriod', 'Tarif {{rate}} × bruto per masa', {
-      rate: formatPercentLabel(terRate),
+      rate: formatPercentLabel(terRateBps),
     }),
   })
   rows.push({
     label: t('pph21Waterfall.rows.terPaid', '(-) Sudah dipotong Jan–Nov (TER)'),
     value: -terPaid,
     note: t('pph21Waterfall.notes.terPaid', 'Tarif {{rate}} × {{months}} masa', {
-      rate: formatPercentLabel(terRate),
+      rate: formatPercentLabel(terRateBps),
       months: terMonths,
     }),
   })
@@ -536,6 +556,7 @@ function buildWaterfallTerRows({
     })
   }
   rows.push({
+    id: 'december_adjustment',
     label: t('pph21Waterfall.rows.decemberAdjustment', 'PPh 21 masa Desember (kurang bayar)'),
     value: adjustment,
     variant: 'total',
@@ -545,11 +566,13 @@ function buildWaterfallTerRows({
 
   rows.push({ label: t('pph21Waterfall.groups.takeHome', 'F. Take-home pay'), variant: 'group' })
   rows.push({
+    id: 'take_home_annual',
     label: t('pph21Waterfall.rows.takeHomeAnnual', 'Take-home setahun'),
     value: takeHomeAnnual,
     note: t('pph21Waterfall.notes.takeHomeAnnual', 'Bruto - pajak terutang'),
   })
   rows.push({
+    id: 'take_home_period',
     label: t('pph21Waterfall.rows.takeHomePeriod', 'Take-home per masa'),
     value: takeHomePerMasa,
     note: t('pph21Waterfall.notes.takeHomePeriod', '{{months}} masa', { months }),
@@ -563,8 +586,9 @@ function calculatePph26(input: PPh21Input): TaxResult {
   const salaryAnnual = input.brutoMonthly * months
   const allowanceAnnual = input.bonusAnnual
   const bruto = salaryAnnual + allowanceAnnual
-  const decimalRate = ((input.foreignTaxRate ?? 20) / 100)
-  const tax = bruto * decimalRate
+  const foreignRatePercent = input.foreignTaxRate ?? 20
+  const rateBps = Math.max(0, Math.round(foreignRatePercent * 100))
+  const tax = applyRate(bruto, rateBps)
   const rows: TaxBreakdownRow[] = [
     { label: 'A. Penghasilan bruto WPLN', variant: 'group' },
     {
@@ -586,7 +610,7 @@ function calculatePph26(input: PPh21Input): TaxResult {
     { label: 'B. Tarif PPh 26', variant: 'group' },
     {
       label: 'Tarif efektif',
-      value: decimalRate,
+      value: rateBpsToPercent(rateBps),
       valueType: 'percent',
       note: 'Treaty / PMK 164/2023',
     },
