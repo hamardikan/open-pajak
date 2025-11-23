@@ -1,0 +1,570 @@
+{
+  "app": {
+    "brand": "Open Pajak",
+    "brandMain": "Open",
+    "brandAccent": "Pajak",
+    "tagline": "오픈 소스 세무 도구 키트",
+    "taglineLine1": "Open Source",
+    "taglineLine2": "Tax Toolkit",
+    "nav": {
+      "home": "홈",
+      "pph21": "PPh 21/26",
+      "pph22": "PPh 22",
+      "pph23": "PPh 23",
+      "pph4_2": "PPh 4(2)",
+      "ppn": "VAT",
+      "ppnbm": "사치품 VAT"
+    },
+    "buttons": {
+      "pph21Simulator": "PPh 21 시뮬레이터",
+      "startSimulation": "시뮬레이션 시작",
+      "clearForm": "입력 초기화",
+      "useSample": "샘플 사용",
+      "github": "GitHub",
+      "openNav": "내비게이션 열기",
+      "closeNav": "내비게이션 닫기"
+    },
+    "menu": {
+      "title": "메인 메뉴",
+      "subtitle": "필요한 계산기를 선택하세요."
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Open Pajak",
+      "title": "인도네시아 세금 계산기를 한 곳에서.",
+      "body": "모든 계산이 브라우저 안에서 처리됩니다. 개인정보나 서버 전송 없이 빠르게 시뮬레이션하거나 신고 전에 세액을 검토하세요.",
+      "ctaPrimary": "계산 시작하기",
+      "ctaSecondary": "GitHub"
+    },
+    "features": [
+      {
+        "title": "주요 6개 계산기",
+        "description": "PPh 21/26, 22, 23, 최종 4(2), VAT, 사치품 VAT가 최신 DJP 방식을 따릅니다."
+      },
+      {
+        "title": "개인정보 우선",
+        "description": "NIK, 이름, 주소는 묻지 않습니다. 숫자와 거래 유형만 입력하세요."
+      },
+      {
+        "title": "투명한 계산식",
+        "description": "모든 결과에 단계별 표와 관련 규정이 함께 제공됩니다."
+      }
+    ],
+    "calculatorList": {
+      "title": "계산기 선택",
+      "subtitle": "각 페이지에서 입력 폼, 결과 표, 공식 설명을 제공합니다.",
+      "cards": {
+        "pph21": {
+          "title": "PPh 21/26",
+          "description": "직원, 비상근, 비거주자."
+        },
+        "pph22": {
+          "title": "PPh 22",
+          "description": "수입, 석유·가스, 국영기업 거래, 특수 사례."
+        },
+        "pph23": {
+          "title": "PPh 23",
+          "description": "기술 서비스, 컨설팅, 장비 임대, 배당, 이자."
+        },
+        "pph4_2": {
+          "title": "최종 PPh 4(2)",
+          "description": "토지 임대, 건설, 레스토랑, PP23 MSME."
+        },
+        "ppn": {
+          "title": "VAT",
+          "description": "포함/별도 금액을 자동으로 DPP로 나눕니다."
+        },
+        "ppnbm": {
+          "title": "사치품 VAT",
+          "description": "차량, 보석, 프리미엄 전자제품."
+        }
+      }
+    }
+  },
+  "table": {
+    "component": "구성",
+    "value": "금액 (IDR)",
+    "note": "메모 / 공식"
+  },
+  "summary": {
+    "taxOverview": "세금 개요",
+    "takeHome": "실수령액",
+    "totalTax": "총 PPh 21/26",
+    "terMonthly": "월별 TER",
+    "decAdjustment": "12월 정산",
+    "thpAnnual": "연간 THP",
+    "thpPeriod": "기간별 THP"
+  },
+  "receipts": {
+    "defaultTitle": "{{type}} 영수증",
+    "panel": {
+      "title": "영수증 및 기록",
+      "subtitle": "결과를 저장하거나 일괄 업로드를 관리하세요."
+    },
+    "actions": {
+      "preview": "영수증 미리보기",
+      "history": "기록",
+      "save": "영수증 저장",
+      "downloadPdf": "인쇄 / PDF",
+      "downloadExcel": "Excel 다운로드",
+      "delete": "삭제",
+      "scrollTop": "맨 위로"
+    },
+    "modal": {
+      "title": "영수증 미리보기",
+      "name": "영수증 제목",
+      "identifier": "식별자 / 사번",
+      "group": "그룹 / 프로젝트",
+      "groupHint": "관련 영수증을 묶으려면 같은 라벨을 사용하세요.",
+      "created": "생성일",
+      "breakdownTitle": "단계별 계산",
+      "dataTitle": "입력 정보 스냅샷",
+      "source": {
+        "manual": "직접 입력",
+        "bulk": "일괄 업로드"
+      }
+    },
+    "summary": {
+      "totalTax": "총 세액",
+      "terMonthly": "기간별 TER",
+      "decAdjustment": "12월 정산",
+      "thpAnnual": "연간 THP",
+      "thpPeriod": "기간별 THP"
+    },
+    "boolean": {
+      "true": "예",
+      "false": "아니요"
+    },
+    "history": {
+      "title": "영수증 기록",
+      "recordsCount": "총 {{count}}건의 영수증",
+      "countLabel": "{{count}}건의 영수증",
+      "groupLabel": "그룹 없음",
+      "empty": "아직 저장된 영수증이 없습니다.",
+      "noResult": "검색어와 일치하는 영수증이 없습니다.",
+      "batchTitle": "일괄 처리",
+      "batchEmpty": "아직 일괄 업로드가 없습니다.",
+      "downloadBatch": "일괄 Excel 다운로드",
+      "viewBatch": "영수증 보기",
+      "hideBatch": "영수증 숨기기",
+      "searchPlaceholder": "영수증이나 그룹 검색...",
+      "sortLabel": "정렬",
+      "sortNewest": "최신순",
+      "sortOldest": "오래된순",
+      "sortName": "이름순"
+    },
+    "bulk": {
+      "title": "일괄 업로드 (Excel)",
+      "description": "템플릿을 이용해 PPh 21/26 직원 데이터를 한꺼번에 가져옵니다.",
+      "downloadTemplate": "Excel 템플릿 다운로드",
+      "uploadLabel": "Excel 업로드 (.xls)",
+      "pending": "{{count}}개 행 처리 중…",
+      "success": "\"{{group}}\" 아래에 {{count}}건의 영수증을 저장했습니다",
+      "error": "파일을 처리하지 못했습니다. 열 구성을 확인하세요.",
+      "untitled": "제목 없는 영수증"
+    },
+    "fields": {
+      "subjectType": "납세자 유형",
+      "brutoMonthly": "기간별 총액",
+      "monthsPaid": "지급 기간",
+      "pensionContribution": "연금 기여금",
+      "bonusAnnual": "보너스",
+      "ptkpStatus": "PTKP 상태",
+      "scheme": "방식",
+      "terCategory": "TER 구간",
+      "zakatOrDonation": "자카트 / 기부금",
+      "foreignTaxRate": "외국 세율",
+      "isDailyWorker": "일용직 근로자"
+    },
+    "print": {
+      "title": "세금 영수증",
+      "meta": "영수증 ID",
+      "group": "그룹",
+      "identifier": "식별자",
+      "visitSite": "사이트 방문",
+      "github": "GitHub"
+    }
+  },
+  "pph21": {
+    "title": "PPh 21/26 계산기",
+    "description": "직원, 계약직, 외국 납세자의 원천징수액을 추정하고 기존 방식과 TER을 비교하세요.",
+    "summary": {
+      "meta": "1~11월은 TER, 12월은 17조로 정산"
+    },
+    "form": {
+      "title": "소득 정보",
+      "description": "총급여와 세무 기간을 입력하세요.",
+      "fields": {
+        "subjectType": "납세자 유형",
+        "brutoMonthly": "기간별 총 소득",
+        "monthsPaid": "기간 수(월/일)",
+        "pensionContribution": "기간별 연금 기여금",
+        "bonusAnnual": "연간 보너스/THR",
+        "ptkpStatus": "PTKP 상태",
+        "zakat": "자카트/기부금 (연간)",
+        "scheme": "방식",
+        "terCategory": "TER 구간"
+      },
+      "descriptions": {
+        "monthsPaid": "최대 12.",
+        "zakat": "고용주를 통해 선택 입력",
+        "terCategory": "납세자 유형에 따라 자동 설정되며 직접 수정 가능합니다."
+      }
+    },
+    "subjectOptions": {
+      "pegawai_tetap": "정규직",
+      "pensiunan": "연금 수급자",
+      "pegawai_tidak_tetap": "비정규직",
+      "bukan_pegawai": "비직원",
+      "peserta_kegiatan": "행사 참가자",
+      "program_pensiun": "연금 인출",
+      "mantan_pegawai": "퇴직자",
+      "wpln": "PPh 26 (비거주자)"
+    },
+    "schemeOptions": {
+      "lama": "기존 방식(17조)",
+      "ter": "TER (효과율)"
+    },
+    "terOptions": {
+      "A": "A 구간",
+      "B": "B 구간",
+      "C": "C 구간"
+    },
+    "toggleDaily": {
+      "title": "일 단위 계산을 사용할까요?",
+      "description": "일급 근로자라면 일별 TER로 전환하세요.",
+      "daily": "일 단위",
+      "monthly": "월 단위"
+    },
+    "wplnField": {
+      "label": "PPh 26 세율",
+      "description": "백분율"
+    },
+    "explanationTitle": "간단한 공식",
+    "explanation": [
+      "세액 산정 방식은 납세자 유형에 따라 달라집니다(총액 50%, TER, 전액 과세 등).",
+      "PTKP는 기존 방식을 사용하는 직원/연금 수급자에게 적용됩니다.",
+      "PKP는 17조 적용 전 IDR 1,000 단위 내림 처리됩니다.",
+      "TER 구간은 PER-2/PJ/2024를 따릅니다."
+    ],
+    "info": {
+      "goodPractice": "중요 메모",
+      "points": [
+        "어떤 데이터도 저장되지 않으며 계산은 브라우저에만 남아 있습니다.",
+        "PKP는 규정에 따라 내림 처리를 적용합니다.",
+        "직원은 1~11월 TER를 사용하고 12월에 17조로 정산합니다.",
+        "TER 표는 DJP 지침을 따릅니다. 회사별 커스텀 매핑이 있다면 수정하세요."
+      ],
+      "disclaimer": "참고용 추정치입니다. 신고 전에 반드시 확인하세요."
+    }
+  },
+  "pph26": {
+    "title": "PPh 26 계산기",
+    "description": "비거주자의 원천징수를 시뮬레이션하고 조세조약과 국내 세율을 비교하세요."
+  },
+  "pph22": {
+    "title": "PPh 22 계산기",
+    "description": "수입, 국영기업 매입, 석유·가스, 기타 특수 사례에 대한 PPh 22 징수를 시뮬레이션하세요.",
+    "form": {
+      "title": "PPh 22 과세 대상",
+      "description": "DPP 정보를 입력하세요.",
+      "transactionType": "거래 유형",
+      "transactionValue": "거래 금액 (CIF/FOB)",
+      "otherCosts": "추가 비용 (+)",
+      "otherCostsNote": "보험료, 운송비 등 조정 금액.",
+      "deduction": "공제 (-)",
+      "deductionNote": "할인, 비 DPP 항목, 면세 등.",
+      "transactionTypeOptions": {
+        "impor": "일반 수입",
+        "migas": "석유·가스 산업",
+        "bumn": "특정 국영기업 구매",
+        "lainnya": "기타 거래"
+      }
+    },
+    "summary": {
+      "label": "징수된 PPh 22",
+      "meta": "세율은 거래 유형에 따라 결정"
+    },
+    "explanationTitle": "계산 흐름",
+    "explanation": [
+      "DPP = 금액 + 추가 비용 − 공제.",
+      "세율은 PER-38/PJ/2013을 따릅니다(수입 2.5%, 석유·가스 2%, 국영기업 1.5%).",
+      "PPh 22 = DPP × 세율."
+    ],
+    "info": {
+      "title": "확인 사항",
+      "items": [
+        "해당 물품이 PPh 22 대상인지 확인합니다.",
+        "관세/VAT 인센티브가 있으면 세율이 달라질 수 있습니다.",
+        "연말 세액공제를 위해 원천징수 영수증을 보관하세요."
+      ]
+    },
+    "breakdown": {
+      "baseSection": "과세 표준",
+      "taxSection": "세액",
+      "transaction": "거래 금액",
+      "otherCosts": "추가 비용",
+      "deduction": "공제",
+      "dpp": "DPP(과세 표준)",
+      "rate": "PPh 22 세율",
+      "tax": "징수 PPh 22"
+    },
+    "notes": {
+      "otherCosts": "+ 추가 비용",
+      "deduction": "- 공제"
+    }
+  },
+  "pph23": {
+    "title": "PPh 23 계산기",
+    "description": "기술 서비스, 컨설팅, 장비 임대, 배당, 이자에 대한 PPh 23을 계산하세요.",
+    "form": {
+      "title": "거래 세부정보",
+      "incomeType": "소득 유형",
+      "isFinal": "최종 과세?",
+      "isFinalDesc": "배당과 이자는 보통 최종세입니다.",
+      "gross": "총액(VAT 전)"
+    },
+    "options": {
+      "serviceType": {
+        "jasaTeknik": "기술 서비스",
+        "jasaKonsultan": "컨설팅",
+        "sewaAlat": "장비 임대",
+        "dividen": "배당",
+        "bunga": "이자"
+      },
+      "final": {
+        "yes": "예",
+        "no": "아니요"
+      }
+    },
+    "summary": {
+      "label": "납부할 PPh 23",
+      "meta": "세율은 서비스 유형에 따라 결정"
+    },
+    "explanationTitle": "공식",
+    "explanation": [
+      "과세 표준 = VAT 전 총액.",
+      "세율은 23조를 따릅니다(서비스 2%, 컨설팅 4%, 배당/이자 15%).",
+      "PPh 23 = 과세 표준 × 세율."
+    ],
+    "info": {
+      "title": "참고",
+      "items": [
+        "지급 시점 또는 지급 의무 발생 시 원천징수합니다.",
+        "연말 세액공제는 1721-VII 양식을 사용하세요.",
+        "수취인 면제서가 있으면 세율이 달라질 수 있습니다."
+      ]
+    },
+    "breakdown": {
+      "section": "총 소득",
+      "gross": "총액",
+      "rate": "PPh 23 세율",
+      "tax": "원천징수 PPh 23"
+    },
+    "notes": {
+      "final": "최종 (원천징수로 종료)",
+      "creditable": "세액공제 가능"
+    }
+  },
+  "pph4_2_calc": {
+    "title": "최종 PPh 4(2) 계산기",
+    "description": "토지 임대, 건설, 레스토랑, PP23 MSME의 최종 원천징수.",
+    "summary": {
+      "label": "최종 PPh 4(2)",
+      "meta": "대상에 맞춰 세율 자동 선택"
+    },
+    "explanationTitle": "단계",
+    "form": {
+      "title": "최종 과세 대상 정보",
+      "objectType": "대상 유형",
+      "gross": "총액",
+      "grossDesc": "계약 금액 또는 매출을 입력하세요."
+    },
+    "options": {
+      "objectType": {
+        "sewaTanah": "토지/건물 임대 (10%)",
+        "konstruksi": "건설 서비스 (3.5%)",
+        "restoran": "레스토랑 사업 (5%)",
+        "umkmFinal": "PP23 MSME (0.5%)"
+      }
+    },
+    "explanation": [
+      "과세 표준 = 대상별 총액.",
+      "세율은 PP 34/2017과 PP 55/2022를 따릅니다.",
+      "최종 PPh = 과세 표준 × 세율."
+    ],
+    "info": {
+      "title": "메모",
+      "items": [
+        "최종 원천징수는 연말 신고에서 공제되지 않습니다.",
+        "건설 세율은 회사 자격에 따라 달라질 수 있습니다.",
+        "PP23 UMKM은 5억 IDR 매출 한도를 따릅니다."
+      ]
+    },
+    "breakdown": {
+      "section": "과세 표준",
+      "value": "대상 금액",
+      "rate": "최종 세율",
+      "tax": "최종 PPh 4(2)"
+    }
+  },
+  "ppnCalc": {
+    "title": "VAT 계산기",
+    "description": "포함/별도 금액에 대한 DPP와 VAT를 계산합니다. 전자세금계산서 확인에 적합합니다.",
+    "summary": {
+      "label": "납부할 VAT",
+      "metaInclusive": "가격에 VAT 포함",
+      "metaExclusive": "가격은 VAT 제외"
+    },
+    "explanationTitle": "VAT 공식",
+    "form": {
+      "title": "거래 정보",
+      "taxYear": "과세 연도",
+      "basePrice": "판매가",
+      "basePriceDesc": "아래 토글이 켜져 있으면 VAT 포함 금액을 입력하세요.",
+      "discount": "할인 (-)",
+      "otherCosts": "기타 비용 (+)",
+      "customRate": "맞춤 세율 (선택)",
+      "customRateDesc": "백분율로 입력하세요.",
+      "toggleTitle": "가격에 VAT가 포함되어 있나요?",
+      "toggleHint": "토글하여 금액을 DPP + VAT로 나눕니다.",
+      "toggleTrue": "예, 포함",
+      "toggleFalse": "아니요, 제외"
+    },
+    "explanation": [
+      "가격이 VAT 제외라면: DPP = 가격 − 할인 + 기타 비용.",
+      "가격이 VAT 포함이라면: DPP = 가격 / (1 + 세율).",
+      "VAT = DPP × 세율; 총 청구액 = DPP + VAT."
+    ],
+    "info": {
+      "title": "권장 사항",
+      "items": [
+        "DPP에서 할인액을 빼는지 확인하세요.",
+        "PMK 인센티브가 있을 때만 맞춤 세율을 사용하세요.",
+        "감사를 대비해 세금계산서 번호를 보관하세요."
+      ]
+    },
+    "breakdown": {
+      "baseSection": "과세 표준",
+      "dpp": "DPP",
+      "taxSection": "VAT 계산",
+      "rate": "VAT 세율",
+      "tax": "납부할 VAT",
+      "total": "총 청구액"
+    },
+    "notes": {
+      "dppInclusive": "가격에 VAT 포함",
+      "dppExclusive": "VAT 제외 가격"
+    }
+  },
+  "ppnbmCalc": {
+    "title": "사치품 VAT 계산기",
+    "description": "차량, 보석, 프리미엄 전자제품용 PPNBM을 시뮬레이션하세요.",
+    "summary": {
+      "label": "납부할 PPNBM",
+      "meta": "DPP는 VAT 기준과 동일"
+    },
+    "explanationTitle": "단계",
+    "form": {
+      "title": "사치품 정보",
+      "goodsType": "상품 유형",
+      "dpp": "VAT 기준(보통 판매가)",
+      "customRate": "맞춤 세율 (선택)",
+      "customRateDesc": "기본 세율과 다를 때 사용하세요."
+    },
+    "options": {
+      "goodsType": {
+        "kendaraanMewah": "고급 차량",
+        "perhiasan": "보석/원석",
+        "kapalPesiar": "요트",
+        "elektronikPremium": "프리미엄 전자제품"
+      }
+    },
+    "explanation": [
+      "PPNBM 기준은 일반적으로 VAT 기준과 동일합니다.",
+      "세율은 제품군에 따라 달라집니다(PMK 141/2021).",
+      "PPNBM = 기준 × 세율."
+    ],
+    "info": {
+      "title": "기억하세요",
+      "items": [
+        "PPNBM은 세액공제가 불가합니다.",
+        "수출/KITE 면제가 있는지 확인하세요.",
+        "VAT와 PPNBM을 인보이스에서 구분하세요."
+      ]
+    },
+    "breakdown": {
+      "section": "과세 표준",
+      "dpp": "PPNBM 기준",
+      "rate": "PPNBM 세율",
+      "tax": "납부할 PPNBM"
+    }
+  },
+  "pph21Waterfall": {
+    "groups": {
+      "gross": "A. 총 소득",
+      "deductions": "B. 공제",
+      "basis": "C. 과세 표준",
+      "taxDue": "D. 납부할 세액 (17조)",
+      "settlement": "E. 정산 상태",
+      "takeHome": "F. 실수령액"
+    },
+    "rows": {
+      "salaryAnnual": "기본급 (연간)",
+      "allowanceAnnual": "수당/보너스 (연간)",
+      "totalGross": "총 소득",
+      "jobCost": "직무 관련 공제",
+      "pension": "연금/JHT 기여금",
+      "zakat": "자카트/기부금",
+      "totalDeductions": "총 공제",
+      "netIncome": "과세소득",
+      "ptkp": "PTKP",
+      "pkpRounded": "PKP(내림)",
+      "totalTaxYear": "연간 PPh 21 총액",
+      "terPerPeriod": "기간별 PPh 21 TER",
+      "terPaid": "(-) 1~11월 원천징수 TER",
+      "overpaid": "TER 초과 납부",
+      "decemberAdjustment": "12월 추가 부담",
+      "takeHomeAnnual": "연간 실수령",
+      "takeHomePeriod": "기간별 실수령"
+    },
+    "notes": {
+      "salaryAnnual": "약 {{months}}기간",
+      "allowanceAnnual": "고정/변동 수당 및 보너스",
+      "totalGross": "총 소득",
+      "jobCost": "총액의 5%, 연 600만 한도",
+      "pension": "근로자 부담분",
+      "zakat": "고용주를 통해 처리",
+      "netIncome": "총액 − 공제",
+      "ptkp": "가족 상태 기준",
+      "totalTaxYear": "연간 세액",
+      "terPerPeriod": "{{rate}} × 기간별 총액",
+      "terPaid": "{{rate}} × {{months}}기간",
+      "overpaid": "TER가 17조 결과보다 큼",
+      "decemberAdjustment": "12월에 추가 납부",
+      "takeHomeAnnual": "총액 − 세금",
+      "takeHomePeriod": "{{months}}기간"
+    },
+    "tierLabel": "구간 {{tier}}: {{rate}} × {{amount}}",
+    "tierNote": "PKP 구간 {{lower}} – {{upper}}"
+  },
+  "formulaSource": {
+    "title": "공식 출처",
+    "body": "모든 계산은 다음을 참조합니다",
+    "link": "Buku_PPh2126_Release_20240108.pdf"
+  },
+  "tableSections": {
+    "waterfall": {
+      "gross": "총 소득",
+      "deductions": "공제",
+      "basis": "과세 표준",
+      "taxDue": "납부 세액",
+      "settlement": "정산",
+      "thp": "실수령액"
+    }
+  },
+  "errors": {
+    "positiveOnly": "양수만 입력하세요."
+  }
+}
